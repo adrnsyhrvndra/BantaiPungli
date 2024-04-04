@@ -8,9 +8,13 @@ module.exports = {
   theme: {
     extend: {
       backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+        "pattern-money-pungli": "url('../assets/bg-pattern-login.png')",
+      },
+      colors: {
+        "primary": "#D81D2A",
+        "secondary": "#5A070C",
+        "background": "#F5F5F5",
+        "font-dark-01" : "#030303",
       },
     },
   },

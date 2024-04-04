@@ -1,118 +1,177 @@
-import Image from "next/image";
-import { Inter } from "next/font/google";
+import Image from 'next/image';
+import gambarTukangPungli from '../assets/tukang-pungli2.png';
+import elemenLoginForm from '../assets/elemen-login-form.png';
+import logoBantaiPungli from '../assets/logo-bantai-punli-form-login.png';
+import eyeClose from '../assets/eye-close.png';
+import eyeOpen from '../assets/eye-open.png';
+import arrowRightLogin from '../assets/arrow-right-login.png';
+import lagukebangsaan from '../assets/gaksudibayarpungli.mp3';
+import localFont from '@next/font/local';
+import { useState } from 'react';
 
-const inter = Inter({ subsets: ["latin"] });
+import { Swiper, SwiperSlide } from 'swiper/react';
 
-export default function Home() {
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/pagination';
+
+import { Autoplay, Pagination } from 'swiper/modules';
+import Head from 'next/head';
+
+
+const suicoBams = localFont({ src: '../../public/fonts/SuicoBams.otf' }, { variable: '--suicoBams' });
+const workSans = localFont({
+  src: [
+    {
+      path: '../../public/fonts/WorkSans-Thin.ttf',
+      weight: '100'
+    },
+    {
+      path: '../../public/fonts/WorkSans-Regular.ttf',
+      weight: '400'
+    },
+    {
+      path: '../../public/fonts/WorkSans-Medium.ttf',
+      weight: '500'
+    },
+    {
+      path: '../../public/fonts/WorkSans-SemiBold.ttf',
+      weight: '600'
+    },
+    {
+      path: '../../public/fonts/WorkSans-Bold.ttf',
+      weight: '700'
+    },
+    {
+      path: '../../public/fonts/WorkSans-ExtraBold.ttf',
+      weight: '800'
+    },
+    {
+      path: '../../public/fonts/WorkSans-Black.ttf',
+      weight: '900'
+    }
+  ],
+  variable: '--font-work-sans'
+});
+
+const Login = () => {
+  const [eyePassword,setEyePassword] = useState(false);
+
+  const handleEyePassword = () => {
+    setEyePassword(!eyePassword);
+  }
+
   return (
-    <main
-      className={`flex min-h-screen flex-col items-center justify-between p-24 ${inter.className}`}
-    >
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">src/pages/index.js</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+    <>
+      <Head>
+        <title>Halaman Login | Bantai Pungli</title>
+      </Head>
+      <div className='grid grid-cols-12 bg-orange-500 h-screen'>
+        <audio autoPlay loop src={lagukebangsaan}></audio>
+        <div className='col-span-6 bg-primary bg-pattern-money-pungli bg-blend-multiply bg-contain relative overflow-hidden'>
+          <Image className='absolute bottom-[51%] translate-y-1/2 left-[60%] -translate-x-1/2 scale-100' src={gambarTukangPungli} />
+          <div className='w-full py-[78px] pl-32 pr-48 bg-secondary absolute bottom-0'>
+            <Swiper
+              autoplay={{
+                delay: 2500,
+                disableOnInteraction: false,
+              }}
+              pagination={{
+                el: "#containerForBullets",
+                clickable: true,
+                type: "bullets",
+                hiddenClass: "swiper-pagination-hidden",
+              }}
+              modules={[Autoplay, Pagination]}
+            >
+              <SwiperSlide>
+                <div className='flex flex-col gap-4'>
+                  <h2 className='text-white text-3xl font-semibold' style={workSans.style}>Tidak ada Kewajiban Bagi Kita Untuk Membayar Pungli-Pungli Sampah dan Hina!</h2>
+                  <p className='text-white text-sm font-light' style={workSans.style}>Kita tidak berkewajiban membayar pungutan liar yang merendahkan martabat dan merugikan.</p>
+                </div>
+              </SwiperSlide>
+              <SwiperSlide>
+                <div className='flex flex-col gap-4'>
+                  <h2 className='text-white text-3xl font-semibold' style={workSans.style}>“Yaelah, 2000 Doang Sedekah Aja Kali” Heh, Itu Namanya Pungli!</h2>
+                  <p className='text-white text-sm font-light' style={workSans.style}>Menganggap sedekah sebesar 2000 untuk pungli menunjukkan sikap tidak menghargai kebaikan.</p>
+                </div>
+              </SwiperSlide>
+              <SwiperSlide>
+                <div className='flex flex-col gap-4'>
+                  <h2 className='text-white text-3xl font-semibold' style={workSans.style}>Lama lama kita gausah sekolah, mending markir daripada mikir.</h2>
+                  <p className='text-white text-sm font-light' style={workSans.style}>Kalau pungli-pungli in ditoleransi dengan embel "sedekah". yaudah mending markir aja daripada mikir.</p>
+                </div>
+              </SwiperSlide>
+              <SwiperSlide>
+                <div className='flex flex-col gap-4'>
+                  <h2 className='text-white text-3xl font-semibold' style={workSans.style}>Hal Salah Jangan Ditoleransi, Kalau Di Toleransi Terus, Namanya Jaman Jahiliyah</h2>
+                  <p className='text-white text-sm font-light' style={workSans.style}>Kesalahan harus ditegur, jika terus ditoleransi, kita kembali ke masa jahiliyah.</p>
+                </div>
+              </SwiperSlide>
+            </Swiper>
+            <div 
+              id="containerForBullets"
+              className='mt-8'
+              style={{
+                "--swiper-pagination-color": "#FFFFFF",
+                "--swiper-pagination-bullet-inactive-color": "#6A6A6A",
+                "--swiper-pagination-bullet-inactive-opacity": "1",
+                "--swiper-pagination-bullet-size": "10px",
+                "--swiper-pagination-bullet-horizontal-gap": "6px"
+              }}
+            >
+            </div>
+          </div>
+        </div>
+        <div className='col-span-6 bg-background relative z-0 overflow-y-auto'>
+          <Image className='absolute top-0 right-0 -z-10' src={elemenLoginForm}/>
+          <div className='mx-auto mt-28 flex flex-row justify-center items-center'>
+            <Image src={logoBantaiPungli}/>
+            <div className='flex flex-col ml-6'>
+              <h3 className='text-6xl text-font-dark-01' style={suicoBams.style}>Bantai</h3>
+              <h3 className='text-6xl text-[#C51D29] -mt-3' style={suicoBams.style}>Pungli</h3>
+            </div>
+          </div>
+          <div className='py-16 bg-white rounded-lg w-[75%] mx-auto mt-12'>
+            <div aria-label='Container Text And Description Login Form' className='w-[80%] mx-auto flex flex-col gap-3'>
+              <h2 className='text-center text-3xl font-bold' style={workSans.style}>
+                Login & Laporkan <span className='text-[#C51D29]'>Pungli-Pungli</span>
+              </h2>
+              <p className='text-center text-sm text-[#746B6B] font-medium opacity-60 leading-loose' style={workSans.style}>Akses  dan berkontribusi melawan pungutan liar dengan melaporkan setiap kejadian yang merugikan.</p>
+            </div>
+            <div aria-label='Container Group Login Form' className='w-[80%] mx-auto mt-8 flex flex-col gap-6'>
+              <input type="text" className='w-full h-12 rounded-md bg-[#F8FAFB] border border-none pl-4 pt-3 pb-4 placeholder:text-[#B1BBC6] placeholder:font-normal placeholder:text-sm placeholder:tracking-wide focus:outline-primary' placeholder='Masukan Alamat Email Atau Username' style={workSans.style}/>
+              <div aria-label='input-group' className='relative'>
+                {
+                  eyePassword === false && (
+                    <Image onClick={handleEyePassword} className='absolute top-1/2 right-6 -translate-y-1/2 opacity-60 cursor-pointer' src={eyeClose}/>
+                  )
+                }
+                {
+                  eyePassword === true && (
+                    <Image onClick={handleEyePassword} className='absolute top-1/2 right-6 -translate-y-1/2 opacity-30 cursor-pointer' src={eyeOpen}/>
+                  )
+                }
+                <input type={eyePassword === true ? 'text' : 'password'} className='w-full h-12 rounded-md bg-[#F8FAFB] border border-none pl-4 pt-3 pb-4 placeholder:text-[#B1BBC6] placeholder:font-normal placeholder:text-sm placeholder:tracking-wide focus:outline-primary' placeholder='Masukan Password' style={workSans.style}/>
+              </div>
+              <h6 className='text-right text-[#03014C] text-sm font-medium opacity-30' style={workSans.style}>Lupa Password?</h6>
+            </div>
+            <div className='mx-auto w-[45%] mt-8 relative bg-primary py-4 text-center text-white text-base font-medium overflow-clip cursor-pointer' style={workSans.style}>
+              Login
+              <div className='h-full absolute top-0 right-0 w-[16%] bg-secondary flex justify-center items-center'>
+                <Image src={arrowRightLogin}/>
+              </div>
+            </div>
+          </div>
+          <h6 className='w-[75%] mx-auto text-center mt-6 text-[#18191C] font-medium' style={workSans.style}>
+            Belum Punya Akun? <span className='text-primary font-bold underline'>Daftar Sekarang</span>
+          </h6>
+          <h6 className='mt-16 mb-3 text-right mr-32 text-sm text-[#6F7581] font-normal' style={workSans.style}>©Copyright Bantai Pungli 2024</h6>
         </div>
       </div>
+    </>
 
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-full sm:before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full sm:after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700/10 after:dark:from-sky-900 after:dark:via-[#0141ff]/40 before:lg:h-[360px]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Discover and deploy boilerplate example Next.js&nbsp;projects.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50 text-balance`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
-  );
+  )
 }
+
+export default Login
