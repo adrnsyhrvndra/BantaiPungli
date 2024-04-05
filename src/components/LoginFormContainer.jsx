@@ -14,7 +14,7 @@ const LoginFormContainer = () => {
                               setiap kejadian yang merugikan."
                         />
                         <LoginForm/>
-                        <ButtonFormArrow text="Login"/>
+                        <ButtonFormArrow marginTop="mt-8" text="Login"/>
                   </form>
             </div>
       )

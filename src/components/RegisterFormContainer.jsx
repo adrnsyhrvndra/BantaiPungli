@@ -2,6 +2,7 @@ import React from 'react'
 import TitleHeadingForm from './TitleHeadingForm'
 import ButtonFormArrow from './ButtonFormArrow'
 import RegisterForm from './RegisterForm'
+import AlreadyAndForgotPassword from './AlreadyAndForgotPassword'
 
 const RegisterFormContainer = () => {
       return (
@@ -14,7 +15,8 @@ const RegisterFormContainer = () => {
                               setiap kejadian yang merugikan."
                         />
                         <RegisterForm/>
-                        <ButtonFormArrow text="Daftar Sekarang!"/>
+                        <ButtonFormArrow marginTop="mt-8" text="Daftar Sekarang!"/>
+                        <AlreadyAndForgotPassword marginTop="mt-8" text="Sudah Punya Akun?" directText="Login Sekarang"/>
                   </form>
             </div>
       )

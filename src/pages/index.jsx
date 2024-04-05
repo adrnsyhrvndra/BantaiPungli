@@ -30,7 +30,7 @@ const Login = () => {
 					<Image className="absolute top-0 right-0 -z-10" src={elemenLoginForm}/>
 					<LogoForm paddingTop="pt-28"/>
 					<LoginFormContainer/>
-					<AlreadyAndForgotPassword text="Belum Punya Akun?" directText="Daftar Sekarang"/>
+					<AlreadyAndForgotPassword marginTop="mt-6" text="Belum Punya Akun?" directText="Daftar Sekarang"/>
 					<CopyrightAuthForm/>
 				</div>
 			</div>
