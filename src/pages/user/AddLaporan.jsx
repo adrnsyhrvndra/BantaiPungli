@@ -4,8 +4,17 @@ import SidebarUserMenu from '@/components/SidebarUserMenu';
 import StatistikPungliCard from '@/components/StatistikPungliCard';
 import UserActiveListCard from '@/components/UserActiveListCard';
 import Head from 'next/head'
+import { useEffect } from 'react';
 
 const AddLaporan = () => {
+      
+      useEffect(() => {
+            document.body.style.overflow = 'hidden';
+            return () => {
+                  document.body.style.overflow = ''; 
+            };
+      }, []);
+
 
       return (
             <div className='overflow-hidden'>

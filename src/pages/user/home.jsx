@@ -6,8 +6,16 @@ import UserActiveListCard from '@/components/UserActiveListCard';
 import PungliCardPost from '@/components/PungliCardPost';
 import StatistikPungliCard from '@/components/StatistikPungliCard';
 import Breadcumb from '@/components/Breadcumb';
+import { useEffect } from 'react';
 
 const Home = () => {
+
+      useEffect(() => {
+            document.body.style.overflow = 'hidden';
+            return () => {
+                  document.body.style.overflow = ''; 
+            };
+      }, []);
 
       return (
             <div className='overflow-hidden'>
