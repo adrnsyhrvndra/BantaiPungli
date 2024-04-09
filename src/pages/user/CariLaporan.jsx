@@ -7,6 +7,7 @@ import Head from 'next/head'
 import workSans from '@/libs/FontWorkSans'
 import ListCheckBoxFilterLaporan from '@/components/ListCheckBoxFilterLaporan'
 import SearchLaporan from '@/components/SearchLaporan'
+import PungliCardPost from '@/components/PungliCardPost'
 
 const CariLaporan = () => {
 
@@ -35,6 +36,10 @@ const CariLaporan = () => {
                                           </h4>
                                           <ListCheckBoxFilterLaporan/>
                                           <SearchLaporan/>
+                                          <div className='flex flex-col gap-6 mt-6'>
+                                                <PungliCardPost/>
+                                                <PungliCardPost/>
+                                          </div>
                                     </div>
                                     <div className='col-span-4'>
                                           <div className='grid grid-cols-12 gap-6'>

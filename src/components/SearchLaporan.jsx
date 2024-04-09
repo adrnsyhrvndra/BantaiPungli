@@ -30,12 +30,6 @@ const SearchLaporan = () => {
                   <div className='col-start-10 col-end-13 place-self-end'>
                         <h6 className='font-semibold text-sm text-[#6F7F95]' style={workSans.style}>Total Pungli : 2 Laporan</h6>
                   </div>
-                  <div className='col-span-12 mt-6'>
-                        <div className='flex flex-col gap-6'>
-                              <PungliCardPost/>
-                              <PungliCardPost/>
-                        </div>
-                  </div>
             </div>
       )
 }
