@@ -1,21 +1,17 @@
-import workSans from '@/libs/FontWorkSans'
-import React, { useEffect } from 'react'
+import React from 'react'
 import SearchIcon from "../assets/search-normal.png";
 import Image from "next/image";
+import workSans from '@/libs/FontWorkSans';
 
-const SearchLaporan = () => {
-
-      useEffect(() => {
-            document.body.style.overflow = 'hidden';
-            return () => {
-                  document.body.style.overflow = ''; 
-            };
-      }, []);
+const SearchLaporanDetailProfil = () => {
 
       return (
-            <div className='grid grid-cols-12 mt-10 '>
-                  <div className='col-start-1 col-end-8'>
-                        <div className='relative'>
+            <>
+                  <h3 className='text-2xl font-bold text-left' style={workSans.style}>
+                        Laporan Laporan Pungli By Adriansyah Ravindra
+                  </h3>
+                  <div className='flex flex-row items-end justify-between mt-8'>
+                        <div className='relative w-[45%]'>
                               <input 
                                     type="text" 
                                     className='w-full h-12 bg-white rounded-md px-14 py-3 placeholder:text-base placeholder:text-[#757B8C]'
@@ -24,12 +20,10 @@ const SearchLaporan = () => {
                               />
                               <Image src={SearchIcon} className='absolute top-1/2 left-6 -translate-y-1/2'/>
                         </div>
-                  </div>
-                  <div className='col-start-10 col-end-13 place-self-end'>
                         <h6 className='font-semibold text-sm text-[#6F7F95]' style={workSans.style}>Total Pungli : 2 Laporan</h6>
                   </div>
-            </div>
+            </>
       )
 }
 
-export default SearchLaporan
+export default SearchLaporanDetailProfil

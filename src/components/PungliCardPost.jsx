@@ -4,19 +4,19 @@ import GambarPungli from '../assets/gambar-pungli.png'
 import workSans from '@/libs/FontWorkSans'
 import SarjanaBrewok from "../assets/sarjanabrewok.png";
 
-const PungliCardPost = () => {
+const PungliCardPost = ({imageSizeWidth,imageSizeHeight,judulTextSize,deskripsiTextSize}) => {
       return (
             <div className='bg-white px-12 py-10 rounded-lg h-fit'>
-                  <div className='flex flex-row gap-8 items-end'>
-                        <div className='w-[470px] h-[320px] overflow-hidden relative rounded-lg'>
+                  <div className='flex flex-row gap-8 items-center'>
+                        <div className={`${imageSizeWidth} ${imageSizeHeight} overflow-hidden relative rounded-lg`}>
                               <Image className='object-cover object-center' src={GambarPungli} layout="fill" />
                         </div>
                         <div className='w-full'>
                               <div className='flex flex-col gap-2'>
-                                    <h2 className='text-left font-semibold text-2xl leading-normal text-[#364045]' style={workSans.style} >
+                                    <h2 className={`text-left font-semibold ${judulTextSize} leading-normal text-[#364045]`} style={workSans.style} >
                                           Laporan Pungli Parkir Liar Di Pertigaan Jalan Tendean Jakarta
                                     </h2>
-                                    <p className='text-xs font-normal text-[#48555C]' style={workSans.style}>
+                                    <p className={`${deskripsiTextSize} font-normal text-[#48555C]`} style={workSans.style}>
                                           Lorem ipsum dolor sit amet consectetur. Consectetur vestibulum euismod vivamus laoreet integer ullamcorper quam.... 
                                           <span className='text-primary font-extrabold leading-loose underline cursor-pointer' style={workSans.style}>LIHAT LEBIH DETAIL</span>
                                     </p>

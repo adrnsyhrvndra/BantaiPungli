@@ -40,10 +40,20 @@ const Home = () => {
                                                 <div className='col-span-12'>
                                                       <div className='grid grid-cols-12 gap-6'>
                                                             <div className='col-span-12'>
-                                                                  <PungliCardPost/>
+                                                                  <PungliCardPost 
+                                                                        imageSizeWidth="w-[470px]" 
+                                                                        imageSizeHeight="h-[320px]" 
+                                                                        judulTextSize="text-2xl" 
+                                                                        deskripsiTextSize="text-xs"
+                                                                  />
                                                             </div>
                                                             <div className='col-span-12'>
-                                                                  <PungliCardPost/>
+                                                                  <PungliCardPost 
+                                                                        imageSizeWidth="w-[470px]" 
+                                                                        imageSizeHeight="h-[320px]" 
+                                                                        judulTextSize="text-2xl" 
+                                                                        deskripsiTextSize="text-xs"
+                                                                  />
                                                             </div>
                                                       </div>
                                                 </div>

@@ -2,6 +2,7 @@ import React from 'react'
 import SarjanaBrewok from "../assets/sarjanabrewok.png";
 import Image from 'next/image';
 import workSans from '@/libs/FontWorkSans';
+import Link from 'next/link';
 
 const CardHomeProfile = () => {
       return (
@@ -16,9 +17,11 @@ const CardHomeProfile = () => {
                               >
                                     Adriansyah Ravindra
                               </h4>
-                              <button className='bg-secondary px-7 py-3 text-xs text-white rounded-lg' style={workSans.style}>
-                                    Detail Profil
-                              </button>
+                              <Link href={"DetailSelfProfile"}>
+                                    <button className='bg-secondary px-7 py-3 text-xs text-white rounded-lg' style={workSans.style}>
+                                          Detail Profil
+                                    </button>
+                              </Link>
                         </div>
                   </div>
             </div>

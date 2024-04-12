@@ -37,8 +37,24 @@ const CariLaporan = () => {
                                           <ListCheckBoxFilterLaporan/>
                                           <SearchLaporan/>
                                           <div className='flex flex-col gap-6 mt-6'>
-                                                <PungliCardPost/>
-                                                <PungliCardPost/>
+                                                <PungliCardPost 
+                                                      imageSizeWidth="w-[470px]" 
+                                                      imageSizeHeight="h-[320px]" 
+                                                      judulTextSize="text-2xl" 
+                                                      deskripsiTextSize="text-xs"
+                                                />
+                                                <PungliCardPost 
+                                                      imageSizeWidth="w-[470px]" 
+                                                      imageSizeHeight="h-[320px]" 
+                                                      judulTextSize="text-2xl" 
+                                                      deskripsiTextSize="text-xs"
+                                                />
+                                                <PungliCardPost 
+                                                      imageSizeWidth="w-[470px]" 
+                                                      imageSizeHeight="h-[320px]" 
+                                                      judulTextSize="text-2xl" 
+                                                      deskripsiTextSize="text-xs"
+                                                />
                                           </div>
                                     </div>
                                     <div className='col-span-4'>
