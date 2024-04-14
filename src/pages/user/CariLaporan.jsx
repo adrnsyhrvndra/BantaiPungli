@@ -8,6 +8,7 @@ import workSans from '@/libs/FontWorkSans'
 import ListCheckBoxFilterLaporan from '@/components/ListCheckBoxFilterLaporan'
 import SearchLaporan from '@/components/SearchLaporan'
 import PungliCardPost from '@/components/PungliCardPost'
+import Pagination from '@/components/Pagination'
 
 const CariLaporan = () => {
 
@@ -49,12 +50,6 @@ const CariLaporan = () => {
                                                       judulTextSize="text-2xl" 
                                                       deskripsiTextSize="text-xs"
                                                 />
-                                                <PungliCardPost 
-                                                      imageSizeWidth="w-[470px]" 
-                                                      imageSizeHeight="h-[320px]" 
-                                                      judulTextSize="text-2xl" 
-                                                      deskripsiTextSize="text-xs"
-                                                />
                                           </div>
                                     </div>
                                     <div className='col-span-4'>
@@ -66,6 +61,9 @@ const CariLaporan = () => {
                                                       <StatistikPungliCard/>
                                                 </div>
                                           </div>
+                                    </div>
+                                    <div className='col-span-12 mt-4'>
+                                          <Pagination/>
                                     </div>
                               </div>
                         </div>

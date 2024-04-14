@@ -3,6 +3,7 @@ import CardProfileSelf from '@/components/CardProfileSelf';
 import Head from 'next/head';
 import SearchLaporanDetailProfil from '@/components/SearchLaporanDetailProfil';
 import PungliCardPost from '@/components/PungliCardPost';
+import Pagination from '@/components/Pagination';
 
 const DetailSelfProfile = () => {
 
@@ -34,6 +35,9 @@ const DetailSelfProfile = () => {
                                           judulTextSize="text-3xl" 
                                           deskripsiTextSize="text-sm"
                                     />
+                              </div>
+                              <div className='mt-14 mx-auto w-fit'>
+                                    <Pagination/>
                               </div>
                         </div>
                   </div>

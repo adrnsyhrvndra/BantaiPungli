@@ -7,6 +7,8 @@ import PungliCardPost from '@/components/PungliCardPost';
 import StatistikPungliCard from '@/components/StatistikPungliCard';
 import Breadcumb from '@/components/Breadcumb';
 import { useEffect } from 'react';
+import Pagination from '@/components/Pagination';
+
 
 const Home = () => {
 
@@ -68,6 +70,9 @@ const Home = () => {
                                                       <StatistikPungliCard/>
                                                 </div>
                                           </div>
+                                    </div>
+                                    <div className='col-span-12 mt-4'>
+                                          <Pagination/>
                                     </div>
                               </div>
                         </div>
