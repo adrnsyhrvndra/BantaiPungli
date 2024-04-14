@@ -18,6 +18,7 @@ const Breadcumb = () => {
                                     </div>
                               </>
                         }
+
                         {
                               router.pathname === '/user/AddLaporan' &&
                               <>
@@ -29,6 +30,7 @@ const Breadcumb = () => {
                                     </div>
                               </>
                         }
+
                         {
                               router.pathname === '/user/CariLaporan' &&
                               <>
@@ -40,6 +42,19 @@ const Breadcumb = () => {
                                     </div>
                               </>
                         }
+
+                        {
+                              router.pathname === '/user/EditProfile' &&
+                              <>
+                                    <h5 className='font-semibold text-xl text-[#B31E28]' style={workSans.style}>Edit Profil</h5>
+                                    <div className='flex flex-row gap-2 font-medium' style={workSans.style}>
+                                          <h6 className='text-[#B31E28]'>Home</h6>
+                                          <h6 className='text-[#B31E28]'>-</h6>
+                                          <h6 className='text-[#F59198]'>Edit Profil</h6>
+                                    </div>
+                              </>
+                        }
+
                   </div>
             </div>
       )
