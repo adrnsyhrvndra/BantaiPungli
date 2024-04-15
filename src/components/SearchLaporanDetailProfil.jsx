@@ -3,12 +3,12 @@ import SearchIcon from "../assets/search-normal.png";
 import Image from "next/image";
 import workSans from '@/libs/FontWorkSans';
 
-const SearchLaporanDetailProfil = () => {
+const SearchLaporanDetailProfil = ({textUserHeading}) => {
 
       return (
             <>
                   <h3 className='text-2xl font-bold text-left' style={workSans.style}>
-                        Laporan Laporan Pungli By Adriansyah Ravindra
+                        Laporan Laporan Pungli By {textUserHeading}
                   </h3>
                   <div className='flex flex-row items-end justify-between mt-8'>
                         <div className='relative w-[45%]'>

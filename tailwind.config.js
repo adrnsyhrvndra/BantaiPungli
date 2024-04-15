@@ -10,6 +10,7 @@ module.exports = {
 			backgroundImage: {
 				"pattern-money-pungli": "url('../assets/bg-pattern-login.png')",
 				"pattern-money-pungli-card-home": "url('../assets/bg-pattern-pungli-homes.png')",
+				"pattern-money-pungli-detail-user-other": "url('../assets/bg-uang-pungli-detail-user-lain.png')",
 			},
 			colors: {
 				"primary": "#D81D2A",

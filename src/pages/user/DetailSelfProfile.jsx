@@ -21,7 +21,7 @@ const DetailSelfProfile = () => {
                               <CardInformasiLengkapProfil/>
                         </div>
                         <div className='col-span-12 mt-16'>
-                              <SearchLaporanDetailProfil/>
+                              <SearchLaporanDetailProfil textUserHeading={'Adriansyah Ravindra'} />
                               <div className='mt-8 flex flex-col gap-8'>
                                     <PungliCardPost 
                                           imageSizeWidth="w-[512px]" 
