@@ -211,7 +211,7 @@ const MenuListSidebar = () => {
                   }
 
                   {
-                        router.pathname === '/user/EditProfile' || router.pathname === '/user/EditLaporan' &&
+                        router.pathname === '/user/EditProfile' || router.pathname === '/user/EditLaporan' || router.pathname === '/user/DetailLaporan' &&
                         <>
                               <Link href={"/user/Home"}>
                                     <div className='flex flex-row justify-start items-center gap-4'>
