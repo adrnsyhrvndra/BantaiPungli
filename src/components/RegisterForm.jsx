@@ -1,14 +1,16 @@
 import workSans from '@/libs/FontWorkSans'
-import React from 'react'
+import React, { useState } from 'react'
 import eyeClose from "../assets/eye-close.png";
 import eyeOpen from "../assets/eye-open.png";
 import { useDispatch, useSelector } from 'react-redux';
-import { setEyePassword } from '@/store/auth';
+import { setAlamat, setEmail, setEyePassword, setFotoProfile, setJenisKelamin, setNamaLengkap, setNoTelp, setPassword, setTanggalLahir, setUsername } from '@/store/auth';
 import Image from 'next/image';
 import Select from 'react-select';
 import dataSelectOptionsJenisKelamin from '@/libs/DataOptionJenisKelamin';
 import dataSelectOptionsKotaDanProvinsi from '@/libs/DataOptionKotaDanProvinsi';
 import arrowUploadFilesIcon from '../assets/export.png';
+import 'react-phone-number-input/style.css'
+import PhoneInput from 'react-phone-number-input'
 
 const customStyles = {
 	control: (styles) => ({ 
@@ -47,12 +49,65 @@ const customStyles = {
 }
 
 const RegisterForm = () => {
+
 	const dispatch = useDispatch();
 	const eyePassword = useSelector(state => state.authReducerRedux.eyePassword);
+	const username = useSelector(state => state.authReducerRedux.username);
+	const password = useSelector(state => state.authReducerRedux.password);
+	const email = useSelector(state => state.authReducerRedux.email);
+	const nama_lengkap = useSelector(state => state.authReducerRedux.nama_lengkap);
+	const tanggal_lahir = useSelector(state => state.authReducerRedux.tanggal_lahir);
+	const jenis_kelamin = useSelector(state => state.authReducerRedux.jenis_kelamin);
+	const no_telp = useSelector(state => state.authReducerRedux.no_telp);
+	const alamat = useSelector(state => state.authReducerRedux.alamat);
+	const foto_profile = useSelector(state => state.authReducerRedux.foto_profile);
 
 	const handleEyePassword = () => {
 		dispatch(setEyePassword(!eyePassword));
 	};
+
+	const handleInput = (e) => {
+		if (e.target.name === "username"){
+			dispatch(setUsername(e.target.value));
+		} 
+		
+		else if (e.target.name === "password"){
+			dispatch(setPassword(e.target.value));
+		} 
+		
+		else if (e.target.name === "email") {
+			dispatch(setEmail(e.target.value));
+		}
+		
+		else if (e.target.name === "nama_lengkap") {
+			dispatch(setNamaLengkap(e.target.value));
+		}
+		
+		else if (e.target.name === "tanggal_lahir") {
+			dispatch(setTanggalLahir(e.target.value));
+		}
+
+		else if (e.target.name === "foto_profile") {
+			dispatch(setFotoProfile(e.target.value));
+		}
+	}
+
+	const handlePhoneInput = (value) => {
+		dispatch(setNoTelp(value));
+	}
+
+	const handleNameFileStatus = () => {
+		if (foto_profile) {
+			const filePath = foto_profile;
+			const fileName = filePath.split(/[\\\/]/).pop();
+
+			return fileName;
+		}
+
+		if (!foto_profile) {
+			return 'PNG or JPG (MAX. 800x800px)';
+		}
+	}
 
 	return (
 		<div aria-label="Container Group Register Form" className="w-[80%] mx-auto mt-8">
@@ -60,6 +115,9 @@ const RegisterForm = () => {
 				<div className='col-span-6'>
 					<input
 						type="text"
+						name='username'
+						onChange={handleInput}
+						value={username}
 						className="w-full h-12 rounded-md bg-[#F8FAFB] border border-none pl-4 pt-3 pb-4 placeholder:text-[#B1BBC6] placeholder:font-normal placeholder:text-sm placeholder:tracking-wide focus:outline-primary"
 						placeholder="Masukan Username"
 						style={workSans.style}
@@ -83,6 +141,9 @@ const RegisterForm = () => {
 						)}
 						<input
 							type={eyePassword === true ? "text" : "password"}
+							name='password'
+							value={password}
+							onChange={handleInput}
 							className="w-full h-12 rounded-md bg-[#F8FAFB] border border-none pl-4 pt-3 pb-4 placeholder:text-[#B1BBC6] placeholder:font-normal placeholder:text-sm placeholder:tracking-wide focus:outline-primary"
 							placeholder="Masukan Password"
 							style={workSans.style}
@@ -91,7 +152,10 @@ const RegisterForm = () => {
 				</div>
 				<div className='col-span-6'>
 					<input
-						type="text"
+						type="email"
+						name='email'
+						value={email}
+						onChange={handleInput}
 						className="w-full h-12 rounded-md bg-[#F8FAFB] border border-none pl-4 pt-3 pb-4 placeholder:text-[#B1BBC6] placeholder:font-normal placeholder:text-sm placeholder:tracking-wide focus:outline-primary"
 						placeholder="Masukan Email"
 						style={workSans.style}
@@ -100,6 +164,9 @@ const RegisterForm = () => {
 				<div className='col-span-6'>
 					<input
 						type="text"
+						name="nama_lengkap"
+						value={nama_lengkap}
+						onChange={handleInput}
 						className="w-full h-12 rounded-md bg-[#F8FAFB] border border-none pl-4 pt-3 pb-4 placeholder:text-[#B1BBC6] placeholder:font-normal placeholder:text-sm placeholder:tracking-wide focus:outline-primary"
 						placeholder="Masukan Nama Lengkap"
 						style={workSans.style}
@@ -107,7 +174,10 @@ const RegisterForm = () => {
 				</div>
 				<div className='col-span-6'>
 					<input
-						type="text"
+						type="date"
+						name="tanggal_lahir"
+						value={tanggal_lahir}
+						onChange={handleInput}
 						className="w-full h-12 rounded-md bg-[#F8FAFB] border border-none pl-4 pt-3 pb-4 placeholder:text-[#B1BBC6] placeholder:font-normal placeholder:text-sm placeholder:tracking-wide focus:outline-primary"
 						placeholder="Masukan Tanggal Lahir"
 						style={workSans.style}
@@ -115,23 +185,30 @@ const RegisterForm = () => {
 				</div>
 				<div className='col-span-6'>
 					<Select
-						isClearable
+						name="jenis_kelamin"
+						onChange={(e) => dispatch(setJenisKelamin(e.value))}
 						options={dataSelectOptionsJenisKelamin} 
 						styles={customStyles}
 						placeholder="Pilih Jenis Kelamin"
 					/>
 				</div>
 				<div className='col-span-6'>
-					<input
-						type="text"
+					<PhoneInput
+						international
+						name="no_telp"
+						value={no_telp}
+						defaultCountry='ID'
+						countryCallingCodeEditable={false}
+						placeholder="Enter phone number"
+						onChange={value => handlePhoneInput(value)}
 						className="w-full h-12 rounded-md bg-[#F8FAFB] border border-none pl-4 pt-3 pb-4 placeholder:text-[#B1BBC6] placeholder:font-normal placeholder:text-sm placeholder:tracking-wide focus:outline-primary"
-						placeholder="Masukan No Telp"
 						style={workSans.style}
 					/>
 				</div>
 				<div className='col-span-6'>
 					<Select
-						isClearable
+						name='alamat'
+						onChange={(e) => dispatch(setAlamat(e.value))}
 						options={dataSelectOptionsKotaDanProvinsi} 
 						styles={customStyles}
 						placeholder="Pilih Alamat Domisili"
@@ -146,10 +223,18 @@ const RegisterForm = () => {
 									Upload Foto Profilmu (Optional)*
 								</p>
 								<p class="text-xs text-gray-500 dark:text-gray-400">
-									PNG or JPG (MAX. 800x800px)
+									{handleNameFileStatus()}
 								</p>
 							</div>
-							<input id="dropzone-file" type="file" class="hidden" />
+							<input 
+								name='foto_profile' 
+								id="dropzone-file" 
+								value={foto_profile}
+								type="file" 
+								class="hidden" 
+								onChange={handleInput} 
+								accept="image/png, image/gif, image/jpeg, image/jpg" 
+							/>
 						</label>
 					</div> 
 				</div>
