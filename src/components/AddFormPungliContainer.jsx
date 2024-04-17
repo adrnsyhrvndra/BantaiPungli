@@ -46,6 +46,7 @@ const customStyles = {
 
 const AddFormPungliContainer = ({dataKategoriList}) => {
 
+      const [selectedImage, setSelectedImage] = useState(null);
       const [listArray, setListArray] = useState([]);
       const id_user = Cookies.get('userId');
 
@@ -53,9 +54,11 @@ const AddFormPungliContainer = ({dataKategoriList}) => {
             judul_pelaporan: '',
             tanggal_pelaporan: '',
             deskripsi_pelaporan: '',
-            kategoriPungliId: '',
             userId: id_user,
+            kategoriPungliId: '',
       });
+
+      const [selectedKategoriPungli, setSelectedKategoriPungli] = useState(null);
 
       dataKategoriList.map((data) => {
             const value = data._id;
@@ -93,32 +96,52 @@ const AddFormPungliContainer = ({dataKategoriList}) => {
             } 
       }
 
+      const handleChangeKategoriPungli = (value) => {
+            console.log(value);
+
+            setSelectedKategoriPungli(value);
+            setInput({ ...input, kategoriPungliId: value.value });
+        };
+
+      const handleFile = (e) => {
+            const file = e.target.files[0];
+            setSelectedImage(file);
+      }
+
+      const handleFileNameStatus = () => {
+            if (selectedImage) {
+                  return selectedImage.name;
+            } else {
+                  return 'PNG or JPG (MAX. 800x800px)';
+            }
+      }
+
       const handleSubmit = async (e) => {
             e.preventDefault();
 
-            if (input.judul_pelaporan && input.tanggal_pelaporan && input.deskripsi_pelaporan && input.kategoriPungliId && id_user) {
+            const formData = new FormData();
+            formData.append('bukti_pendukung', selectedImage);
+            formData.append('userId', id_user);
+            formData.append('kategoriPungliId', input.kategoriPungliId);
+            formData.append('judul_pelaporan', input.judul_pelaporan);
+            formData.append('deskripsi_pelaporan', input.deskripsi_pelaporan);
+            formData.append('tanggal_pelaporan', input.tanggal_pelaporan);
+            formData.append('status_pelaporan', 'Belum Selesai');
+            formData.append('created_at', new Date());
+            formData.append('updated_at', new Date());
+
+            if (input.judul_pelaporan && input.tanggal_pelaporan && input.deskripsi_pelaporan && input.kategoriPungliId && id_user || selectedImage) {
 
                   try {
 
-                        const res = await axios({
-                              method: 'POST',
-                              url: '/api/addLaporan',
-                              data:  {
-                                    userId: id_user,
-                                    kategoriPungliId: input.kategoriPungliId,
-                                    judul_pelaporan: input.judul_pelaporan,
-                                    deskripsi_pelaporan: input.deskripsi_pelaporan,
-                                    tanggal_pelaporan: input.tanggal_pelaporan,
-                                    status_pelaporan: 'Belum Selesai',
-                                    bukti_pendukung: '',
-                                    created_at: new Date(),
-                                    updated_at: new Date(),
+                        const res = await axios.post('/api/addLaporan', formData, {
+                              headers: {
+                                  'Access-Control-Allow-Origin': '*',
+                                  'Content-Type': 'multipart/form-data'
                               },
-                              headers: { 
-                                    'Content-Type': 'application/json', 
-                                    'Access-Control-Allow-Origin': '*' 
-                              }
                         });
+
+                        console.log(res);
       
                         toast.success('Tambah Laporan Berhasil! 🤙', {
                               position: "top-right",
@@ -141,7 +164,10 @@ const AddFormPungliContainer = ({dataKategoriList}) => {
                         
                   } catch (error) {
 
-                        toast.error('Tidak Berhasil! 😰', {
+                        // console.log(error.response.data.message);
+                        console.log(error.response.data);
+
+                        toast.error(`Tidak Berhasil! karena ${error} 😰`, {
                               position: "top-right",
                               autoClose: 4993,
                               hideProgressBar: false,
@@ -157,7 +183,9 @@ const AddFormPungliContainer = ({dataKategoriList}) => {
 
             }
 
-      }
+      };
+
+      console.log(input.kategoriPungliId);
 
       return (
             <div className='bg-white rounded-lg py-16 px-20' style={workSans.style}>
@@ -211,7 +239,7 @@ const AddFormPungliContainer = ({dataKategoriList}) => {
                                     <div className='flex flex-col gap-6'>
                                           <Creatable
                                                 name='kategoriPungliId'
-                                                onChange={(value) => setInput({...input, kategoriPungliId: value.value})}
+                                                onChange={handleChangeKategoriPungli}
                                                 options={listArray} 
                                                 styles={customStyles}
                                                 placeholder="Masukan Kategori Laporan Pungli"
@@ -224,10 +252,10 @@ const AddFormPungliContainer = ({dataKategoriList}) => {
                                                                   Upload Bukti Laporan (Optional)*
                                                             </p>
                                                             <p className="text-xs text-gray-500 dark:text-gray-400">
-                                                                  PNG or JPG (MAX. 800x800px)
+                                                                  {handleFileNameStatus()}
                                                             </p>
                                                       </div>
-                                                      <input name='bukti_pendukung' id="dropzone-file" type="file" className="hidden" />
+                                                      <input onChange={handleFile} name='bukti_pendukung' id="dropzone-file" type="file" className="hidden" />
                                                 </label>
                                           </div> 
                                     </div>
