@@ -4,8 +4,11 @@ import ArrowIconNav from "../assets/arrow-icon-bottom.png";
 import Image from 'next/image';
 import Link from 'next/link';
 import workSans from '@/libs/FontWorkSans';
+import { useSelector } from 'react-redux';
 
 const NavbarUser = () => {
+
+      const nama_lengkap_redux = useSelector(state => state.userReducerRedux.nama_lengkap);
 
       return (
 
@@ -62,7 +65,7 @@ const NavbarUser = () => {
                                                 className='text-lg font-medium text-[#364045]' 
                                                 style={workSans.style}
                                           >
-                                                Adriansyah
+                                                {nama_lengkap_redux}
                                           </h6>
                                     </div>
                                     <Image src={ArrowIconNav} />

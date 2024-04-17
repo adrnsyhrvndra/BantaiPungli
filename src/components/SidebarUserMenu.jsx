@@ -3,10 +3,35 @@ import LogoSidebar from './LogoSidebar'
 import workSans from '@/libs/FontWorkSans'
 import MenuListSidebar from './MenuListSidebar'
 import Link from 'next/link';
+import Cookies from 'js-cookie';
+import { useRouter } from 'next/router';
+import { useDispatch } from 'react-redux';
+import { setAlamat, setEmail, setFotoProfile, setJenisKelamin, setNamaLengkap, setNoTelp, setTanggalLahir, setUsername, set_Id } from '@/store/user';
 
 const SidebarUserMenu = () => {
 
+      const router = useRouter();
+      const dispatch = useDispatch();
+
+      const handleLogout = () => {
+            Cookies.remove('token');
+            Cookies.remove('userId');
+
+            dispatch(set_Id(null));
+            dispatch(setUsername(null));
+            dispatch(setEmail(null));
+            dispatch(setNoTelp(null));
+            dispatch(setAlamat(null));
+            dispatch(setFotoProfile(null));
+            dispatch(setNamaLengkap(null));
+            dispatch(setJenisKelamin(null));
+            dispatch(setTanggalLahir(null));
+
+            router.push('/');
+      }
+
       return (
+
             <>
                   <LogoSidebar/>
                   <div className='flex flex-col justify-start gap-10 mt-16'>
@@ -19,7 +44,7 @@ const SidebarUserMenu = () => {
                               </svg>
                               <h6 className='text-black text-[15px] font-normal opacity-30' style={workSans.style}>Bantuan</h6>
                         </div>
-                        <Link href={"/"}>
+                        <Link href={"/"} onClick={handleLogout}>
                               <div className='flex flex-row justify-start items-center gap-4'>
                                     <svg className='w-6 h-6 opacity-20' viewBox="0 0 26 27" fill="none" xmlns="http://www.w3.org/2000/svg">
                                           <path d="M17.3809 9.12134L21.5749 13.3165L17.3809 17.5116" stroke="black" strokeWidth="2.13086" strokeLinecap="round" strokeLinejoin="round"/>
@@ -31,6 +56,7 @@ const SidebarUserMenu = () => {
                         </Link>
                   </div>
             </>
+
       )
 }
 
