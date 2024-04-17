@@ -4,11 +4,11 @@ import ArrowIconNav from "../assets/arrow-icon-bottom.png";
 import Image from 'next/image';
 import Link from 'next/link';
 import workSans from '@/libs/FontWorkSans';
-import { useSelector } from 'react-redux';
+import Cookies from 'js-cookie';
 
 const NavbarUser = () => {
 
-      const nama_lengkap_redux = useSelector(state => state.userReducerRedux.nama_lengkap);
+      const nama_lengkap = Cookies.get('nama_lengkap');
 
       return (
 
@@ -65,7 +65,7 @@ const NavbarUser = () => {
                                                 className='text-lg font-medium text-[#364045]' 
                                                 style={workSans.style}
                                           >
-                                                {nama_lengkap_redux}
+                                                { nama_lengkap }
                                           </h6>
                                     </div>
                                     <Image src={ArrowIconNav} />

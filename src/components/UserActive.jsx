@@ -8,7 +8,7 @@ const UserActive = ({text}) => {
             <div className='flex flex-col gap-5 mt-4'>
                   <div className='flex flex-row justify-between items-center'>
                         <div className='flex flex-row justify-start items-center gap-4'>
-                              <Image src={SarjanaBrewok} className='w-16 rounded-full'/>
+                              <Image alt='user-profile-active' src={SarjanaBrewok} className='w-16 rounded-full'/>
                               <h4 className='text-sm text-[#364045] font-medium' style={workSans.style}>{text}</h4>
                         </div>
                         <span className="relative flex items-center justify-center h-6 w-6">

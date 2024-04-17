@@ -8,24 +8,18 @@ import StatistikPungliCard from '@/components/StatistikPungliCard';
 import Breadcumb from '@/components/Breadcumb';
 import { useEffect } from 'react';
 import Pagination from '@/components/Pagination';
-import { useDispatch } from 'react-redux';
-import { setAlamat, setEmail, setFotoProfile, setJenisKelamin, setNamaLengkap, setNoTelp, setTanggalLahir, setUsername, set_Id } from '@/store/user';
+import Cookies from 'js-cookie';
 
 export default function ({ _id, username, nama_lengkap, email, no_telp, alamat, status_online,tanggal_lahir,jenis_kelamin, foto_profile, created_at, updated_at }) {
 
-      const dispatch = useDispatch();
-
-      useEffect(() => {
-            dispatch(set_Id(_id));
-            dispatch(setUsername(username));
-            dispatch(setEmail(email));
-            dispatch(setNoTelp(no_telp));
-            dispatch(setAlamat(alamat));
-            dispatch(setFotoProfile(foto_profile));
-            dispatch(setNamaLengkap(nama_lengkap));
-            dispatch(setJenisKelamin(jenis_kelamin));
-            dispatch(setTanggalLahir(tanggal_lahir));
-      }, []);
+      Cookies.set('username', username, { expires: 1 });
+      Cookies.set('email', email, { expires: 1 });
+      Cookies.set('no_telp', no_telp, { expires: 1 });
+      Cookies.set('alamat', alamat, { expires: 1 });
+      Cookies.set('status_online', status_online, { expires: 1 });
+      Cookies.set('tanggal_lahir', tanggal_lahir, { expires: 1 });
+      Cookies.set('jenis_kelamin', jenis_kelamin, { expires: 1 });
+      Cookies.set('foto_profile', foto_profile, { expires: 1 });
 
       useEffect(() => {
             document.body.style.overflow = 'hidden';

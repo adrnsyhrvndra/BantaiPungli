@@ -5,27 +5,23 @@ import MenuListSidebar from './MenuListSidebar'
 import Link from 'next/link';
 import Cookies from 'js-cookie';
 import { useRouter } from 'next/router';
-import { useDispatch } from 'react-redux';
-import { setAlamat, setEmail, setFotoProfile, setJenisKelamin, setNamaLengkap, setNoTelp, setTanggalLahir, setUsername, set_Id } from '@/store/user';
 
 const SidebarUserMenu = () => {
 
       const router = useRouter();
-      const dispatch = useDispatch();
 
       const handleLogout = () => {
             Cookies.remove('token');
             Cookies.remove('userId');
-
-            dispatch(set_Id(null));
-            dispatch(setUsername(null));
-            dispatch(setEmail(null));
-            dispatch(setNoTelp(null));
-            dispatch(setAlamat(null));
-            dispatch(setFotoProfile(null));
-            dispatch(setNamaLengkap(null));
-            dispatch(setJenisKelamin(null));
-            dispatch(setTanggalLahir(null));
+            Cookies.remove('username');
+            Cookies.remove('nama_lengkap');
+            Cookies.remove('email');
+            Cookies.remove('no_telp');
+            Cookies.remove('alamat');
+            Cookies.remove('status_online');
+            Cookies.remove('tanggal_lahir');
+            Cookies.remove('jenis_kelamin');
+            Cookies.remove('foto_profile');
 
             router.push('/');
       }
