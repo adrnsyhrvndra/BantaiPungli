@@ -7,10 +7,13 @@ import { Bounce, ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import axios from 'axios'
 import { setPassword, setUsernameOrEmail } from '@/store/auth'
+import { useRouter } from 'next/router'
 
 const LoginFormContainer = () => {
 
       const dispatch = useDispatch();
+      const router = useRouter();
+
 	const usernameOrEmail = useSelector(state => state.authReducerRedux.usernameOrEmail);
 	const passwordLogin = useSelector(state => state.authReducerRedux.passwordLogin);
 
@@ -47,6 +50,11 @@ const LoginFormContainer = () => {
                         });
 
                         console.log(res.data);
+
+                        setTimeout(() => {
+                              router.push('/user/Home');
+                        }, 5000);
+
                         
                   } catch (error) {
                         
