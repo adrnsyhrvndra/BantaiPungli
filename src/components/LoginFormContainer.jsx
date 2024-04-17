@@ -8,6 +8,7 @@ import 'react-toastify/dist/ReactToastify.css'
 import axios from 'axios'
 import { setPasswordLogin, setUsernameOrEmail } from '@/store/auth'
 import { useRouter } from 'next/router'
+import Cookies from 'js-cookie'
 
 const LoginFormContainer = () => {
 
@@ -49,8 +50,9 @@ const LoginFormContainer = () => {
                               transition: Bounce,
                         });
 
-                        console.log(res.data);
-                        
+                        Cookies.set('token', res.data.accessToken, { expires: 1 });
+                        Cookies.set('userId', res.data.data._id, { expires: 1 });
+
                         dispatch(setUsernameOrEmail(''));
                         dispatch(setPasswordLogin(''));
 
