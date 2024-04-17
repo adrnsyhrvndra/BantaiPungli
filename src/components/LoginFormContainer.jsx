@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Bounce, ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import axios from 'axios'
-import { setPassword, setUsernameOrEmail } from '@/store/auth'
+import { setPasswordLogin, setUsernameOrEmail } from '@/store/auth'
 import { useRouter } from 'next/router'
 
 const LoginFormContainer = () => {
@@ -50,6 +50,9 @@ const LoginFormContainer = () => {
                         });
 
                         console.log(res.data);
+                        
+                        dispatch(setUsernameOrEmail(''));
+                        dispatch(setPasswordLogin(''));
 
                         setTimeout(() => {
                               router.push('/user/Home');
