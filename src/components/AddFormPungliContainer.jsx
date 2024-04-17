@@ -6,7 +6,7 @@ import Image from "next/image";
 import Cookies from 'js-cookie';
 import axios from 'axios';
 import { Bounce, ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css'
+import 'react-toastify/dist/ReactToastify.css';
 
 const customStyles = {
 	control: (styles) => ({ 
@@ -120,72 +120,80 @@ const AddFormPungliContainer = ({dataKategoriList}) => {
             e.preventDefault();
 
             const formData = new FormData();
-            formData.append('bukti_pendukung', selectedImage);
-            formData.append('userId', id_user);
-            formData.append('kategoriPungliId', input.kategoriPungliId);
-            formData.append('judul_pelaporan', input.judul_pelaporan);
-            formData.append('deskripsi_pelaporan', input.deskripsi_pelaporan);
-            formData.append('tanggal_pelaporan', input.tanggal_pelaporan);
-            formData.append('status_pelaporan', 'Belum Selesai');
-            formData.append('created_at', new Date());
-            formData.append('updated_at', new Date());
+            // formData.append('userId', id_user);
+            // formData.append('kategoriPungliId', input.kategoriPungliId);
+            // formData.append('judul_pelaporan', input.judul_pelaporan);
+            // formData.append('deskripsi_pelaporan', input.deskripsi_pelaporan);
+            // formData.append('tanggal_pelaporan', input.tanggal_pelaporan);
+            // formData.append('status_pelaporan', 'Belum Selesai');
+            // formData.append('created_at', new Date());
+            // formData.append('updated_at', new Date());
+            formData.append('file', selectedImage);
+            formData.append('upload_preset', 'bantai_pungli');
 
-            if (input.judul_pelaporan && input.tanggal_pelaporan && input.deskripsi_pelaporan && input.kategoriPungliId && id_user || selectedImage) {
+            const response = await fetch('https://api.cloudinary.com/v1_1/adriansyah-course-laravel7/image/upload', {
+                  method: 'POST',
+                  body: formData
+            });
+            const result = await response.json();
+            console.log(result.secure_url);
 
-                  try {
+            // if (input.judul_pelaporan && input.tanggal_pelaporan && input.deskripsi_pelaporan && input.kategoriPungliId && id_user || selectedImage) {
 
-                        const res = await axios.post('/api/addLaporan', formData, {
-                              headers: {
-                                  'Access-Control-Allow-Origin': '*',
-                                  'Content-Type': 'multipart/form-data'
-                              },
-                        });
+            //       try {
 
-                        console.log(res);
+            //             const res = await axios.post('/api/addLaporan', formData, {
+            //                   headers: {
+            //                       'Access-Control-Allow-Origin': '*',
+            //                       'Content-Type': 'multipart/form-data'
+            //                   },
+            //             });
+
+            //             console.log(res);
       
-                        toast.success('Tambah Laporan Berhasil! 🤙', {
-                              position: "top-right",
-                              autoClose: 9000,
-                              hideProgressBar: false,
-                              closeOnClick: true,
-                              pauseOnHover: true,
-                              draggable: true,
-                              progress: undefined,
-                              theme: "dark",
-                              transition: Bounce,
-                        });
+            //             toast.success('Tambah Laporan Berhasil! 🤙', {
+            //                   position: "top-right",
+            //                   autoClose: 9000,
+            //                   hideProgressBar: false,
+            //                   closeOnClick: true,
+            //                   pauseOnHover: true,
+            //                   draggable: true,
+            //                   progress: undefined,
+            //                   theme: "dark",
+            //                   transition: Bounce,
+            //             });
 
-                        // Remove All Input Value
-                        setInput({
-                              judul_pelaporan: '',
-                              tanggal_pelaporan: '',
-                              deskripsi_pelaporan: '',
-                        });
+            //             // Remove All Input Value
+            //             setInput({
+            //                   judul_pelaporan: '',
+            //                   tanggal_pelaporan: '',
+            //                   deskripsi_pelaporan: '',
+            //             });
                         
-                  } catch (error) {
+            //       } catch (error) {
 
-                        // console.log(error.response.data.message);
-                        console.log(error.response.data);
+            //             // console.log(error.response.data.message);
+            //             console.log(error.response.data);
 
-                        toast.error(`Tidak Berhasil! karena ${error} 😰`, {
-                              position: "top-right",
-                              autoClose: 4993,
-                              hideProgressBar: false,
-                              closeOnClick: true,
-                              pauseOnHover: true,
-                              draggable: true,
-                              progress: undefined,
-                              theme: "dark",
-                              transition: Bounce,
-                        });
+            //             toast.error(`Tidak Berhasil! karena ${error} 😰`, {
+            //                   position: "top-right",
+            //                   autoClose: 4993,
+            //                   hideProgressBar: false,
+            //                   closeOnClick: true,
+            //                   pauseOnHover: true,
+            //                   draggable: true,
+            //                   progress: undefined,
+            //                   theme: "dark",
+            //                   transition: Bounce,
+            //             });
 
-                  }
+            //       }
 
-            }
+            // }
 
       };
 
-      console.log(input.kategoriPungliId);
+      console.log(selectedImage);
 
       return (
             <div className='bg-white rounded-lg py-16 px-20' style={workSans.style}>
@@ -196,7 +204,7 @@ const AddFormPungliContainer = ({dataKategoriList}) => {
                         </h6>
                         <p className='text-[#746B6B] font-normal text-sm leading-loose opacity-60'>Ayo bersatu melawan pungutan liar! Laporkan setiap tindakan pungli yang merugikan untuk memerangi korupsi. Melalui tindakan kita, kita dapat membangun masyarakat yang berintegritas dan adil. Mari bersama-sama memastikan keadilan dan transparansi dalam setiap aspek kehidupan kita.</p>
                   </div>
-                  <form onSubmit={handleSubmit}>
+                  <form encType='multipart/form-data' onSubmit={handleSubmit}>
                         <div className='grid grid-cols-12 mt-6 gap-6'>
                               <div className='col-span-6'>
                                     <div className='flex flex-col gap-6'>
@@ -255,7 +263,7 @@ const AddFormPungliContainer = ({dataKategoriList}) => {
                                                                   {handleFileNameStatus()}
                                                             </p>
                                                       </div>
-                                                      <input onChange={handleFile} name='bukti_pendukung' id="dropzone-file" type="file" className="hidden" />
+                                                      <input onChange={handleFile} name='file' id="dropzone-file" type="file" className="hidden" />
                                                 </label>
                                           </div> 
                                     </div>

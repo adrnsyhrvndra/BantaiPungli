@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@cloudinary/react": "^1.13.0",
+    "@cloudinary/url-gen": "^1.19.0",
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
     "@mui/material": "^5.15.15",
@@ -16,6 +18,8 @@
     "@reduxjs/toolkit": "^2.2.3",
     "@types/formidable": "^3.4.5",
     "axios": "^1.6.8",
+    "cloudinary": "^2.1.0",
+    "cloudinary-react": "^1.8.1",
     "cookie": "^0.6.0",
     "file-loader": "^6.2.0",
     "formidable": "^3.5.1",
