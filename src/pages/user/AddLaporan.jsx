@@ -3,10 +3,12 @@ import Breadcumb from '@/components/Breadcumb';
 import SidebarUserMenu from '@/components/SidebarUserMenu';
 import StatistikPungliCard from '@/components/StatistikPungliCard';
 import UserActiveListCard from '@/components/UserActiveListCard';
-import Head from 'next/head'
+import Head from 'next/head';
 import { useEffect } from 'react';
+import * as cookie from 'cookie';
+import axios from 'axios';
 
-const AddLaporan = () => {
+export default function AddLaporan (props) {
       
       useEffect(() => {
             document.body.style.overflow = 'hidden';
@@ -14,7 +16,6 @@ const AddLaporan = () => {
                   document.body.style.overflow = ''; 
             };
       }, []);
-
 
       return (
             <div className='overflow-hidden'>
@@ -29,7 +30,7 @@ const AddLaporan = () => {
                               <Breadcumb/>
                               <div className='grid grid-cols-12 px-6 gap-6 mt-10'>
                                     <div className='col-span-8'>
-                                          <AddFormPungliContainer/>
+                                          <AddFormPungliContainer dataKategoriList={props.result}/>
                                     </div>
                                     <div className='col-span-4'>
                                           <div className='grid grid-cols-12 gap-6'>
@@ -48,4 +49,13 @@ const AddLaporan = () => {
       )
 }
 
-export default AddLaporan
+export async function getServerSideProps(context) {
+
+      const parsedCookies = cookie.parse(context.req.headers.cookie);
+
+      const res = await axios.get(`https://rest-api-bantai-pungli-ysnn.vercel.app/kategoriPungli`, {
+            headers: { 'Authorization': `Bearer ${parsedCookies.token}` }
+      });
+
+      return { props: { result: res.data } }
+}
