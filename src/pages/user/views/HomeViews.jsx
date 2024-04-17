@@ -8,9 +8,24 @@ import StatistikPungliCard from '@/components/StatistikPungliCard';
 import Breadcumb from '@/components/Breadcumb';
 import { useEffect } from 'react';
 import Pagination from '@/components/Pagination';
-import Cookies from 'js-cookie';
+import { useDispatch } from 'react-redux';
+import { setAlamat, setEmail, setFotoProfile, setJenisKelamin, setNamaLengkap, setNoTelp, setTanggalLahir, setUsername, set_Id } from '@/store/user';
 
-export default function ({ _id, username, nama_lengkap, email, no_telp, alamat, status_online, foto_profile, created_at, updated_at }) {
+export default function ({ _id, username, nama_lengkap, email, no_telp, alamat, status_online,tanggal_lahir,jenis_kelamin, foto_profile, created_at, updated_at }) {
+
+      const dispatch = useDispatch();
+
+      useEffect(() => {
+            dispatch(set_Id(_id));
+            dispatch(setUsername(username));
+            dispatch(setEmail(email));
+            dispatch(setNoTelp(no_telp));
+            dispatch(setAlamat(alamat));
+            dispatch(setFotoProfile(foto_profile));
+            dispatch(setNamaLengkap(nama_lengkap));
+            dispatch(setJenisKelamin(jenis_kelamin));
+            dispatch(setTanggalLahir(tanggal_lahir));
+      }, []);
 
       useEffect(() => {
             document.body.style.overflow = 'hidden';

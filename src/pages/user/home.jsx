@@ -12,6 +12,8 @@ export default function Home (props) {
                   nama_lengkap={props.result.nama_lengkap}
                   email={props.result.email} 
                   no_telp={props.result.no_telp}
+                  tanggal_lahir={props.result.tanggal_lahir}
+                  jenis_kelamin={props.result.jenis_kelamin}
                   alamat={props.result.alamat}
                   status_online={props.result.status_online}
                   foto_profile={props.result.foto_profile}

@@ -9,6 +9,8 @@ const initialState = {
       alamat: '',
       foto_profile: '',
       nama_lengkap: '',
+      tanggal_lahir: '',
+      jenis_kelamin: '',
 };
 
 export const userSlice = createSlice({
@@ -36,9 +38,15 @@ export const userSlice = createSlice({
             setNamaLengkap: (state, action) => {
                   state.nama_lengkap = action.payload;
             },
+            setTanggalLahir: (state, action) => {
+                  state.tanggal_lahir = action.payload;
+            },
+            setJenisKelamin: (state, action) => {
+                  state.jenis_kelamin = action.payload;
+            },
       },
 });
 
-export const {set_Id, setUsername, setEmail, setNoTelp, setAlamat, setFotoProfile, setNamaLengkap} = userSlice.actions;
+export const {set_Id, setUsername, setEmail, setNoTelp, setAlamat, setFotoProfile, setNamaLengkap, setJenisKelamin, setTanggalLahir} = userSlice.actions;
 
 export default userSlice.reducer;
