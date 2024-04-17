@@ -11,9 +11,9 @@ const UserActive = ({text}) => {
                               <Image src={SarjanaBrewok} className='w-16 rounded-full'/>
                               <h4 className='text-sm text-[#364045] font-medium' style={workSans.style}>{text}</h4>
                         </div>
-                        <span class="relative flex items-center justify-center h-6 w-6">
-                              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                              <span class="relative rounded-full h-3 w-3 bg-green-600 items-center justify-center"></span>
+                        <span className="relative flex items-center justify-center h-6 w-6">
+                              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                              <span className="relative rounded-full h-3 w-3 bg-green-600 items-center justify-center"></span>
                         </span>
                   </div>
                   <hr className='h-0.5 opacity-5 bg-[#575151] w-full' />

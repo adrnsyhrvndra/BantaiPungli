@@ -1,12 +1,14 @@
 import React from 'react';
-import workSans from '@/libs/FontWorkSans'
 import SearchIcon from "../assets/search-icon.png";
 import ArrowIconNav from "../assets/arrow-icon-bottom.png";
 import Image from 'next/image';
 import Link from 'next/link';
+import workSans from '@/libs/FontWorkSans';
 
 const NavbarUser = () => {
+
       return (
+
             <div className='py-6 px-8 bg-whitew-full flex'>
                   <div className='flex flex-row justify-start items-center gap-[72px] w-[60%]'>
                         <div className='relative w-full'>
@@ -60,7 +62,7 @@ const NavbarUser = () => {
                                                 className='text-lg font-medium text-[#364045]' 
                                                 style={workSans.style}
                                           >
-                                                Adriansyah Ravindra
+                                                Adriansyah
                                           </h6>
                                     </div>
                                     <Image src={ArrowIconNav} />
@@ -71,4 +73,4 @@ const NavbarUser = () => {
       )
 }
 
-export default NavbarUser
+export default NavbarUser;

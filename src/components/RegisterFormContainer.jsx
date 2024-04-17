@@ -73,8 +73,6 @@ const RegisterFormContainer = () => {
                         dispatch(setNoTelp(''));
                         dispatch(setAlamat(''));
                         dispatch(setFotoProfile(''));
-
-                        console.log(res.data);
                         
                   } catch (error) {
 

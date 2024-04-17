@@ -6,7 +6,7 @@ import suicoBams from '@/libs/FontSuicoBams';
 const LogoSidebar = () => {
       return (
             <div className={`flex flex-row justify-start items-center mt-8`}>
-                  <Image src={logoBantaiPungli} />
+                  <Image src={logoBantaiPungli} alt='logo-bantai-pungli'/>
                   <div className="flex flex-col ml-5">
                         <h3 className="text-6xl text-font-dark-01" style={suicoBams.style}>
                               Bantai
