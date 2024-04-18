@@ -119,15 +119,8 @@ const AddFormPungliContainer = ({dataKategoriList}) => {
       const handleSubmit = async (e) => {
             e.preventDefault();
 
+            // Clodinary Upload Image
             const formData = new FormData();
-            // formData.append('userId', id_user);
-            // formData.append('kategoriPungliId', input.kategoriPungliId);
-            // formData.append('judul_pelaporan', input.judul_pelaporan);
-            // formData.append('deskripsi_pelaporan', input.deskripsi_pelaporan);
-            // formData.append('tanggal_pelaporan', input.tanggal_pelaporan);
-            // formData.append('status_pelaporan', 'Belum Selesai');
-            // formData.append('created_at', new Date());
-            // formData.append('updated_at', new Date());
             formData.append('file', selectedImage);
             formData.append('upload_preset', 'bantai_pungli');
 
@@ -138,58 +131,69 @@ const AddFormPungliContainer = ({dataKategoriList}) => {
             const result = await response.json();
             console.log(result.secure_url);
 
-            // if (input.judul_pelaporan && input.tanggal_pelaporan && input.deskripsi_pelaporan && input.kategoriPungliId && id_user || selectedImage) {
+            const data = {
+                  userId: id_user,
+                  kategoriPungliId: input.kategoriPungliId,
+                  judul_pelaporan: input.judul_pelaporan,
+                  deskripsi_pelaporan: input.deskripsi_pelaporan,
+                  tanggal_pelaporan: input.tanggal_pelaporan,
+                  status_pelaporan : 'Belum Selesai',
+                  bukti_pendukung: result.secure_url,
+                  created_at: new Date(),
+                  updated_at: new Date()
+            };
 
-            //       try {
+            if (input.judul_pelaporan && input.tanggal_pelaporan && input.deskripsi_pelaporan && input.kategoriPungliId && id_user) {
 
-            //             const res = await axios.post('/api/addLaporan', formData, {
-            //                   headers: {
-            //                       'Access-Control-Allow-Origin': '*',
-            //                       'Content-Type': 'multipart/form-data'
-            //                   },
-            //             });
+                  try {
 
-            //             console.log(res);
+                        const res = await axios.post('/api/addLaporan', data, {
+                              headers: {
+                                  'Access-Control-Allow-Origin': '*',
+                                  'Content-Type': 'application/json',
+                                  'Authorization': `Bearer ${Cookies.get('token')}`
+                              },
+                        });
+
+                        console.log(res);
       
-            //             toast.success('Tambah Laporan Berhasil! 🤙', {
-            //                   position: "top-right",
-            //                   autoClose: 9000,
-            //                   hideProgressBar: false,
-            //                   closeOnClick: true,
-            //                   pauseOnHover: true,
-            //                   draggable: true,
-            //                   progress: undefined,
-            //                   theme: "dark",
-            //                   transition: Bounce,
-            //             });
+                        toast.success('Tambah Laporan Berhasil! 🤙', {
+                              position: "top-right",
+                              autoClose: 9000,
+                              hideProgressBar: false,
+                              closeOnClick: true,
+                              pauseOnHover: true,
+                              draggable: true,
+                              progress: undefined,
+                              theme: "dark",
+                              transition: Bounce,
+                        });
 
-            //             // Remove All Input Value
-            //             setInput({
-            //                   judul_pelaporan: '',
-            //                   tanggal_pelaporan: '',
-            //                   deskripsi_pelaporan: '',
-            //             });
+                        // Remove All Input Value
+                        setInput({
+                              judul_pelaporan: '',
+                              tanggal_pelaporan: '',
+                              deskripsi_pelaporan: '',
+                        });
+                        setSelectedImage(null);
                         
-            //       } catch (error) {
+                  } catch (error) {
 
-            //             // console.log(error.response.data.message);
-            //             console.log(error.response.data);
+                        toast.error(`Tidak Berhasil! Karena ${error.response.data.message} 😰`, {
+                              position: "top-right",
+                              autoClose: 4993,
+                              hideProgressBar: false,
+                              closeOnClick: true,
+                              pauseOnHover: true,
+                              draggable: true,
+                              progress: undefined,
+                              theme: "dark",
+                              transition: Bounce,
+                        });
 
-            //             toast.error(`Tidak Berhasil! karena ${error} 😰`, {
-            //                   position: "top-right",
-            //                   autoClose: 4993,
-            //                   hideProgressBar: false,
-            //                   closeOnClick: true,
-            //                   pauseOnHover: true,
-            //                   draggable: true,
-            //                   progress: undefined,
-            //                   theme: "dark",
-            //                   transition: Bounce,
-            //             });
+                  }
 
-            //       }
-
-            // }
+            }
 
       };
 
@@ -204,7 +208,7 @@ const AddFormPungliContainer = ({dataKategoriList}) => {
                         </h6>
                         <p className='text-[#746B6B] font-normal text-sm leading-loose opacity-60'>Ayo bersatu melawan pungutan liar! Laporkan setiap tindakan pungli yang merugikan untuk memerangi korupsi. Melalui tindakan kita, kita dapat membangun masyarakat yang berintegritas dan adil. Mari bersama-sama memastikan keadilan dan transparansi dalam setiap aspek kehidupan kita.</p>
                   </div>
-                  <form encType='multipart/form-data' onSubmit={handleSubmit}>
+                  <form onSubmit={handleSubmit}>
                         <div className='grid grid-cols-12 mt-6 gap-6'>
                               <div className='col-span-6'>
                                     <div className='flex flex-col gap-6'>
