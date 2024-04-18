@@ -25,6 +25,18 @@ const RegisterFormContainer = () => {
       const handleSubmit = async (e) => {
             e.preventDefault();
 
+            // Clodinary Upload Image
+            const formData = new FormData();
+            formData.append('file', foto_profile);
+            formData.append('upload_preset', 'bantai_pungli');
+
+            const response = await fetch('https://api.cloudinary.com/v1_1/adriansyah-course-laravel7/image/upload', {
+                  method: 'POST',
+                  body: formData
+            });
+            const result = await response.json();
+            console.log(result.secure_url);
+
             const data = {
                   username,
                   password,
@@ -35,8 +47,10 @@ const RegisterFormContainer = () => {
                   no_telp,
                   alamat,
                   status_online: 'online',
-                  foto_profile
+                  foto_profile: result.secure_url
             };
+
+            console.log(data);
 
             if (data.username && data.password && data.email && data.nama_lengkap && data.tanggal_lahir && data.jenis_kelamin && data.no_telp && data.alamat) {
                   
