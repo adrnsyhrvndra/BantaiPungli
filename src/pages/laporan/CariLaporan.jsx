@@ -1,75 +1,41 @@
-import Breadcumb from '@/components/Breadcumb'
-import SidebarUserMenu from '@/components/SidebarUserMenu'
-import StatistikPungliCard from '@/components/StatistikPungliCard'
-import UserActiveListCard from '@/components/UserActiveListCard'
-import React, { useEffect } from 'react'
-import Head from 'next/head'
-import workSans from '@/libs/FontWorkSans'
-import ListCheckBoxFilterLaporan from '@/components/ListCheckBoxFilterLaporan'
-import SearchLaporan from '@/components/SearchLaporan'
-import PungliCardPost from '@/components/PungliCardPost'
-import Pagination from '@/components/Pagination'
+import React from 'react';
+import CariLaporanView from './views/CariLaporanView';
+import * as cookie from 'cookie';
+import axios from 'axios';
 
-const CariLaporan = () => {
-
-      useEffect(() => {
-            document.body.style.overflow = 'hidden';
-            return () => {
-                  document.body.style.overflow = ''; 
-            };
-      }, []);
+export default function CariLaporan (props) {
 
       return (
-            <div className='overflow-hidden'>
-                  <Head>
-                        <title>Halaman Cari Laporan | Bantai Pungli</title>
-                  </Head>
-                  <div className='grid grid-cols-12'>
-                        <div className='col-span-2 px-8 overflow-y-scroll h-screen pb-40'>
-                              <SidebarUserMenu/>
-                        </div>
-                        <div className='col-span-10 bg-[#F1F3F4] overflow-y-auto h-screen pb-48'>
-                              <Breadcumb/>
-                              <div className='grid grid-cols-12 px-6 gap-6 mt-10'>
-                                    <div className='col-span-8'>
-                                          <h4 className='text-xl text-[#17181C] font-medium' style={workSans.style}>
-                                                Filter Berdasarkan Kategori Pungli
-                                          </h4>
-                                          <ListCheckBoxFilterLaporan/>
-                                          <SearchLaporan/>
-                                          <div className='flex flex-col gap-6 mt-6'>
-                                                <PungliCardPost 
-                                                      imageSizeWidth="w-[470px]" 
-                                                      imageSizeHeight="h-[320px]" 
-                                                      judulTextSize="text-2xl" 
-                                                      deskripsiTextSize="text-xs"
-                                                />
-                                                <PungliCardPost 
-                                                      imageSizeWidth="w-[470px]" 
-                                                      imageSizeHeight="h-[320px]" 
-                                                      judulTextSize="text-2xl" 
-                                                      deskripsiTextSize="text-xs"
-                                                />
-                                          </div>
-                                    </div>
-                                    <div className='col-span-4'>
-                                          <div className='grid grid-cols-12 gap-6'>
-                                                <div className='col-span-12'>
-                                                      <UserActiveListCard/>
-                                                </div>
-                                                <div className='col-span-12'>
-                                                      <StatistikPungliCard/>
-                                                </div>
-                                          </div>
-                                    </div>
-                                    <div className='col-span-12 mt-4'>
-                                          <Pagination/>
-                                    </div>
-                              </div>
-                        </div>
-                  </div>
-            </div>
+            <CariLaporanView
+                  dataKategoriPungli={props.kategoriPungli}
+                  dataLaporanPungli={props.laporanPungli}
+                  dataKomentarLaporanPungli={props.komentarLaporanPungli}
+            />
       )
 }
 
-export default CariLaporan
+export async function getServerSideProps(context) {
+
+      const parsedCookies = cookie.parse(context.req.headers.cookie);
+
+      const kategoriPungliRes = await axios.get(`https://rest-api-bantai-pungli-ysnn.vercel.app/kategoriPungli`, {
+            headers: { 'Authorization': `Bearer ${parsedCookies.token}` }
+      });
+
+      const laporanPungliRes = await axios.get(`https://rest-api-bantai-pungli-ysnn.vercel.app/pelaporanPungli`, {
+            headers: { 'Authorization': `Bearer ${parsedCookies.token}` }
+      });
+
+      const komentarLaporanPungliRes = await axios.get(`https://rest-api-bantai-pungli-ysnn.vercel.app/komentarPungli`, {
+            headers: { 'Authorization': `Bearer ${parsedCookies.token}` }
+      });
+
+      return { 
+            props: {
+                  kategoriPungli: kategoriPungliRes.data,
+                  laporanPungli: laporanPungliRes.data,
+                  komentarLaporanPungli: komentarLaporanPungliRes.data
+            }
+      };
+
+}
