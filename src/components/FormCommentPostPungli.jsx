@@ -1,12 +1,14 @@
 import workSans from '@/libs/FontWorkSans'
 import axios from 'axios';
 import Cookies from 'js-cookie';
+import { useRouter } from 'next/router';
 import React, { useState } from 'react'
 import { Bounce, ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const FormCommentPostPungli = ({userId,pelaporanPungliId}) => {
       const id_user = Cookies.get('userId');
+      const router = useRouter();
 
       const [input, setInput] = useState({
             userId: id_user,
@@ -25,9 +27,7 @@ const FormCommentPostPungli = ({userId,pelaporanPungliId}) => {
                   tanggal_komentar: new Date(),
                   created_at: new Date(),
                   updated_at: new Date()
-            }
-
-            console.log(data);
+            };
 
             if (input.komentar) {
 
@@ -43,8 +43,6 @@ const FormCommentPostPungli = ({userId,pelaporanPungliId}) => {
                                     'Authorization': 'Bearer ' + Cookies.get('token')
                               }
                         });
-
-                        console.log(res);
 
                         toast.success('Komentar Berhasil Ditambahkan! 🤙', {
                               position: "top-right",
@@ -63,6 +61,8 @@ const FormCommentPostPungli = ({userId,pelaporanPungliId}) => {
                               komentar: ''
                         });
 
+                        // Supaya Realtime Fetch Datanya
+                        router.replace(router.asPath);
                         
                   } catch (error) {
 
