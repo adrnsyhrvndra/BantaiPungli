@@ -35,7 +35,6 @@ const RegisterFormContainer = () => {
                   body: formData
             });
             const result = await response.json();
-            console.log(result.secure_url);
 
             const data = {
                   username,
@@ -49,8 +48,6 @@ const RegisterFormContainer = () => {
                   status_online: 'online',
                   foto_profile: result.secure_url
             };
-
-            console.log(data);
 
             if (data.username && data.password && data.email && data.nama_lengkap && data.tanggal_lahir && data.jenis_kelamin && data.no_telp && data.alamat) {
                   

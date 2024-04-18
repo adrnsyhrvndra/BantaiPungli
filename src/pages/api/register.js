@@ -1,6 +1,8 @@
 // pages/api/register.js
 
 export default async function handler(req, res) {
+      console.log(req.body);
+
       try {
             const response = await fetch("https://rest-api-bantai-pungli-ysnn.vercel.app/register",{
                   method: "POST",
