@@ -7,7 +7,7 @@ const DetailPostPungli = ({id,dataUser,dataKategoriPungli,judul_pelaporan,deskri
       const handleDate = (date) => {
             const newDate = new Date(date);
             return newDate.toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
-      }
+      };
 
       const handleTime = (date) => {
             const newDate = new Date(date);

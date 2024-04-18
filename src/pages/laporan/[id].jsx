@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import SidebarUserMenu from '@/components/SidebarUserMenu';
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Breadcumb from '@/components/Breadcumb';
 import UserActiveListCard from '@/components/UserActiveListCard';
 import StatistikPungliCard from '@/components/StatistikPungliCard';
@@ -11,10 +11,12 @@ import { useRouter } from 'next/router';
 import * as cookie from 'cookie'
 import axios from 'axios';
 
-export default function DetailLaporan ({ laporanPungliById }) {
+export default function DetailLaporan ({ laporanPungliById, komentarLaporanPungli }) {
 
       const router = useRouter();
       const { id } = router.query;
+
+      const [komentar, setKomentar] = useState(komentarLaporanPungli);
 
       useEffect(() => {
             document.body.style.overflow = 'hidden';
@@ -22,6 +24,7 @@ export default function DetailLaporan ({ laporanPungliById }) {
                   document.body.style.overflow = ''; 
             };
       }, []);
+
 
       return (
             <div className='overflow-hidden'>
@@ -52,7 +55,9 @@ export default function DetailLaporan ({ laporanPungliById }) {
                                                 userId={laporanPungliById.userId._id}
                                                 pelaporanPungliId={laporanPungliById._id}
                                           />
-                                          <CommentPungli/>
+                                          <CommentPungli
+                                                dataKomentar={komentarLaporanPungli}
+                                          />
                                     </div>
                                     <div className='col-span-4'>
                                           <div className='grid grid-cols-12 gap-6'>
@@ -79,9 +84,16 @@ export async function getServerSideProps(context) {
             headers: { 'Authorization': `Bearer ${parsedCookies.token}` }
       });
 
+      const getAllKomentarLaporanPungli = await axios.get(`https://rest-api-bantai-pungli-ysnn.vercel.app/komentarPungli`, {
+            headers: {'Authorization': `Bearer ${parsedCookies.token}`}
+      });
+      const dataKomentarAllPungli = getAllKomentarLaporanPungli.data;
+      const filterKomentarSesuaiIdLaporanPungli = dataKomentarAllPungli.filter((data) => data.pelaporanPungliId._id === context.params.id);
+
       return {
             props: {
-                  laporanPungliById: laporanPungliByIdRes.data
+                  laporanPungliById: laporanPungliByIdRes.data,
+                  komentarLaporanPungli: filterKomentarSesuaiIdLaporanPungli
             }
       }
 }

@@ -66,7 +66,7 @@ const FormCommentPostPungli = ({userId,pelaporanPungliId}) => {
                         
                   } catch (error) {
 
-                        toast.error('Komentar Tidak Berhasil! 😰', {
+                        toast.error('Komentar Tidak Berhasil Ditambahkan! 😰', {
                               position: "top-right",
                               autoClose: 4993,
                               hideProgressBar: false,
@@ -84,7 +84,7 @@ const FormCommentPostPungli = ({userId,pelaporanPungliId}) => {
 
             } else {
 
-                  toast.warn('Harap Isi Komentarnya! 😡', {
+                  toast.warn('Harap Isi Komentarnya Dulu! 😡', {
                         position: "top-right",
                         autoClose: 4993,
                         hideProgressBar: false,
@@ -110,6 +110,7 @@ const FormCommentPostPungli = ({userId,pelaporanPungliId}) => {
                                     rows={8}
                                     placeholder='Tambahkan Komentar Ada Disini Tentang Pungli Ini'
                                     onChange={(e) => setInput({ ...input, komentar: e.target.value })}
+                                    value={input.komentar}
                               >
                               </textarea>
                               <button 

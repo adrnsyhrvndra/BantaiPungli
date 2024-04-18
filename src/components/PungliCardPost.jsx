@@ -47,10 +47,12 @@ const PungliCardPost = ({imageSizeWidth,imageSizeHeight,judulTextSize,deskripsiT
                                     <h2 className={`text-left font-semibold ${judulTextSize} leading-normal text-[#364045]`} style={workSans.style} >
                                           {judul_pelaporan}
                                     </h2>
-                                    <p className={`${deskripsiTextSize} font-normal text-[#48555C]`} style={workSans.style}>
-                                          {handleDeskripsiLaporanLimitString(deskripsi_pelaporan)}...
-                                          <span className='text-primary font-extrabold leading-loose underline cursor-pointer' style={workSans.style}>LIHAT LEBIH DETAIL</span>
-                                    </p>
+                                    <Link href={`/laporan/${id}`}>
+                                          <p className={`${deskripsiTextSize} font-normal text-[#48555C]`} style={workSans.style}>
+                                                {handleDeskripsiLaporanLimitString(deskripsi_pelaporan)}...
+                                                <span className='text-primary font-extrabold leading-loose underline cursor-pointer' style={workSans.style}>LIHAT LEBIH DETAIL</span>
+                                          </p>
+                                    </Link>
                               </div>
                               <div className='flex flex-row items-center gap-8 mt-8'>
                                     <div className='flex flex-row gap-5 items-center'>
