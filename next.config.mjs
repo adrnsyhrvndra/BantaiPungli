@@ -1,18 +1,20 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
 	reactStrictMode: true,
+	images: {
+		domains: ['res.cloudinary.com'],
+	},
 	webpack: (config, { isServer }) => {
-		// Tambahkan konfigurasi webpack khusus di sini
 		config.module.rules.push({
 			test: /\.(mp3)$/,
 			use: [
-			{
-			loader: 'file-loader',
-			options: {
-				publicPath: '/_next',
-				name: 'static/media/[name].[hash].[ext]',
-			},
-			},
+				{
+				loader: 'file-loader',
+					options: {
+						publicPath: '/_next',
+						name: 'static/media/[name].[hash].[ext]',
+					},
+				},
 			],
 		});
 

@@ -7,8 +7,14 @@ import StatistikPungliCard from '@/components/StatistikPungliCard';
 import DetailPostPungli from '@/components/DetailPostPungli';
 import FormCommentPostPungli from '@/components/FormCommentPostPungli';
 import CommentPungli from '@/components/CommentPungli';
+import { useRouter } from 'next/router';
+import * as cookie from 'cookie'
+import axios from 'axios';
 
-const DetailLaporan = () => {
+export default function DetailLaporan ({ laporanPungliById }) {
+
+      const router = useRouter();
+      const { id } = router.query;
 
       useEffect(() => {
             document.body.style.overflow = 'hidden';
@@ -30,8 +36,22 @@ const DetailLaporan = () => {
                               <Breadcumb/>
                               <div className='grid grid-cols-12 px-6 gap-6 mt-10'>
                                     <div className='col-span-8'>
-                                          <DetailPostPungli/>
-                                          <FormCommentPostPungli/>
+                                          <DetailPostPungli
+                                                id={laporanPungliById._id}
+                                                dataUser={laporanPungliById.userId}
+                                                dataKategoriPungli={laporanPungliById.kategoriPungliId}
+                                                judul_pelaporan={laporanPungliById.judul_pelaporan}
+                                                deskripsi_pelaporan={laporanPungliById.deskripsi_pelaporan}
+                                                tanggal_pelaporan={laporanPungliById.tanggal_pelaporan}
+                                                status_pelaporan={laporanPungliById.status_pelaporan}
+                                                bukti_pendukung={laporanPungliById.bukti_pendukung}
+                                                created_at={laporanPungliById.created_at}
+                                                updated_at={laporanPungliById.updated_at}
+                                          />
+                                          <FormCommentPostPungli
+                                                userId={laporanPungliById.userId._id}
+                                                pelaporanPungliId={laporanPungliById._id}
+                                          />
                                           <CommentPungli/>
                                     </div>
                                     <div className='col-span-4'>
@@ -51,4 +71,17 @@ const DetailLaporan = () => {
       )
 }
 
-export default DetailLaporan
+export async function getServerSideProps(context) {
+
+      const parsedCookies = cookie.parse(context.req.headers.cookie);
+
+      const laporanPungliByIdRes = await axios.get(`https://rest-api-bantai-pungli-ysnn.vercel.app/pelaporanPungli/${context.params.id}`, {
+            headers: { 'Authorization': `Bearer ${parsedCookies.token}` }
+      });
+
+      return {
+            props: {
+                  laporanPungliById: laporanPungliByIdRes.data
+            }
+      }
+}

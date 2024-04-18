@@ -1,36 +1,45 @@
 import React from 'react'
 import workSans from '@/libs/FontWorkSans';
-import SarjanaBrewok from "../assets/sarjanabrewok.png";
-import FotoLaporanSementara from "../assets/foto-laporan-sementara.png";
 import Image from "next/image";
 
-const DetailPostPungli = () => {
+const DetailPostPungli = ({id,dataUser,dataKategoriPungli,judul_pelaporan,deskripsi_pelaporan,tanggal_pelaporan,status_pelaporan,bukti_pendukung,created_at,updated_at}) => {
+
+      const handleDate = (date) => {
+            const newDate = new Date(date);
+            return newDate.toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+      }
+
+      const handleTime = (date) => {
+            const newDate = new Date(date);
+            return newDate.toLocaleTimeString('id-ID', { hour: 'numeric', minute: 'numeric' });
+      };
+
       return (
+
             <>
                   <h5 className='text-start text-[#364045] font-bold text-2xl leading-normal' style={workSans.style}>
-                        Laporan Pungli Parkir Liar Di Pertigaan Jalan Tendean Jakarta
+                        {judul_pelaporan}
                   </h5>
                   <div className='bg-white mt-6 rounded-lg px-10 py-11'>
                         <div className='flex flex-row gap-5 items-center'>
-                              <div className='relative'>
-                                    <div className='h-3 w-3 bg-green-600 rounded-full absolute top-0 right-0.5'></div>
-                                    <Image className='w-14 h-14 rounded-full' src={SarjanaBrewok} />
+                              <div className='relative w-12 h-12'>
+                                    <Image className='w-12 h-12 rounded-full object-cover object-center' src={dataUser.foto_profile} layout='fill' />
+                                    <div className='h-3.5 w-3.5 bg-green-600 rounded-full absolute top-0 -right-0.5'></div>
                               </div>
                               <div className='flex flex-col gap-1'>
                                     <h6 className='font-semibold text-base text-[#48555B]' style={workSans.style}>
-                                          Adriansyah Ravindra
+                                          {dataUser.nama_lengkap}
                                     </h6>
                                     <p className='text-xs font-normal text-[#5E6F78]' style={workSans.style}>
-                                          12 April 2024 at 12:00 PM
+                                          {handleDate(tanggal_pelaporan)} di jam {handleTime(tanggal_pelaporan)} WIB
                                     </p>
                               </div>
                         </div>
                         <p className='mt-6 text-[#48555C] font-normal text-sm leading-loose' style={workSans.style}>
-                              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore fuga at nam quia odit minus totam, deleniti ad suscipit impedit quidem quo dicta provident temporibus enim repellat neque, ipsam rerum?
-                              Voluptas hic quos beatae quisquam ipsa pariatur ipsum, nihil architecto dolore. Quos molestias est corrupti impedit provident aliquid rerum. Perferendis nesciunt id natus odit repellat sint eos doloribus consequatur illo!
+                              {deskripsi_pelaporan}
                         </p>
                         <div className='relative w-full h-96 mt-8 rounded-sm overflow-hidden'>
-                              <Image className='object-cover object-center' src={FotoLaporanSementara} layout='fill' />
+                              <Image className='object-cover object-center h-96 w-full' src={bukti_pendukung} layout='fill' />
                         </div>
                         <div className='mt-8 flex flex-row gap-8 items-center justify-start'>
                               <div className='flex flex-row items-center justify-start gap-3'>
@@ -60,7 +69,7 @@ const DetailPostPungli = () => {
                                           </svg>
                                     </div>
                                     <h5 className='text-sm font-normal text-[#48555C]' style={workSans.style}>
-                                          Pungli Perhubungan
+                                          {dataKategoriPungli.nama_kategori_pungli}
                                     </h5>
                               </div>
                               <div className='flex flex-row items-center justify-start gap-3'>
@@ -70,12 +79,13 @@ const DetailPostPungli = () => {
                                           </svg>
                                     </div>
                                     <h5 className='text-sm font-normal text-[#48555C]' style={workSans.style}>
-                                          Belum Selesai
+                                          {status_pelaporan}
                                     </h5>
                               </div>
                         </div>
                   </div>
             </>
+
       )
 }
 

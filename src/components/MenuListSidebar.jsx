@@ -6,6 +6,8 @@ import Link from 'next/link';
 const MenuListSidebar = () => {
       const router = useRouter();
 
+      const isDetailLaporanPage = router.pathname.startsWith('/laporan');
+
       return (
       
             <>
@@ -20,7 +22,7 @@ const MenuListSidebar = () => {
                                           <h6 className='text-white text-[15px] font-normal' style={workSans.style}>Beranda</h6>
                                     </div>
                               </Link>
-                              <Link href={"/user/AddLaporan"}>
+                              <Link href={"/laporan/AddLaporan"}>
                                     <div className='flex flex-row justify-start items-center gap-4'>
                                           <svg className='w-6 h-6 opacity-20' viewBox="0 0 26 28" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <mask id="mask0_22_45368" maskUnits="userSpaceOnUse" x="0" y="0" width="26" height="28" style={{ maskType: 'luminance' }}>
@@ -35,7 +37,7 @@ const MenuListSidebar = () => {
                                           <h6 className='text-black text-[15px] font-normal opacity-30' style={workSans.style}>Tambah Laporan</h6>
                                     </div>
                               </Link>
-                              <Link href={"/user/CariLaporan"}>
+                              <Link href={"/laporan/CariLaporan"}>
                                     <div className='flex flex-row justify-start items-center gap-4'>
                                           <svg className='w-6 h-6 opacity-20' viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path d="M15.3023 4.56477C14.5988 3.84817 13.7602 3.27806 12.8351 2.88737C11.91 2.49668 10.9166 2.29315 9.91238 2.28853C8.90815 2.28392 7.91296 2.47831 6.98428 2.86048C6.05561 3.24266 5.21185 3.80504 4.50174 4.51514C3.79164 5.22525 3.22926 6.069 2.84709 6.99768C2.46491 7.92636 2.27052 8.92155 2.27513 9.92578C2.27975 10.93 2.48328 11.9234 2.87397 12.8485C3.26466 13.7736 3.83477 14.6122 4.55137 15.3157C5.9815 16.7198 7.90822 17.5024 9.91238 17.4932C11.9165 17.484 13.836 16.6837 15.2532 15.2666C16.6703 13.8494 17.4706 11.9299 17.4798 9.92578C17.489 7.92162 16.7064 5.9949 15.3023 4.56477ZM2.89756 2.91096C4.69034 1.11862 7.10011 0.0788594 9.63408 0.00430449C12.168 -0.0702504 14.6348 0.826031 16.5298 2.50987C18.4249 4.1937 19.6051 6.53787 19.8291 9.06302C20.0532 11.5882 19.3041 14.1035 17.7351 16.0947L23.9866 22.3462L22.3328 24L16.0813 17.7485C14.0895 19.3117 11.5763 20.0561 9.0544 19.8299C6.53252 19.6037 4.19196 18.4238 2.51016 16.5311C0.82836 14.6383 -0.0679654 12.1752 0.00402342 9.64422C0.0760123 7.11324 1.11089 4.70507 2.89756 2.91096Z" fill="black"/>
@@ -77,7 +79,7 @@ const MenuListSidebar = () => {
                   }
 
                   {
-                        router.pathname === "/user/AddLaporan" &&
+                        router.pathname === "/laporan/AddLaporan" &&
                         <>
                               <Link href={"/user/Home"}>
                                     <div className='flex flex-row justify-start items-center gap-4'>
@@ -87,7 +89,7 @@ const MenuListSidebar = () => {
                                           <h6 className='text-black text-[15px] font-normal opacity-30' style={workSans.style}>Beranda</h6>
                                     </div>
                               </Link>
-                              <Link href={"/user/AddLaporan"}>
+                              <Link href={"/laporan/AddLaporan"}>
                                     <div className='py-4 px-7 bg-primary text-white rounded-lg flex flex-row justify-start items-center gap-4'>
                                           <svg className='w-6 h-6 fill-white' viewBox="0 0 26 28" xmlns="http://www.w3.org/2000/svg">
                                                 <mask id="mask0_22_45368" maskUnits="userSpaceOnUse" x="0" y="0" width="26" height="28" style={{ maskType: 'luminance' }}>
@@ -102,7 +104,7 @@ const MenuListSidebar = () => {
                                           <h6 className='text-white text-[15px] font-normal' style={workSans.style}>Tambah Laporan</h6>
                                     </div>
                               </Link>
-                              <Link href={"/user/CariLaporan"}>
+                              <Link href={"/laporan/CariLaporan"}>
                                     <div className='flex flex-row justify-start items-center gap-4'>
                                           <svg className='w-6 h-6 opacity-20' viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path d="M15.3023 4.56477C14.5988 3.84817 13.7602 3.27806 12.8351 2.88737C11.91 2.49668 10.9166 2.29315 9.91238 2.28853C8.90815 2.28392 7.91296 2.47831 6.98428 2.86048C6.05561 3.24266 5.21185 3.80504 4.50174 4.51514C3.79164 5.22525 3.22926 6.069 2.84709 6.99768C2.46491 7.92636 2.27052 8.92155 2.27513 9.92578C2.27975 10.93 2.48328 11.9234 2.87397 12.8485C3.26466 13.7736 3.83477 14.6122 4.55137 15.3157C5.9815 16.7198 7.90822 17.5024 9.91238 17.4932C11.9165 17.484 13.836 16.6837 15.2532 15.2666C16.6703 13.8494 17.4706 11.9299 17.4798 9.92578C17.489 7.92162 16.7064 5.9949 15.3023 4.56477ZM2.89756 2.91096C4.69034 1.11862 7.10011 0.0788594 9.63408 0.00430449C12.168 -0.0702504 14.6348 0.826031 16.5298 2.50987C18.4249 4.1937 19.6051 6.53787 19.8291 9.06302C20.0532 11.5882 19.3041 14.1035 17.7351 16.0947L23.9866 22.3462L22.3328 24L16.0813 17.7485C14.0895 19.3117 11.5763 20.0561 9.0544 19.8299C6.53252 19.6037 4.19196 18.4238 2.51016 16.5311C0.82836 14.6383 -0.0679654 12.1752 0.00402342 9.64422C0.0760123 7.11324 1.11089 4.70507 2.89756 2.91096Z" fill="black"/>
@@ -144,7 +146,7 @@ const MenuListSidebar = () => {
                   }
 
                   {
-                        router.pathname === '/user/CariLaporan' &&
+                        router.pathname === '/laporan/CariLaporan' &&
                         <>
                               <Link href={"/user/Home"}>
                                     <div className='flex flex-row justify-start items-center gap-4'>
@@ -154,7 +156,7 @@ const MenuListSidebar = () => {
                                           <h6 className='text-black text-[15px] font-normal opacity-30' style={workSans.style}>Beranda</h6>
                                     </div>
                               </Link>
-                              <Link href={"/user/AddLaporan"}>
+                              <Link href={"/laporan/AddLaporan"}>
                                     <div className='flex flex-row justify-start items-center gap-4'>
                                           <svg className='w-6 h-6 opacity-20' viewBox="0 0 26 28" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <mask id="mask0_22_45368" maskUnits="userSpaceOnUse" x="0" y="0" width="26" height="28" style={{ maskType: 'luminance' }}>
@@ -169,7 +171,7 @@ const MenuListSidebar = () => {
                                           <h6 className='text-black text-[15px] font-normal opacity-30' style={workSans.style}>Tambah Laporan</h6>
                                     </div>
                               </Link>
-                              <Link href={"/user/CariLaporan"}>
+                              <Link href={"/laporan/CariLaporan"}>
                                     <div className='py-4 px-7 bg-primary text-white rounded-lg flex flex-row justify-start items-center gap-4'>
                                           <svg className='w-6 h-6 fill-white' viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                                 <path d="M15.3023 4.56477C14.5988 3.84817 13.7602 3.27806 12.8351 2.88737C11.91 2.49668 10.9166 2.29315 9.91238 2.28853C8.90815 2.28392 7.91296 2.47831 6.98428 2.86048C6.05561 3.24266 5.21185 3.80504 4.50174 4.51514C3.79164 5.22525 3.22926 6.069 2.84709 6.99768C2.46491 7.92636 2.27052 8.92155 2.27513 9.92578C2.27975 10.93 2.48328 11.9234 2.87397 12.8485C3.26466 13.7736 3.83477 14.6122 4.55137 15.3157C5.9815 16.7198 7.90822 17.5024 9.91238 17.4932C11.9165 17.484 13.836 16.6837 15.2532 15.2666C16.6703 13.8494 17.4706 11.9299 17.4798 9.92578C17.489 7.92162 16.7064 5.9949 15.3023 4.56477ZM2.89756 2.91096C4.69034 1.11862 7.10011 0.0788594 9.63408 0.00430449C12.168 -0.0702504 14.6348 0.826031 16.5298 2.50987C18.4249 4.1937 19.6051 6.53787 19.8291 9.06302C20.0532 11.5882 19.3041 14.1035 17.7351 16.0947L23.9866 22.3462L22.3328 24L16.0813 17.7485C14.0895 19.3117 11.5763 20.0561 9.0544 19.8299C6.53252 19.6037 4.19196 18.4238 2.51016 16.5311C0.82836 14.6383 -0.0679654 12.1752 0.00402342 9.64422C0.0760123 7.11324 1.11089 4.70507 2.89756 2.91096Z"/>
@@ -211,7 +213,7 @@ const MenuListSidebar = () => {
                   }
 
                   {
-                        router.pathname === '/user/EditProfile' || router.pathname === '/user/EditLaporan' || router.pathname === '/user/DetailLaporan' &&
+                        router.pathname === '/user/EditProfile' || router.pathname === '/user/EditLaporan' || isDetailLaporanPage &&
                         <>
                               <Link href={"/user/Home"}>
                                     <div className='flex flex-row justify-start items-center gap-4'>
@@ -221,7 +223,7 @@ const MenuListSidebar = () => {
                                           <h6 className='text-black text-[15px] font-normal opacity-30' style={workSans.style}>Beranda</h6>
                                     </div>
                               </Link>
-                              <Link href={"/user/AddLaporan"}>
+                              <Link href={"/laporan/AddLaporan"}>
                                     <div className='flex flex-row justify-start items-center gap-4'>
                                           <svg className='w-6 h-6 fill-black opacity-20' viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                                 <path d="M15.3023 4.56477C14.5988 3.84817 13.7602 3.27806 12.8351 2.88737C11.91 2.49668 10.9166 2.29315 9.91238 2.28853C8.90815 2.28392 7.91296 2.47831 6.98428 2.86048C6.05561 3.24266 5.21185 3.80504 4.50174 4.51514C3.79164 5.22525 3.22926 6.069 2.84709 6.99768C2.46491 7.92636 2.27052 8.92155 2.27513 9.92578C2.27975 10.93 2.48328 11.9234 2.87397 12.8485C3.26466 13.7736 3.83477 14.6122 4.55137 15.3157C5.9815 16.7198 7.90822 17.5024 9.91238 17.4932C11.9165 17.484 13.836 16.6837 15.2532 15.2666C16.6703 13.8494 17.4706 11.9299 17.4798 9.92578C17.489 7.92162 16.7064 5.9949 15.3023 4.56477ZM2.89756 2.91096C4.69034 1.11862 7.10011 0.0788594 9.63408 0.00430449C12.168 -0.0702504 14.6348 0.826031 16.5298 2.50987C18.4249 4.1937 19.6051 6.53787 19.8291 9.06302C20.0532 11.5882 19.3041 14.1035 17.7351 16.0947L23.9866 22.3462L22.3328 24L16.0813 17.7485C14.0895 19.3117 11.5763 20.0561 9.0544 19.8299C6.53252 19.6037 4.19196 18.4238 2.51016 16.5311C0.82836 14.6383 -0.0679654 12.1752 0.00402342 9.64422C0.0760123 7.11324 1.11089 4.70507 2.89756 2.91096Z"/>
@@ -229,7 +231,7 @@ const MenuListSidebar = () => {
                                           <h6 className='text-black text-[15px] font-normal opacity-30' style={workSans.style}>Cari Laporan</h6>
                                     </div>
                               </Link>
-                              <Link href={"/user/CariLaporan"}>
+                              <Link href={"/laporan/CariLaporan"}>
                                     <div className='flex flex-row justify-start items-center gap-4'>
                                           <svg className='w-6 h-6 opacity-20' viewBox="0 0 26 28" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <mask id="mask0_22_45368" maskUnits="userSpaceOnUse" x="0" y="0" width="26" height="28" style={{ maskType: 'luminance' }}>

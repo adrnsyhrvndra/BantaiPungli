@@ -53,7 +53,6 @@ const LoginFormContainer = () => {
                         Cookies.set('token', res.data.accessToken, { expires: 1 });
                         Cookies.set('userId', res.data.data._id, { expires: 1 });
                         Cookies.set('nama_lengkap', res.data.data.nama_lengkap, { expires: 1 });
-                        Cookies.set('foto_profile', res.data.data.foto_profile, { expires: 1 });
 
                         dispatch(setUsernameOrEmail(''));
                         dispatch(setPasswordLogin(''));

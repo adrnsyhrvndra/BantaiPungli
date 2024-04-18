@@ -10,7 +10,7 @@ import { useEffect } from 'react';
 import Pagination from '@/components/Pagination';
 import Cookies from 'js-cookie';
 
-export default function ({ _id, username, nama_lengkap, email, no_telp, alamat, status_online,tanggal_lahir,jenis_kelamin, foto_profile, created_at, updated_at }) {
+export default function ({ _id, username, nama_lengkap, email, no_telp, alamat, status_online,tanggal_lahir,jenis_kelamin, foto_profile, created_at, updated_at, laporanPungli, komentarLaporanPungli }) {
 
       Cookies.set('username', username, { expires: 1 });
       Cookies.set('email', email, { expires: 1 });
@@ -31,7 +31,7 @@ export default function ({ _id, username, nama_lengkap, email, no_telp, alamat, 
       return (
             <div className='overflow-hidden'>
                   <Head>
-				<title>Halaman Berandas | Bantai Pungli</title>
+				<title>Halaman Beranda | Bantai Pungli</title>
 			</Head>
                   <div className='grid grid-cols-12'>
                         <div className='col-span-2 px-8 overflow-y-scroll h-screen pb-40'>
@@ -49,22 +49,34 @@ export default function ({ _id, username, nama_lengkap, email, no_telp, alamat, 
                                                       <WeatherCard/>
                                                 </div>
                                                 <div className='col-span-12'>
-                                                      <div className='grid grid-cols-12 gap-6'>
+                                                      <div className='grid grid-cols-12 gap-7'>
                                                             <div className='col-span-12'>
-                                                                  <PungliCardPost 
-                                                                        imageSizeWidth="w-[470px]" 
-                                                                        imageSizeHeight="h-[320px]" 
-                                                                        judulTextSize="text-2xl" 
-                                                                        deskripsiTextSize="text-xs"
-                                                                  />
+                                                                  {
+                                                                        laporanPungli.map((item, index) => {
+
+                                                                              return (
+                                                                                    <PungliCardPost
+                                                                                          id={item._id}
+                                                                                          judul_pelaporan={item.judul_pelaporan}
+                                                                                          deskripsi_pelaporan={item.deskripsi_pelaporan}
+                                                                                          tanggal_pelaporan={item.tanggal_pelaporan}
+                                                                                          status_pelaporan={item.status_pelaporan}
+                                                                                          bukti_pendukung={item.bukti_pendukung}
+                                                                                          created_at={item.created_at}
+                                                                                          updated_at={item.updated_at}
+                                                                                          kategoriPungliId={item.kategoriPungliId}
+                                                                                          userId={item.userId}
+                                                                                          imageSizeWidth="w-[470px]" 
+                                                                                          imageSizeHeight="h-[320px]" 
+                                                                                          judulTextSize="text-2xl" 
+                                                                                          deskripsiTextSize="text-xs"
+                                                                                    />
+                                                                              )
+                                                                        })
+                                                                  }
                                                             </div>
                                                             <div className='col-span-12'>
-                                                                  <PungliCardPost 
-                                                                        imageSizeWidth="w-[470px]" 
-                                                                        imageSizeHeight="h-[320px]" 
-                                                                        judulTextSize="text-2xl" 
-                                                                        deskripsiTextSize="text-xs"
-                                                                  />
+                                                                  <Pagination/>
                                                             </div>
                                                       </div>
                                                 </div>
@@ -79,9 +91,6 @@ export default function ({ _id, username, nama_lengkap, email, no_telp, alamat, 
                                                       <StatistikPungliCard/>
                                                 </div>
                                           </div>
-                                    </div>
-                                    <div className='col-span-12 mt-4'>
-                                          <Pagination/>
                                     </div>
                               </div>
                         </div>

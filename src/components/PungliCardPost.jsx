@@ -1,35 +1,74 @@
 import React from 'react'
 import Image from 'next/image'
-import GambarPungli from '../assets/gambar-pungli.png'
 import workSans from '@/libs/FontWorkSans'
-import SarjanaBrewok from "../assets/sarjanabrewok.png";
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 
-const PungliCardPost = ({imageSizeWidth,imageSizeHeight,judulTextSize,deskripsiTextSize}) => {
+const PungliCardPost = ({imageSizeWidth,imageSizeHeight,judulTextSize,deskripsiTextSize, judul_pelaporan,deskripsi_pelaporan,tanggal_pelaporan,status_pelaporan,bukti_pendukung,created_at,updated_at,kategoriPungliId,userId,id}) => {
+
+      const router = useRouter();
+
+      const handleDeskripsiLaporanLimitString = (deskripsi_pelaporan) => {
+            if (deskripsi_pelaporan.length >= 126) {
+                  return deskripsi_pelaporan.slice(0, 125) + '...';
+            } else {
+                  return deskripsi_pelaporan;
+            }
+      }
+
+      const handleDateTimeFormat = (date) => {
+            const dateNow = new Date();
+            const datePost = new Date(date);
+            const diffTime = Math.abs(dateNow - datePost);
+            
+            if (diffTime < 3600000) {
+
+                  return Math.floor(diffTime / 60000) + ' Menit Yang Lalu';
+
+            } else if (diffTime < 86400000) {
+
+                  return Math.floor(diffTime / 3600000) + ' Jam Yang Lalu';
+
+            } else {
+
+                  return Math.floor(diffTime / 86400000) + ' Hari Yang Lalu';
+
+            }
+      }
+
       return (
             <div className='bg-white px-12 py-10 rounded-lg h-fit'>
                   <div className='flex flex-row gap-8 items-center'>
                         <div className={`${imageSizeWidth} ${imageSizeHeight} overflow-hidden relative rounded-lg`}>
-                              <Image className='object-cover object-center' src={GambarPungli} layout="fill" />
+                              <Image className='object-cover object-center' src={bukti_pendukung} layout="fill" />
                         </div>
                         <div className='w-full'>
                               <div className='flex flex-col gap-2'>
                                     <h2 className={`text-left font-semibold ${judulTextSize} leading-normal text-[#364045]`} style={workSans.style} >
-                                          Laporan Pungli Parkir Liar Di Pertigaan Jalan Tendean Jakarta
+                                          {judul_pelaporan}
                                     </h2>
                                     <p className={`${deskripsiTextSize} font-normal text-[#48555C]`} style={workSans.style}>
-                                          Lorem ipsum dolor sit amet consectetur. Consectetur vestibulum euismod vivamus laoreet integer ullamcorper quam.... 
+                                          {handleDeskripsiLaporanLimitString(deskripsi_pelaporan)}...
                                           <span className='text-primary font-extrabold leading-loose underline cursor-pointer' style={workSans.style}>LIHAT LEBIH DETAIL</span>
                                     </p>
                               </div>
                               <div className='flex flex-row items-center gap-8 mt-8'>
                                     <div className='flex flex-row gap-5 items-center'>
-                                          <div className='relative'>
-                                                <div className='h-3 w-3 bg-green-600 rounded-full absolute top-0 right-0.5'></div>
-                                                <Image className='w-14 h-14 rounded-full' src={SarjanaBrewok} />
+                                          <div className='relative w-12 h-12 rounded-full'>
+                                                <Image 
+                                                      className='rounded-full object-cover object-center w-12 h-12' 
+                                                      src={userId.foto_profile} 
+                                                      layout='fill'
+                                                />
+                                                <div className='h-3 w-3 bg-green-600 rounded-full absolute top-0.5 -right-0.5'></div>
                                           </div>
                                           <div className='flex flex-col gap-1'>
-                                                <h6 className='font-semibold text-base text-[#48555B]' style={workSans.style}>Adriansyah Ravindra</h6>
-                                                <p className='text-xs font-normal text-[#5E6F78]' style={workSans.style}>12 Minute Ago</p>
+                                                <h6 className='font-semibold text-base text-[#48555B]' style={workSans.style}>
+                                                      {userId.nama_lengkap}
+                                                </h6>
+                                                <p className='text-xs font-normal text-[#5E6F78]' style={workSans.style}>
+                                                      {handleDateTimeFormat(created_at)}
+                                                </p>
                                           </div>
                                     </div>
                                     <div className='flex flex-col gap-4'>
@@ -54,20 +93,28 @@ const PungliCardPost = ({imageSizeWidth,imageSizeHeight,judulTextSize,deskripsiT
                                                       <circle cx="10.7134" cy="10.78" r="10" fill="#4AB75B"/>
                                                       <path fillRule="evenodd" clipRule="evenodd" d="M14.2876 7.9067C14.3404 7.95197 14.3838 8.00721 14.4152 8.06925C14.4467 8.1313 14.4656 8.19893 14.4709 8.2683C14.4763 8.33766 14.4678 8.40739 14.4462 8.4735C14.4245 8.53961 14.3901 8.6008 14.3448 8.65359L10.1091 13.5951C10.0617 13.6505 10.0032 13.6955 9.93752 13.7273C9.87182 13.759 9.80027 13.7769 9.72735 13.7796C9.65444 13.7824 9.58173 13.7701 9.5138 13.7435C9.44587 13.7168 9.38419 13.6764 9.33261 13.6248L6.86183 11.154C6.76543 11.0541 6.71213 10.9203 6.7134 10.7815C6.71467 10.6427 6.77042 10.5099 6.86863 10.4118C6.96684 10.3137 7.09966 10.2581 7.23848 10.2569C7.3773 10.2558 7.51102 10.3092 7.61083 10.4057L9.67781 12.472L13.5414 7.96459C13.6328 7.85813 13.7627 7.7923 13.9027 7.78158C14.0426 7.77086 14.181 7.81541 14.2876 7.9067Z" fill="white"/>
                                                 </svg>
-                                                <h6 className='font-normal text-xs text-[#48555C] opacity-90' style={workSans.style}>Sudah Selesai Ditanggapi</h6>
+                                                <h6 className='font-normal text-xs text-[#48555C] opacity-90' style={workSans.style}>{status_pelaporan} Ditanggapi</h6>
                                           </div>
                                           <div className='flex flex-row gap-2 items-center'>
                                                 <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                       <circle cx="10.7134" cy="10.78" r="10" fill="#E8EBED"/>
                                                       <path d="M10.1111 7H7.44444C7.32657 7 7.21352 7.04683 7.13017 7.13017C7.04683 7.21352 7 7.32657 7 7.44444V10.1111C7 10.229 7.04683 10.342 7.13017 10.4254C7.21352 10.5087 7.32657 10.5556 7.44444 10.5556H10.1111C10.229 10.5556 10.342 10.5087 10.4254 10.4254C10.5087 10.342 10.5556 10.229 10.5556 10.1111V7.44444C10.5556 7.32657 10.5087 7.21352 10.4254 7.13017C10.342 7.04683 10.229 7 10.1111 7ZM14.5556 7H11.8889C11.771 7 11.658 7.04683 11.5746 7.13017C11.4913 7.21352 11.4444 7.32657 11.4444 7.44444V10.1111C11.4444 10.229 11.4913 10.342 11.5746 10.4254C11.658 10.5087 11.771 10.5556 11.8889 10.5556H14.5556C14.6734 10.5556 14.7865 10.5087 14.8698 10.4254C14.9532 10.342 15 10.229 15 10.1111V7.44444C15 7.32657 14.9532 7.21352 14.8698 7.13017C14.7865 7.04683 14.6734 7 14.5556 7ZM10.1111 11.4444H7.44444C7.32657 11.4444 7.21352 11.4913 7.13017 11.5746C7.04683 11.658 7 11.771 7 11.8889V14.5556C7 14.6734 7.04683 14.7865 7.13017 14.8698C7.21352 14.9532 7.32657 15 7.44444 15H10.1111C10.229 15 10.342 14.9532 10.4254 14.8698C10.5087 14.7865 10.5556 14.6734 10.5556 14.5556V11.8889C10.5556 11.771 10.5087 11.658 10.4254 11.5746C10.342 11.4913 10.229 11.4444 10.1111 11.4444ZM13.2222 11.4444C13.57 11.4444 13.9102 11.5465 14.2006 11.7379C14.491 11.9293 14.7189 12.2018 14.856 12.5214C14.9932 12.8411 15.0335 13.1939 14.972 13.5363C14.9106 13.8786 14.7501 14.1954 14.5103 14.4475C14.2706 14.6995 13.9622 14.8757 13.6234 14.9541C13.2845 15.0326 12.9301 15.01 12.604 14.889C12.2779 14.7681 11.9944 14.5541 11.7887 14.2736C11.583 13.9932 11.4641 13.6585 11.4467 13.3111L11.4444 13.2222L11.4467 13.1333C11.4695 12.6778 11.6665 12.2484 11.997 11.9341C12.3275 11.6197 12.7661 11.4444 13.2222 11.4444Z" fill="#BFBFBF"/>
                                                 </svg>
-                                                <h6 className='font-normal text-xs text-[#48555C] opacity-90' style={workSans.style}>Pungli Perhubungan</h6>
+                                                <h6 className='font-normal text-xs text-[#48555C] opacity-90' style={workSans.style}>
+                                                      {kategoriPungliId.nama_kategori_pungli}
+                                                </h6>
                                           </div>
                                     </div>
                               </div>
-                              <button className='w-full py-4 bg-primary mt-8 text-white rounded-md font-medium text-xs' style={workSans.style}>
-                                    Detail Laporan Pungli
-                              </button>
+                              <Link href={`/laporan/${id}`}>
+                                    <button
+                                          type='button' 
+                                          className='w-full py-4 bg-primary mt-8 text-white rounded-md font-medium text-xs' 
+                                          style={workSans.style}
+                                    >
+                                          Detail Laporan Pungli
+                                    </button>
+                              </Link>
                         </div>
                   </div>
 

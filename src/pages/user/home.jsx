@@ -7,18 +7,20 @@ export default function Home (props) {
 
       return (
             <HomeViews 
-                  _id={props.result._id} 
-                  username={props.result.username} 
-                  nama_lengkap={props.result.nama_lengkap}
-                  email={props.result.email} 
-                  no_telp={props.result.no_telp}
-                  tanggal_lahir={props.result.tanggal_lahir}
-                  jenis_kelamin={props.result.jenis_kelamin}
-                  alamat={props.result.alamat}
-                  status_online={props.result.status_online}
-                  foto_profile={props.result.foto_profile}
-                  created_at={props.result.created_at}
-                  updated_at={props.result.updated_at}
+                  _id={props.userData._id} 
+                  username={props.userData.username} 
+                  nama_lengkap={props.userData.nama_lengkap}
+                  email={props.userData.email} 
+                  no_telp={props.userData.no_telp}
+                  tanggal_lahir={props.userData.tanggal_lahir}
+                  jenis_kelamin={props.userData.jenis_kelamin}
+                  alamat={props.userData.alamat}
+                  status_online={props.userData.status_online}
+                  foto_profile={props.userData.foto_profile}
+                  created_at={props.userData.created_at}
+                  updated_at={props.userData.updated_at}
+                  laporanPungli={props.laporanPungli}
+                  komentarLaporanPungli={props.komentarLaporanPungli}
             />
       )
 }
@@ -27,9 +29,23 @@ export async function getServerSideProps(context) {
 
       const parsedCookies = cookie.parse(context.req.headers.cookie);
 
-      const res = await axios.get(`https://rest-api-bantai-pungli-ysnn.vercel.app/users/${parsedCookies.userId}`, {
+      const userRes = await axios.get(`https://rest-api-bantai-pungli-ysnn.vercel.app/users/${parsedCookies.userId}`, {
             headers: { 'Authorization': `Bearer ${parsedCookies.token}` }
       });
 
-      return { props: { result: res.data } }
+      const laporanPungliRes = await axios.get(`https://rest-api-bantai-pungli-ysnn.vercel.app/pelaporanPungli`, {
+            headers: { 'Authorization': `Bearer ${parsedCookies.token}` }
+      });
+
+      const komentarLaporanPungliRes = await axios.get(`https://rest-api-bantai-pungli-ysnn.vercel.app/komentarPungli`, {
+            headers: { 'Authorization': `Bearer ${parsedCookies.token}` }
+      });
+
+      return { 
+            props: { 
+                  userData: userRes.data,
+                  laporanPungli: laporanPungliRes.data,
+                  komentarLaporanPungli: komentarLaporanPungliRes.data
+            }
+      }
 }

@@ -9,6 +9,7 @@ import Cookies from 'js-cookie';
 const NavbarUser = () => {
 
       const nama_lengkap = Cookies.get('nama_lengkap');
+      const foto_profile = Cookies.get('foto_profile');
 
       return (
 
@@ -43,7 +44,7 @@ const NavbarUser = () => {
                                           </svg>
                                     </div>
                                     <h4 className='text-base text-[#364045] font-medium' style={workSans.style}>
-                                          Laporan-Laporan Pungli
+                                          Laporan Laporan Pungli
                                     </h4>
                               </div>
                         </div>
@@ -60,7 +61,13 @@ const NavbarUser = () => {
                               <div className='w-[1.5px] h-6 bg-[#D1D8DB]'></div>
                               <div className='flex flex-row items-center justify-start gap-12'>
                                     <div className='flex flex-row items-center justify-start gap-4'>
-                                          <div className='w-10 h-10 rounded-full bg-[#F2F2F2]'></div>
+                                          <div className='w-10 h-10 rounded-full bg-[#F2F2F2] relative'>
+                                                <Image 
+                                                      src={foto_profile} 
+                                                      className='object-cover object-center rounded-full' 
+                                                      layout='fill'
+                                                />
+                                          </div>
                                           <h6 
                                                 className='text-lg font-medium text-[#364045]' 
                                                 style={workSans.style}
