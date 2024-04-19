@@ -9,8 +9,12 @@ import ListCheckBoxFilterLaporan from '@/components/ListCheckBoxFilterLaporan'
 import SearchLaporan from '@/components/SearchLaporan'
 import PungliCardPost from '@/components/PungliCardPost'
 import Pagination from '@/components/Pagination'
+import { useDispatch, useSelector } from 'react-redux'
 
 const CariLaporanView = ({dataKategoriPungli,dataLaporanPungli,dataKomentarLaporanPungli}) => {
+
+      const dispatch = useDispatch();
+      const laporanSearch = useSelector(state => state.laporanReducerRedux.laporanSearch);
 
       useEffect(() => {
             document.body.style.overflow = 'hidden';

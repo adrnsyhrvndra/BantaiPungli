@@ -2,8 +2,17 @@ import workSans from '@/libs/FontWorkSans'
 import React, { useEffect } from 'react'
 import SearchIcon from "../assets/search-normal.png";
 import Image from "next/image";
+import { useDispatch, useSelector } from 'react-redux';
+import { setLaporanSearch } from '@/store/laporan';
 
 const SearchLaporan = () => {
+
+      const dispatch = useDispatch();
+      const laporanSearch = useSelector(state => state.laporanReducerRedux.laporanSearch);
+
+      const handleInputSearch = (e) => {
+            dispatch(setLaporanSearch(e.target.value));
+      }
 
       useEffect(() => {
             document.body.style.overflow = 'hidden';
@@ -16,7 +25,9 @@ const SearchLaporan = () => {
             <div className='grid grid-cols-12 mt-10 '>
                   <div className='col-start-1 col-end-8'>
                         <div className='relative'>
-                              <input 
+                              <input
+                                    value={laporanSearch}
+                                    onChange={handleInputSearch}
                                     type="text" 
                                     className='w-full h-12 bg-white rounded-md px-14 py-3 placeholder:text-base placeholder:text-[#757B8C]'
                                     placeholder='Cari Laporan...'
