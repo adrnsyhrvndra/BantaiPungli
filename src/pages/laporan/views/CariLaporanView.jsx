@@ -22,11 +22,19 @@ const CariLaporanView = ({dataKategoriPungli,dataLaporanPungli,dataKomentarLapor
       const laporanFilter = useSelector(state => state.laporanReducerRedux.laporanFilter);
 
       useEffect(() => {
-            const filterSearch = dataLaporanPungli.filter((data) => {
-                  return data.judul_pelaporan.toLowerCase().includes(laporanSearch.toLowerCase());
-            });
-            router.replace(router.asPath);
-            setArrayLaporanPungli(filterSearch);
+
+            if (laporanSearch) {
+                  const filterSearch = dataLaporanPungli.filter((data) => {
+                        return data.judul_pelaporan.toLowerCase().includes(laporanSearch.toLowerCase());
+                  });
+                  router.replace(router.asPath);
+                  setArrayLaporanPungli(filterSearch);
+            }
+
+            if (laporanSearch === '') {
+                  setArrayLaporanPungli(dataLaporanPungli);
+            }
+
       }, [laporanSearch]);
 
       useEffect(() => {
@@ -58,7 +66,9 @@ const CariLaporanView = ({dataKategoriPungli,dataLaporanPungli,dataKomentarLapor
                                                       <SearchLaporan/>
                                                       <div className='flex flex-col gap-6 mt-6'>
                                                             {
-                                                                  arrayLaporanPungli.map((item, index) => {
+                                                                  arrayLaporanPungli && (
+                                                                        
+                                                                        arrayLaporanPungli.map((item, index) => {
 
                                                                         return (
                                                                               <PungliCardPost
@@ -77,9 +87,10 @@ const CariLaporanView = ({dataKategoriPungli,dataLaporanPungli,dataKomentarLapor
                                                                                     judulTextSize="text-2xl" 
                                                                                     deskripsiTextSize="text-xs"
                                                                               />
-                                                                        )
-                                                                  })
+                                                                        )})
+                                                                  )
                                                             }
+
                                                       </div>
                                                 </div>
                                                 <div className='col-span-12'>

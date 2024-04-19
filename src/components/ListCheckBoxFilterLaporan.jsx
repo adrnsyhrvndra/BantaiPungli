@@ -9,7 +9,11 @@ const ListCheckBoxFilterLaporan = ({dataKategoriPungli}) => {
       const laporanFilter = useSelector(state => state.laporanReducerRedux.laporanFilter);
 
       const handleFilterCheckbox = (e) => {
-            dispatch(setLaporanFilter({ ...laporanFilter, [e.target.name]: e.target.value }));
+            console.log(e.target.value);
+
+            const grabValue = e.target.value;
+
+            dispatch(setLaporanFilter({ ...laporanFilter, grabValue }));
       };
 
       return (

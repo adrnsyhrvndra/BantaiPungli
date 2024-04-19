@@ -3,7 +3,7 @@ import {createSlice} from '@reduxjs/toolkit';
 
 const initialState = {
       laporanSearch: null,
-      laporanFilter: {},
+      laporanFilter: [],
 };
 
 export const laporanSlice = createSlice({
