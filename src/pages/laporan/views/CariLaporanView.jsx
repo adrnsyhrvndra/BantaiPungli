@@ -2,7 +2,7 @@ import Breadcumb from '@/components/Breadcumb'
 import SidebarUserMenu from '@/components/SidebarUserMenu'
 import StatistikPungliCard from '@/components/StatistikPungliCard'
 import UserActiveListCard from '@/components/UserActiveListCard'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Head from 'next/head'
 import workSans from '@/libs/FontWorkSans'
 import ListCheckBoxFilterLaporan from '@/components/ListCheckBoxFilterLaporan'
@@ -10,11 +10,24 @@ import SearchLaporan from '@/components/SearchLaporan'
 import PungliCardPost from '@/components/PungliCardPost'
 import Pagination from '@/components/Pagination'
 import { useDispatch, useSelector } from 'react-redux'
+import { useRouter } from 'next/router'
 
 const CariLaporanView = ({dataKategoriPungli,dataLaporanPungli,dataKomentarLaporanPungli}) => {
 
+      const [arrayLaporanPungli, setArrayLaporanPungli] = useState(null);
+
+      const router = useRouter();
       const dispatch = useDispatch();
       const laporanSearch = useSelector(state => state.laporanReducerRedux.laporanSearch);
+      const laporanFilter = useSelector(state => state.laporanReducerRedux.laporanFilter);
+
+      useEffect(() => {
+            const filterSearch = dataLaporanPungli.filter((data) => {
+                  return data.judul_pelaporan.toLowerCase().includes(laporanSearch.toLowerCase());
+            });
+            router.replace(router.asPath);
+            setArrayLaporanPungli(filterSearch);
+      }, [laporanSearch]);
 
       useEffect(() => {
             document.body.style.overflow = 'hidden';
@@ -45,7 +58,7 @@ const CariLaporanView = ({dataKategoriPungli,dataLaporanPungli,dataKomentarLapor
                                                       <SearchLaporan/>
                                                       <div className='flex flex-col gap-6 mt-6'>
                                                             {
-                                                                  dataLaporanPungli.map((item, index) => {
+                                                                  arrayLaporanPungli.map((item, index) => {
 
                                                                         return (
                                                                               <PungliCardPost

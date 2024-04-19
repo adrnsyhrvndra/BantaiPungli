@@ -3,6 +3,7 @@ import {createSlice} from '@reduxjs/toolkit';
 
 const initialState = {
       laporanSearch: null,
+      laporanFilter: {},
 };
 
 export const laporanSlice = createSlice({
@@ -11,10 +12,13 @@ export const laporanSlice = createSlice({
       reducers: {
             setLaporanSearch: (state, action) => {
                   state.laporanSearch = action.payload;
+            },
+            setLaporanFilter: (state, action) => {
+                  state.laporanFilter = action.payload;
             }
       },
 });
 
-export const {setLaporanSearch} = laporanSlice.actions;
+export const {setLaporanSearch,setLaporanFilter} = laporanSlice.actions;
 
 export default laporanSlice.reducer;
