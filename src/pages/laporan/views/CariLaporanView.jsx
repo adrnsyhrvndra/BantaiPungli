@@ -11,6 +11,7 @@ import PungliCardPost from '@/components/PungliCardPost'
 import Pagination from '@/components/Pagination'
 import { useDispatch, useSelector } from 'react-redux'
 import { useRouter } from 'next/router'
+import laporan from '@/store/laporan'
 
 const CariLaporanView = ({dataKategoriPungli,dataLaporanPungli,dataKomentarLaporanPungli}) => {
 
@@ -23,19 +24,24 @@ const CariLaporanView = ({dataKategoriPungli,dataLaporanPungli,dataKomentarLapor
 
       useEffect(() => {
 
-            if (laporanSearch) {
-                  const filterSearch = dataLaporanPungli.filter((data) => {
-                        return data.judul_pelaporan.toLowerCase().includes(laporanSearch.toLowerCase());
+            if (laporanSearch.length >= 1 || laporanFilter.length >= 1) {
+
+                  const filterSearch = dataLaporanPungli
+                  .filter((data) => {
+                        const matchedSearch = data.judul_pelaporan.toLowerCase().includes(laporanSearch.toLowerCase());
+                        const matchedFilter = data.kategoriPungliId._id.includes(laporanFilter);
+                        return matchedFilter && matchedSearch;
                   });
+
                   router.replace(router.asPath);
                   setArrayLaporanPungli(filterSearch);
             }
 
-            if (laporanSearch === '') {
+            if (laporanSearch === '' && laporanFilter.length === 0) {
                   setArrayLaporanPungli(dataLaporanPungli);
             }
 
-      }, [laporanSearch]);
+      }, [laporanSearch, laporanFilter]);
 
       useEffect(() => {
             document.body.style.overflow = 'hidden';
@@ -88,6 +94,34 @@ const CariLaporanView = ({dataKategoriPungli,dataLaporanPungli,dataKomentarLapor
                                                                                     deskripsiTextSize="text-xs"
                                                                               />
                                                                         )})
+                                                                  )
+                                                            }
+
+                                                            {
+                                                                  arrayLaporanPungli === null && (
+                                                                        
+                                                                        dataLaporanPungli.map((item,index) => {
+
+                                                                              return (
+                                                                                    <PungliCardPost
+                                                                                          id={item._id}
+                                                                                          judul_pelaporan={item.judul_pelaporan}
+                                                                                          deskripsi_pelaporan={item.deskripsi_pelaporan}
+                                                                                          tanggal_pelaporan={item.tanggal_pelaporan}
+                                                                                          status_pelaporan={item.status_pelaporan}
+                                                                                          bukti_pendukung={item.bukti_pendukung}
+                                                                                          created_at={item.created_at}
+                                                                                          updated_at={item.updated_at}
+                                                                                          kategoriPungliId={item.kategoriPungliId}
+                                                                                          userId={item.userId}
+                                                                                          imageSizeWidth="w-[470px]" 
+                                                                                          imageSizeHeight="h-[320px]" 
+                                                                                          judulTextSize="text-2xl" 
+                                                                                          deskripsiTextSize="text-xs"
+                                                                                    />
+                                                                              )
+
+                                                                        })
                                                                   )
                                                             }
 

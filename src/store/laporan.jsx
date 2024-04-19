@@ -2,7 +2,7 @@
 import {createSlice} from '@reduxjs/toolkit';
 
 const initialState = {
-      laporanSearch: null,
+      laporanSearch: '',
       laporanFilter: [],
 };
 
