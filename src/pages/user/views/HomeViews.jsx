@@ -7,7 +7,7 @@ import PungliCardPost from '@/components/PungliCardPost';
 import StatistikPungliCard from '@/components/StatistikPungliCard';
 import Breadcumb from '@/components/Breadcumb';
 import { useEffect } from 'react';
-import Pagination from '@/components/Pagination';
+import Pagination from '@/components/Paginations';
 import Cookies from 'js-cookie';
 
 export default function ({ _id, username, nama_lengkap, email, no_telp, alamat, status_online,tanggal_lahir,jenis_kelamin, foto_profile, created_at, updated_at, laporanPungli, komentarLaporanPungli }) {

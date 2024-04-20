@@ -8,19 +8,26 @@ import workSans from '@/libs/FontWorkSans'
 import ListCheckBoxFilterLaporan from '@/components/ListCheckBoxFilterLaporan'
 import SearchLaporan from '@/components/SearchLaporan'
 import PungliCardPost from '@/components/PungliCardPost'
-import Pagination from '@/components/Pagination'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { useRouter } from 'next/router'
-import laporan from '@/store/laporan'
+import Paginations from '@/components/Paginations'
 
 const CariLaporanView = ({dataKategoriPungli,dataLaporanPungli,dataKomentarLaporanPungli}) => {
 
       const [arrayLaporanPungli, setArrayLaporanPungli] = useState(null);
+      const [currentPage, setCurrentPage] = useState(1);
+      const dataPerPage = 2;
 
       const router = useRouter();
-      const dispatch = useDispatch();
       const laporanSearch = useSelector(state => state.laporanReducerRedux.laporanSearch);
       const laporanFilter = useSelector(state => state.laporanReducerRedux.laporanFilter);
+
+      const handlePageChange = (event, value) => {
+            setCurrentPage(value);
+      };
+
+      const startIndex = (currentPage - 1) * dataPerPage;
+      const endIndex = startIndex + dataPerPage;
 
       useEffect(() => {
 
@@ -30,7 +37,7 @@ const CariLaporanView = ({dataKategoriPungli,dataLaporanPungli,dataKomentarLapor
                   .filter((data) => {
                         const matchedSearch = data.judul_pelaporan.toLowerCase().includes(laporanSearch.toLowerCase());
                         const matchedFilter = data.kategoriPungliId._id.includes(laporanFilter);
-                        return matchedFilter && matchedSearch;
+                        return matchedSearch && matchedFilter;
                   });
 
                   router.replace(router.asPath);
@@ -74,7 +81,7 @@ const CariLaporanView = ({dataKategoriPungli,dataLaporanPungli,dataKomentarLapor
                                                             {
                                                                   arrayLaporanPungli && (
                                                                         
-                                                                        arrayLaporanPungli.map((item, index) => {
+                                                                        arrayLaporanPungli.slice(startIndex, endIndex).map((item, index) => {
 
                                                                         return (
                                                                               <PungliCardPost
@@ -100,7 +107,7 @@ const CariLaporanView = ({dataKategoriPungli,dataLaporanPungli,dataKomentarLapor
                                                             {
                                                                   arrayLaporanPungli === null && (
                                                                         
-                                                                        dataLaporanPungli.map((item,index) => {
+                                                                        dataLaporanPungli.slice(startIndex, endIndex).map((item,index) => {
 
                                                                               return (
                                                                                     <PungliCardPost
@@ -128,7 +135,12 @@ const CariLaporanView = ({dataKategoriPungli,dataLaporanPungli,dataKomentarLapor
                                                       </div>
                                                 </div>
                                                 <div className='col-span-12'>
-                                                      <Pagination/>
+                                                      <Paginations
+                                                            totalItems={dataLaporanPungli.length}
+                                                            itemsPerPage={dataPerPage}
+                                                            currentPage={currentPage}
+                                                            onPageChange={handlePageChange}
+                                                      />
                                                 </div>
                                           </div>
                                     </div>

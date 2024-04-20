@@ -6,7 +6,7 @@ import workSans from '@/libs/FontWorkSans';
 import FemaleIcon from "../../assets/Female-Icon.png";
 import SearchLaporanDetailProfil from '@/components/SearchLaporanDetailProfil';
 import PungliCardPost from '@/components/PungliCardPost';
-import Pagination from '@/components/Pagination';
+import Pagination from '@/components/Paginations';
 
 const DetailOtherUser = () => {
 

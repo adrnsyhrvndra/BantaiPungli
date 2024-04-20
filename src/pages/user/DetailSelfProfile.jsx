@@ -3,7 +3,7 @@ import CardProfileSelf from '@/components/CardProfileSelf';
 import Head from 'next/head';
 import SearchLaporanDetailProfil from '@/components/SearchLaporanDetailProfil';
 import PungliCardPost from '@/components/PungliCardPost';
-import Pagination from '@/components/Pagination';
+import Pagination from '@/components/Paginations';
 
 const DetailSelfProfile = () => {
 
