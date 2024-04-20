@@ -12,6 +12,15 @@ import Cookies from 'js-cookie';
 
 export default function ({ _id, username, nama_lengkap, email, no_telp, alamat, status_online,tanggal_lahir,jenis_kelamin, foto_profile, created_at, updated_at, laporanPungli, komentarLaporanPungli }) {
 
+      const [namaLengkap, setNamaLengkap] = useState('');
+      const [emailUser, setEmailUser] = useState('');
+      const [noTelpUser, setNoTelpUser] = useState('');
+      const [alamatUser, setAlamatUser] = useState('');
+      const [statusUser, setStatusUser] = useState('');
+      const [tanggalLahir, setTanggalLahir] = useState('');
+      const [jenisKelamin, setJenisKelamin] = useState('');
+      const [fotoProfile, setFotoProfile] = useState('');
+
       Cookies.set('username', username, { expires: 1 });
       Cookies.set('email', email, { expires: 1 });
       Cookies.set('no_telp', no_telp, { expires: 1 });
@@ -32,6 +41,15 @@ export default function ({ _id, username, nama_lengkap, email, no_telp, alamat, 
       const endIndex = startIndex + dataPerPage;
 
       useEffect(() => {
+            setNamaLengkap(nama_lengkap);
+            setFotoProfile(foto_profile);
+            setEmailUser(email);
+            setNoTelpUser(no_telp);
+            setAlamatUser(alamat);
+            setStatusUser(status_online);
+            setTanggalLahir(tanggal_lahir);
+            setJenisKelamin(jenis_kelamin);
+
             document.body.style.overflow = 'hidden';
             return () => {
                   document.body.style.overflow = ''; 
@@ -47,8 +65,8 @@ export default function ({ _id, username, nama_lengkap, email, no_telp, alamat, 
                         <div className='col-span-2 px-8 overflow-y-scroll h-screen pb-40'>
                               <SidebarUserMenu/>
                         </div>
-                        {/* <div className='col-span-10 bg-[#F1F3F4] overflow-y-auto h-screen pb-48'>
-                              <Breadcumb namaWelcome={nama_lengkap}/>
+                        <div className='col-span-10 bg-[#F1F3F4] overflow-y-auto h-screen pb-48'>
+                              <Breadcumb namaWelcome={namaLengkap}/>
                               <div className='grid grid-cols-12 px-6 gap-6 mt-10'>
                                     <div className='col-span-8'>
                                           <div className='grid grid-cols-12 gap-6'>
@@ -108,7 +126,7 @@ export default function ({ _id, username, nama_lengkap, email, no_telp, alamat, 
                                           </div>
                                     </div>
                               </div>
-                        </div> */}
+                        </div>
                   </div>
             </div>
       )
