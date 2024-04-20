@@ -6,7 +6,7 @@ import UserActiveListCard from '@/components/UserActiveListCard';
 import PungliCardPost from '@/components/PungliCardPost';
 import StatistikPungliCard from '@/components/StatistikPungliCard';
 import Breadcumb from '@/components/Breadcumb';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Pagination from '@/components/Paginations';
 import Cookies from 'js-cookie';
 
@@ -20,6 +20,16 @@ export default function ({ _id, username, nama_lengkap, email, no_telp, alamat, 
       Cookies.set('tanggal_lahir', tanggal_lahir, { expires: 1 });
       Cookies.set('jenis_kelamin', jenis_kelamin, { expires: 1 });
       Cookies.set('foto_profile', foto_profile, { expires: 1 });
+
+      const [currentPage, setCurrentPage] = useState(1);
+      const dataPerPage = 2;
+
+      const handlePageChange = (event, value) => {
+            setCurrentPage(value);
+      };
+
+      const startIndex = (currentPage - 1) * dataPerPage;
+      const endIndex = startIndex + dataPerPage;
 
       useEffect(() => {
             document.body.style.overflow = 'hidden';
@@ -52,7 +62,7 @@ export default function ({ _id, username, nama_lengkap, email, no_telp, alamat, 
                                                       <div className='grid grid-cols-12 gap-7'>
                                                             <div className='col-span-12'>
                                                                   {
-                                                                        laporanPungli.map((item, index) => {
+                                                                        laporanPungli.slice(startIndex, endIndex).map((item, index) => {
 
                                                                               return (
                                                                                     <PungliCardPost
@@ -76,7 +86,12 @@ export default function ({ _id, username, nama_lengkap, email, no_telp, alamat, 
                                                                   }
                                                             </div>
                                                             <div className='col-span-12'>
-                                                                  <Pagination/>
+                                                                  <Pagination
+                                                                        totalItems={laporanPungli.length}
+                                                                        itemsPerPage={dataPerPage}
+                                                                        currentPage={currentPage}
+                                                                        onPageChange={handlePageChange}
+                                                                  />
                                                             </div>
                                                       </div>
                                                 </div>
