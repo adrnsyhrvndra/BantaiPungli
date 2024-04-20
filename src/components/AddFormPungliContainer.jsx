@@ -7,6 +7,7 @@ import Cookies from 'js-cookie';
 import axios from 'axios';
 import { Bounce, ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useRouter } from 'next/router';
 
 const customStyles = {
 	control: (styles) => ({ 
@@ -60,6 +61,8 @@ const AddFormPungliContainer = ({dataKategoriList}) => {
 
       const [selectedKategoriPungli, setSelectedKategoriPungli] = useState(null);
 
+      const router = useRouter();
+
       dataKategoriList.map((data) => {
             const value = data._id;
             const label = data.nama_kategori_pungli;
@@ -97,8 +100,6 @@ const AddFormPungliContainer = ({dataKategoriList}) => {
       }
 
       const handleChangeKategoriPungli = (value) => {
-            console.log(value);
-
             setSelectedKategoriPungli(value);
             setInput({ ...input, kategoriPungliId: value.value });
         };
@@ -129,7 +130,6 @@ const AddFormPungliContainer = ({dataKategoriList}) => {
                   body: formData
             });
             const result = await response.json();
-            console.log(result.secure_url);
 
             const data = {
                   userId: id_user,
@@ -176,6 +176,7 @@ const AddFormPungliContainer = ({dataKategoriList}) => {
                               deskripsi_pelaporan: '',
                         });
                         setSelectedImage(null);
+                        router.replace(router.asPath);
                         
                   } catch (error) {
 
@@ -196,8 +197,6 @@ const AddFormPungliContainer = ({dataKategoriList}) => {
             }
 
       };
-
-      console.log(selectedImage);
 
       return (
             <div className='bg-white rounded-lg py-16 px-20' style={workSans.style}>

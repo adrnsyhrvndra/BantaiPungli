@@ -7,20 +7,22 @@ export default function Home (props) {
 
       return (
             <HomeViews 
-                  _id={props.userData._id} 
-                  username={props.userData.username} 
-                  nama_lengkap={props.userData.nama_lengkap}
-                  email={props.userData.email} 
-                  no_telp={props.userData.no_telp}
-                  tanggal_lahir={props.userData.tanggal_lahir}
-                  jenis_kelamin={props.userData.jenis_kelamin}
-                  alamat={props.userData.alamat}
-                  status_online={props.userData.status_online}
-                  foto_profile={props.userData.foto_profile}
-                  created_at={props.userData.created_at}
-                  updated_at={props.userData.updated_at}
+                  _id={props.userById._id} 
+                  username={props.userById.username} 
+                  nama_lengkap={props.userById.nama_lengkap}
+                  email={props.userById.email} 
+                  no_telp={props.userById.no_telp}
+                  tanggal_lahir={props.userById.tanggal_lahir}
+                  jenis_kelamin={props.userById.jenis_kelamin}
+                  alamat={props.userById.alamat}
+                  status_online={props.userById.status_online}
+                  foto_profile={props.userById.foto_profile}
+                  created_at={props.userById.created_at}
+                  updated_at={props.userById.updated_at}
                   laporanPungli={props.laporanPungli}
                   komentarLaporanPungli={props.komentarLaporanPungli}
+                  dataUserAll={props.userAll}
+                  dataLaporanPungli={props.laporanPungli}
             />
       )
 }
@@ -29,7 +31,11 @@ export async function getServerSideProps(context) {
 
       const parsedCookies = cookie.parse(context.req.headers.cookie);
 
-      const userRes = await axios.get(`https://rest-api-bantai-pungli-ysnn.vercel.app/users/${parsedCookies.userId}`, {
+      const userByIdRes = await axios.get(`https://rest-api-bantai-pungli-ysnn.vercel.app/users/${parsedCookies.userId}`, {
+            headers: { 'Authorization': `Bearer ${parsedCookies.token}` }
+      });
+      
+      const userAllRes = await axios.get(`https://rest-api-bantai-pungli-ysnn.vercel.app/users`, {
             headers: { 'Authorization': `Bearer ${parsedCookies.token}` }
       });
 
@@ -43,7 +49,8 @@ export async function getServerSideProps(context) {
 
       return { 
             props: { 
-                  userData: userRes.data,
+                  userById: userByIdRes.data,
+                  userAll: userAllRes.data,
                   laporanPungli: laporanPungliRes.data,
                   komentarLaporanPungli: komentarLaporanPungliRes.data
             }

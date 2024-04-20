@@ -30,7 +30,7 @@ export default function AddLaporan (props) {
                               <Breadcumb/>
                               <div className='grid grid-cols-12 px-6 gap-6 mt-10'>
                                     <div className='col-span-8'>
-                                          <AddFormPungliContainer dataKategoriList={props.result}/>
+                                          <AddFormPungliContainer dataKategoriList={props.kategoriAll}/>
                                     </div>
                                     <div className='col-span-4'>
                                           <div className='grid grid-cols-12 gap-6'>
@@ -38,7 +38,10 @@ export default function AddLaporan (props) {
                                                       <UserActiveListCard/>
                                                 </div>
                                                 <div className='col-span-12'>
-                                                      <StatistikPungliCard/>
+                                                      <StatistikPungliCard
+                                                            dataUserAll={props.userAll}
+                                                            dataLaporanPungli={props.laporanPungli}
+                                                      />
                                                 </div>
                                           </div>
                                     </div>
@@ -53,9 +56,21 @@ export async function getServerSideProps(context) {
 
       const parsedCookies = cookie.parse(context.req.headers.cookie);
 
-      const res = await axios.get(`https://rest-api-bantai-pungli-ysnn.vercel.app/kategoriPungli`, {
+      const kategoriAllRes = await axios.get(`https://rest-api-bantai-pungli-ysnn.vercel.app/kategoriPungli`, {
             headers: { 'Authorization': `Bearer ${parsedCookies.token}` }
       });
 
-      return { props: { result: res.data } }
+      const userAllRes = await axios.get(`https://rest-api-bantai-pungli-ysnn.vercel.app/users`, {
+            headers: { 'Authorization': `Bearer ${parsedCookies.token}` }
+      });
+
+      const laporanPungliRes = await axios.get(`https://rest-api-bantai-pungli-ysnn.vercel.app/pelaporanPungli`, {
+            headers: { 'Authorization': `Bearer ${parsedCookies.token}` }
+      });
+
+      return { props: { 
+            kategoriAll: kategoriAllRes.data,
+            userAll: userAllRes.data,
+            laporanPungli: laporanPungliRes.data,
+      }}
 }

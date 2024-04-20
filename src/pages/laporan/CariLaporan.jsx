@@ -10,6 +10,7 @@ export default function CariLaporan (props) {
                   dataKategoriPungli={props.kategoriPungli}
                   dataLaporanPungli={props.laporanPungli}
                   dataKomentarLaporanPungli={props.komentarLaporanPungli}
+                  dataUserAll={props.userAll}
             />
       )
 }
@@ -18,7 +19,7 @@ export async function getServerSideProps(context) {
 
       const parsedCookies = cookie.parse(context.req.headers.cookie);
 
-      const kategoriPungliRes = await axios.get(`https://rest-api-bantai-pungli-ysnn.vercel.app/kategoriPungli`, {
+      const kategoriAllRes = await axios.get(`https://rest-api-bantai-pungli-ysnn.vercel.app/kategoriPungli`, {
             headers: { 'Authorization': `Bearer ${parsedCookies.token}` }
       });
 
@@ -30,11 +31,16 @@ export async function getServerSideProps(context) {
             headers: { 'Authorization': `Bearer ${parsedCookies.token}` }
       });
 
+      const userAllRes = await axios.get(`https://rest-api-bantai-pungli-ysnn.vercel.app/users`, {
+            headers: { 'Authorization': `Bearer ${parsedCookies.token}` }
+      });
+
       return { 
             props: {
-                  kategoriPungli: kategoriPungliRes.data,
+                  kategoriPungli: kategoriAllRes.data,
                   laporanPungli: laporanPungliRes.data,
-                  komentarLaporanPungli: komentarLaporanPungliRes.data
+                  komentarLaporanPungli: komentarLaporanPungliRes.data,
+                  userAll: userAllRes.data
             }
       };
 

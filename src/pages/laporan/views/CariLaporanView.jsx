@@ -12,7 +12,7 @@ import { useSelector } from 'react-redux'
 import { useRouter } from 'next/router'
 import Paginations from '@/components/Paginations'
 
-const CariLaporanView = ({dataKategoriPungli,dataLaporanPungli,dataKomentarLaporanPungli}) => {
+const CariLaporanView = ({dataKategoriPungli,dataLaporanPungli,dataKomentarLaporanPungli,dataUserAll}) => {
 
       const [arrayLaporanPungli, setArrayLaporanPungli] = useState(null);
       const [currentPage, setCurrentPage] = useState(1);
@@ -76,7 +76,7 @@ const CariLaporanView = ({dataKategoriPungli,dataLaporanPungli,dataKomentarLapor
                                                             Filter Berdasarkan Kategori Pungli
                                                       </h4>
                                                       <ListCheckBoxFilterLaporan dataKategoriPungli={dataKategoriPungli}/>
-                                                      <SearchLaporan/>
+                                                      <SearchLaporan totalItems={dataLaporanPungli.length}/>
                                                       <div className='flex flex-col gap-6 mt-6'>
                                                             {
                                                                   arrayLaporanPungli && (
@@ -150,7 +150,10 @@ const CariLaporanView = ({dataKategoriPungli,dataLaporanPungli,dataKomentarLapor
                                                       <UserActiveListCard/>
                                                 </div>
                                                 <div className='col-span-12'>
-                                                      <StatistikPungliCard/>
+                                                      <StatistikPungliCard
+                                                            dataUserAll={dataUserAll}
+                                                            dataLaporanPungli={dataLaporanPungli}
+                                                      />
                                                 </div>
                                           </div>
                                     </div>

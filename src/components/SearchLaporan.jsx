@@ -5,7 +5,7 @@ import Image from "next/image";
 import { useDispatch, useSelector } from 'react-redux';
 import { setLaporanSearch } from '@/store/laporan';
 
-const SearchLaporan = () => {
+const SearchLaporan = ({totalItems}) => {
 
       const dispatch = useDispatch();
       const laporanSearch = useSelector(state => state.laporanReducerRedux.laporanSearch);
@@ -37,7 +37,9 @@ const SearchLaporan = () => {
                         </div>
                   </div>
                   <div className='col-start-10 col-end-13 place-self-end'>
-                        <h6 className='font-semibold text-sm text-[#6F7F95]' style={workSans.style}>Total Pungli : 2 Laporan</h6>
+                        <h6 className='font-semibold text-sm text-[#6F7F95]' style={workSans.style}>
+                              Total Pungli : {totalItems} Laporan
+                        </h6>
                   </div>
             </div>
       )

@@ -1,7 +1,6 @@
 import workSans from '@/libs/FontWorkSans'
 import React from 'react'
 import Image from "next/image";
-import FotoProfilSementara from "../assets/logo-bantai-punli-form-login.png";
 
 const CommentPungli = ({dataKomentar}) => {
 
