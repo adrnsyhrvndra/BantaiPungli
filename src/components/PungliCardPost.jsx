@@ -40,7 +40,7 @@ const PungliCardPost = ({imageSizeWidth,imageSizeHeight,judulTextSize,deskripsiT
             <div className='bg-white px-12 py-10 rounded-lg h-fit'>
                   <div className='flex flex-row gap-8 items-center'>
                         <div className={`${imageSizeWidth} ${imageSizeHeight} overflow-hidden relative rounded-lg`}>
-                              <Image className='object-cover object-center' src={bukti_pendukung} layout="fill" />
+                              <Image className='object-cover object-center rounded-lg' src={bukti_pendukung} fill={true} />
                         </div>
                         <div className='w-full'>
                               <div className='flex flex-col gap-2'>

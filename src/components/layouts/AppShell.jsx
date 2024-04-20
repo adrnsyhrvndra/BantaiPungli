@@ -16,10 +16,10 @@ export default function (props) {
       
                         :
       
-                        <main>
+                        <>
                               <NavbarUser/>
                               {children}
-                        </main>
+                        </>
                   }
 
             </>
