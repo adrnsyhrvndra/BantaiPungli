@@ -10,7 +10,7 @@ import Pagination from '@/components/Paginations';
 import Cookies from 'js-cookie';
 import StatistikPungliCard from '@/components/StatistikPungliCard';
 
-export default function ({ _id, username, nama_lengkap, email, no_telp, alamat, status_online,tanggal_lahir,jenis_kelamin, foto_profile, created_at, updated_at, laporanPungli, komentarLaporanPungli,dataLaporanPungli,dataUserAll}) {
+export default function HomeViews ({ _id, username, nama_lengkap, email, no_telp, alamat, status_online,tanggal_lahir,jenis_kelamin, foto_profile, created_at, updated_at, laporanPungli, komentarLaporanPungli,dataLaporanPungli,dataUserAll}) {
 
       const [namaLengkap, setNamaLengkap] = useState('');
       const [emailUser, setEmailUser] = useState('');
@@ -83,22 +83,24 @@ export default function ({ _id, username, nama_lengkap, email, no_telp, alamat, 
                                                                         laporanPungli.slice(startIndex, endIndex).map((item, index) => {
 
                                                                               return (
-                                                                                    <PungliCardPost
-                                                                                          id={item._id}
-                                                                                          judul_pelaporan={item.judul_pelaporan}
-                                                                                          deskripsi_pelaporan={item.deskripsi_pelaporan}
-                                                                                          tanggal_pelaporan={item.tanggal_pelaporan}
-                                                                                          status_pelaporan={item.status_pelaporan}
-                                                                                          bukti_pendukung={item.bukti_pendukung}
-                                                                                          created_at={item.created_at}
-                                                                                          updated_at={item.updated_at}
-                                                                                          kategoriPungliId={item.kategoriPungliId}
-                                                                                          userId={item.userId}
-                                                                                          imageSizeWidth="w-[470px]" 
-                                                                                          imageSizeHeight="h-[320px]" 
-                                                                                          judulTextSize="text-2xl" 
-                                                                                          deskripsiTextSize="text-xs"
-                                                                                    />
+                                                                                    <>
+                                                                                          <PungliCardPost
+                                                                                                id={item._id}
+                                                                                                judul_pelaporan={item.judul_pelaporan}
+                                                                                                deskripsi_pelaporan={item.deskripsi_pelaporan}
+                                                                                                tanggal_pelaporan={item.tanggal_pelaporan}
+                                                                                                status_pelaporan={item.status_pelaporan}
+                                                                                                bukti_pendukung={item.bukti_pendukung}
+                                                                                                created_at={item.created_at}
+                                                                                                updated_at={item.updated_at}
+                                                                                                kategoriPungliId={item.kategoriPungliId}
+                                                                                                userId={item.userId}
+                                                                                                imageSizeWidth="w-[470px]" 
+                                                                                                imageSizeHeight="h-[320px]" 
+                                                                                                judulTextSize="text-2xl" 
+                                                                                                deskripsiTextSize="text-xs"
+                                                                                          />
+                                                                                    </>
                                                                               )
                                                                         })
                                                                   }

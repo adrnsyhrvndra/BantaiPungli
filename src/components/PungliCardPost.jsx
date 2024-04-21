@@ -1,12 +1,14 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 import workSans from '@/libs/FontWorkSans'
 import Link from 'next/link';
-import { useRouter } from 'next/router';
+import Cookies from 'js-cookie';
 
 const PungliCardPost = ({imageSizeWidth,imageSizeHeight,judulTextSize,deskripsiTextSize, judul_pelaporan,deskripsi_pelaporan,tanggal_pelaporan,status_pelaporan,bukti_pendukung,created_at,updated_at,kategoriPungliId,userId,id}) => {
 
-      const router = useRouter();
+      const foto_profile = Cookies.get('foto_profile');
+      const [gambarBuktiPendukung, setGambarBuktiPendukung] = useState(bukti_pendukung);
+      const [fotoProfile, setFotoProfile] = useState(foto_profile);
 
       const handleDeskripsiLaporanLimitString = (deskripsi_pelaporan) => {
             if (deskripsi_pelaporan.length >= 126) {
@@ -36,11 +38,16 @@ const PungliCardPost = ({imageSizeWidth,imageSizeHeight,judulTextSize,deskripsiT
             }
       }
 
+      useEffect(() => {
+            setGambarBuktiPendukung(bukti_pendukung);
+            setFotoProfile(foto_profile);
+      }, [bukti_pendukung, foto_profile]);
+
       return (
             <div className='bg-white px-12 py-10 rounded-lg h-fit'>
                   <div className='flex flex-row gap-8 items-center'>
                         <div className={`${imageSizeWidth} ${imageSizeHeight} overflow-hidden relative rounded-lg`}>
-                              <Image className='object-cover object-center rounded-lg' src={bukti_pendukung} fill={true} />
+                              <Image className='object-cover object-center rounded-lg' src={gambarBuktiPendukung} fill={true} alt='laporan-pungli' />
                         </div>
                         <div className='w-full'>
                               <div className='flex flex-col gap-2'>
@@ -59,8 +66,9 @@ const PungliCardPost = ({imageSizeWidth,imageSizeHeight,judulTextSize,deskripsiT
                                           <div className='relative w-12 h-12 rounded-full'>
                                                 <Image 
                                                       className='rounded-full object-cover object-center w-12 h-12' 
-                                                      src={userId.foto_profile} 
+                                                      src={foto_profile} 
                                                       layout='fill'
+                                                      alt='user-profile'
                                                 />
                                                 <div className='h-3 w-3 bg-green-600 rounded-full absolute top-0.5 -right-0.5'></div>
                                           </div>

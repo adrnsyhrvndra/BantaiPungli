@@ -9,9 +9,7 @@ import PungliCardPost from '@/components/PungliCardPost';
 import Pagination from '@/components/Paginations';
 
 const DetailOtherUser = () => {
-
       return (
-
             <div className='overflow-hidden'>
                   <Head>
 				<title>Halaman Detail User Lain | Bantai Pungli</title>
@@ -91,7 +89,6 @@ const DetailOtherUser = () => {
                         </div>
                   </div>
             </div>
-
       )
 }
 

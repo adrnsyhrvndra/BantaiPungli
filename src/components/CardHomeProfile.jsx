@@ -7,13 +7,16 @@ import Cookies from 'js-cookie';
 const CardHomeProfile = () => {
       const [namaLengkap, setNamaLengkap] = useState('');
       const [fotoProfile, setFotoProfile] = useState('');
+      const [userId, setUserId] = useState('');
 
       const nama_lengkap = Cookies.get('nama_lengkap');
       const foto_profile = Cookies.get('foto_profile');
+      const user_id = Cookies.get('userId');
 
       useEffect(() => {
             setNamaLengkap(nama_lengkap);
             setFotoProfile(foto_profile);
+            setUserId(user_id);
       }, []);
 
       return (
@@ -27,7 +30,7 @@ const CardHomeProfile = () => {
                               <h4 className='w-[45%] text-2xl font-semibold leading-tight text-[#17181C]' style={workSans.style}>
                                     {namaLengkap}
                               </h4>
-                              <Link href={"DetailSelfProfile"}>
+                              <Link href={`/user/${userId}`}>
                                     <button className='bg-secondary px-7 py-3 text-xs text-white rounded-lg' style={workSans.style}>
                                           Detail Profil
                                     </button>
