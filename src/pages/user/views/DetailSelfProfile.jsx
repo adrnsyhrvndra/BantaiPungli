@@ -7,7 +7,7 @@ import Pagination from '@/components/Paginations';
 import React, { useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
 
-const DetailSelfProfile = ({idUser,dataUser,dataLaporanPungli,dataKomentarLaporanPungli}) => {
+const DetailSelfProfile = ({idUser,dataUser,dataLaporanPungli,dataKomentarLaporanPungli,dataKategoriPungli}) => {
 
       const nama_lengkap = Cookies.get('nama_lengkap');
       const [namaLengkap,setNamaLengkap] = useState('');
@@ -45,7 +45,7 @@ const DetailSelfProfile = ({idUser,dataUser,dataLaporanPungli,dataKomentarLapora
                                                                   bukti_pendukung={data.bukti_pendukung}
                                                                   created_at={data.created_at}
                                                                   updated_at={data.updated_at}
-                                                                  kategoriPungliId={data.kategoriPungliId._id}
+                                                                  kategoriPungliId={data.kategoriPungliId}
                                                                   userId={data.userId}
                                                                   dataKomentarLaporanPungli={dataKomentarLaporanPungli}
                                                                   imageSizeWidth="w-[512px]" 

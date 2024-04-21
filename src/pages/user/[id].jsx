@@ -15,6 +15,7 @@ export default function DetailUser (props) {
                   dataUser={props.userById}
                   dataLaporanPungli={props.laporanPungli}
                   dataKomentarLaporanPungli={props.komentarLaporanPungli}
+                  dataKategoriPungli={props.kategoriPungli}
             />
       )
 
@@ -39,11 +40,16 @@ export async function getServerSideProps(context) {
             headers: { 'Authorization': `Bearer ${parsedCookies.token}` }
       });
 
+      const kategoriAllRes = await axios.get(`https://rest-api-bantai-pungli-ysnn.vercel.app/kategoriPungli`, {
+            headers: { 'Authorization': `Bearer ${parsedCookies.token}` }
+      });
+
       return {
             props: {
                   userById: userByIdRes.data,
                   laporanPungli: filterLaporanPungli,
-                  komentarLaporanPungli: komentarLaporanPungliRes.data
+                  komentarLaporanPungli: komentarLaporanPungliRes.data,
+                  kategoriPungli: kategoriAllRes.data
             }
       }
 }
