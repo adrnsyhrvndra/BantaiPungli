@@ -12,7 +12,7 @@ import { useSelector } from 'react-redux'
 import { useRouter } from 'next/router'
 import Paginations from '@/components/Paginations'
 
-const CariLaporanView = ({dataKategoriPungli,dataLaporanPungli,dataKomentarLaporanPungli,dataUserAll}) => {
+const CariLaporanView = ({dataKategoriPungli,dataLaporanPungli,komentarLaporanPungli,dataUserAll}) => {
 
       const [arrayLaporanPungli, setArrayLaporanPungli] = useState(null);
       const [currentPage, setCurrentPage] = useState(1);
@@ -84,32 +84,7 @@ const CariLaporanView = ({dataKategoriPungli,dataLaporanPungli,dataKomentarLapor
                                                                         arrayLaporanPungli.slice(startIndex, endIndex).map((item, index) => {
 
                                                                         return (
-                                                                              <PungliCardPost
-                                                                                    id={item._id}
-                                                                                    judul_pelaporan={item.judul_pelaporan}
-                                                                                    deskripsi_pelaporan={item.deskripsi_pelaporan}
-                                                                                    tanggal_pelaporan={item.tanggal_pelaporan}
-                                                                                    status_pelaporan={item.status_pelaporan}
-                                                                                    bukti_pendukung={item.bukti_pendukung}
-                                                                                    created_at={item.created_at}
-                                                                                    updated_at={item.updated_at}
-                                                                                    kategoriPungliId={item.kategoriPungliId}
-                                                                                    userId={item.userId}
-                                                                                    imageSizeWidth="w-[470px]" 
-                                                                                    imageSizeHeight="h-[320px]" 
-                                                                                    judulTextSize="text-2xl" 
-                                                                                    deskripsiTextSize="text-xs"
-                                                                              />
-                                                                        )})
-                                                                  )
-                                                            }
-
-                                                            {
-                                                                  arrayLaporanPungli === null && (
-                                                                        
-                                                                        dataLaporanPungli.slice(startIndex, endIndex).map((item,index) => {
-
-                                                                              return (
+                                                                              <>
                                                                                     <PungliCardPost
                                                                                           id={item._id}
                                                                                           judul_pelaporan={item.judul_pelaporan}
@@ -121,11 +96,42 @@ const CariLaporanView = ({dataKategoriPungli,dataLaporanPungli,dataKomentarLapor
                                                                                           updated_at={item.updated_at}
                                                                                           kategoriPungliId={item.kategoriPungliId}
                                                                                           userId={item.userId}
+                                                                                          dataKomentarLaporanPungli={komentarLaporanPungli}
                                                                                           imageSizeWidth="w-[470px]" 
                                                                                           imageSizeHeight="h-[320px]" 
                                                                                           judulTextSize="text-2xl" 
                                                                                           deskripsiTextSize="text-xs"
                                                                                     />
+                                                                              </>
+                                                                        )})
+                                                                  )
+                                                            }
+
+                                                            {
+                                                                  arrayLaporanPungli === null && (
+                                                                        
+                                                                        dataLaporanPungli.slice(startIndex, endIndex).map((item,index) => {
+
+                                                                              return (
+                                                                                    <>
+                                                                                          <PungliCardPost
+                                                                                                id={item._id}
+                                                                                                judul_pelaporan={item.judul_pelaporan}
+                                                                                                deskripsi_pelaporan={item.deskripsi_pelaporan}
+                                                                                                tanggal_pelaporan={item.tanggal_pelaporan}
+                                                                                                status_pelaporan={item.status_pelaporan}
+                                                                                                bukti_pendukung={item.bukti_pendukung}
+                                                                                                created_at={item.created_at}
+                                                                                                updated_at={item.updated_at}
+                                                                                                kategoriPungliId={item.kategoriPungliId}
+                                                                                                userId={item.userId}
+                                                                                                dataKomentarLaporanPungli={komentarLaporanPungli}
+                                                                                                imageSizeWidth="w-[470px]" 
+                                                                                                imageSizeHeight="h-[320px]" 
+                                                                                                judulTextSize="text-2xl" 
+                                                                                                deskripsiTextSize="text-xs"
+                                                                                          />
+                                                                                    </>
                                                                               )
 
                                                                         })

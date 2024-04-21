@@ -95,6 +95,7 @@ export default function HomeViews ({ _id, username, nama_lengkap, email, no_telp
                                                                                                 updated_at={item.updated_at}
                                                                                                 kategoriPungliId={item.kategoriPungliId}
                                                                                                 userId={item.userId}
+                                                                                                dataKomentarLaporanPungli={komentarLaporanPungli}
                                                                                                 imageSizeWidth="w-[470px]" 
                                                                                                 imageSizeHeight="h-[320px]" 
                                                                                                 judulTextSize="text-2xl" 

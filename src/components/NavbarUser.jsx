@@ -32,7 +32,7 @@ const NavbarUser = () => {
                                     placeholder='Search..' 
                                     style={workSans.style} 
                               />
-                              <Image src={SearchIcon} className='absolute top-1/2 left-6 -translate-y-1/2' />
+                              <Image src={SearchIcon} className='absolute top-1/2 left-6 -translate-y-1/2' alt='search-icon' />
                         </div>
                         <div className='flex flex-row gap-14 justify-start items-center w-full'>
                               <Link href={'/user/Home'}>
@@ -68,6 +68,7 @@ const NavbarUser = () => {
                                                       src={fotoProfile} 
                                                       className='object-cover object-center rounded-full' 
                                                       fill={true}
+                                                      alt='user-profile'
                                                 />
                                           </div>
                                           <h4 className='text-lg font-medium text-[#364045]' style={workSans.style}>

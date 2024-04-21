@@ -28,16 +28,15 @@ export async function getServerSideProps(context) {
             headers: { 'Authorization': `Bearer ${parsedCookies.token}` }
       });
 
-      const komentarLaporanPungliRes = await axios.get(`https://rest-api-bantai-pungli-ysnn.vercel.app/komentarPungli`, {
-            headers: { 'Authorization': `Bearer ${parsedCookies.token}` }
-      });
-
       const laporanPungliRes = await axios.get(`https://rest-api-bantai-pungli-ysnn.vercel.app/pelaporanPungli`, {
             headers: { 'Authorization': `Bearer ${parsedCookies.token}` }
       });
-
       const filterLaporanPungli = laporanPungliRes.data.filter((item) => {
-            return item.userId._id === parsedCookies.userId
+            return item.userId._id === parsedCookies.userId;
+      });
+
+      const komentarLaporanPungliRes = await axios.get(`https://rest-api-bantai-pungli-ysnn.vercel.app/komentarPungli`, {
+            headers: { 'Authorization': `Bearer ${parsedCookies.token}` }
       });
 
       return {

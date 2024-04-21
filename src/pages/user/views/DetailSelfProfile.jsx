@@ -4,9 +4,17 @@ import Head from 'next/head';
 import SearchLaporanDetailProfil from '@/components/SearchLaporanDetailProfil';
 import PungliCardPost from '@/components/PungliCardPost';
 import Pagination from '@/components/Paginations';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import Cookies from 'js-cookie';
 
 const DetailSelfProfile = ({idUser,dataUser,dataLaporanPungli,dataKomentarLaporanPungli}) => {
+
+      const nama_lengkap = Cookies.get('nama_lengkap');
+      const [namaLengkap,setNamaLengkap] = useState('');
+
+      useEffect(() => {
+            setNamaLengkap(nama_lengkap);
+      },[nama_lengkap])
 
       return (
             <div className='px-48 pt-10 bg-[#F1F3F4] h-fit pb-32'>
@@ -21,7 +29,7 @@ const DetailSelfProfile = ({idUser,dataUser,dataLaporanPungli,dataKomentarLapora
                               <CardInformasiLengkapProfil/>
                         </div>
                         <div className='col-span-12 mt-16'>
-                              <SearchLaporanDetailProfil textUserHeading={'Adriansyah Ravindra'} />
+                              <SearchLaporanDetailProfil textUserHeading={namaLengkap} />
                               <div className='mt-8 flex flex-col gap-8'>
                                     {
                                           dataLaporanPungli.map((data,index) => {
@@ -39,6 +47,7 @@ const DetailSelfProfile = ({idUser,dataUser,dataLaporanPungli,dataKomentarLapora
                                                                   updated_at={data.updated_at}
                                                                   kategoriPungliId={data.kategoriPungliId._id}
                                                                   userId={data.userId}
+                                                                  dataKomentarLaporanPungli={dataKomentarLaporanPungli}
                                                                   imageSizeWidth="w-[512px]" 
                                                                   imageSizeHeight="h-[320px]" 
                                                                   judulTextSize="text-3xl" 

@@ -9,7 +9,7 @@ export default function CariLaporan (props) {
             <CariLaporanView
                   dataKategoriPungli={props.kategoriPungli}
                   dataLaporanPungli={props.laporanPungli}
-                  dataKomentarLaporanPungli={props.komentarLaporanPungli}
+                  komentarLaporanPungli={props.komentarLaporanPungli}
                   dataUserAll={props.userAll}
             />
       )
