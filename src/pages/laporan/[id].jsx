@@ -11,10 +11,12 @@ import { useRouter } from 'next/router';
 import * as cookie from 'cookie'
 import axios from 'axios';
 
-export default function DetailLaporan ({ laporanPungliById, komentarLaporanPungli }) {
+export default function DetailLaporan ({ laporanPungliById, komentarLaporanPungli,userAll, laporanPungli }) {
 
       const router = useRouter();
       const { id } = router.query;
+
+      console.log(userAll);
 
       const [komentar, setKomentar] = useState(komentarLaporanPungli);
 
@@ -65,7 +67,10 @@ export default function DetailLaporan ({ laporanPungliById, komentarLaporanPungl
                                                       <UserActiveListCard/>
                                                 </div>
                                                 <div className='col-span-12'>
-                                                      <StatistikPungliCard/>
+                                                      <StatistikPungliCard
+                                                            dataUserAll={userAll}
+                                                            dataLaporanPungli={laporanPungli}
+                                                      />
                                                 </div>
                                           </div>
                                     </div>
@@ -90,10 +95,20 @@ export async function getServerSideProps(context) {
       const dataKomentarAllPungli = getAllKomentarLaporanPungli.data;
       const filterKomentarSesuaiIdLaporanPungli = dataKomentarAllPungli.filter((data) => data.pelaporanPungliId._id === context.params.id);
 
+      const userAllRes = await axios.get(`https://rest-api-bantai-pungli-ysnn.vercel.app/users`, {
+            headers: { 'Authorization': `Bearer ${parsedCookies.token}` }
+      });
+
+      const laporanPungliRes = await axios.get(`https://rest-api-bantai-pungli-ysnn.vercel.app/pelaporanPungli`, {
+            headers: { 'Authorization': `Bearer ${parsedCookies.token}` }
+      });
+
       return {
             props: {
                   laporanPungliById: laporanPungliByIdRes.data,
-                  komentarLaporanPungli: filterKomentarSesuaiIdLaporanPungli
+                  komentarLaporanPungli: filterKomentarSesuaiIdLaporanPungli,
+                  userAll: userAllRes.data,
+                  laporanPungli: laporanPungliRes.data
             }
       }
 }
