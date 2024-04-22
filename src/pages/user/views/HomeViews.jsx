@@ -86,6 +86,7 @@ export default function HomeViews ({ _id, username, nama_lengkap, email, no_telp
                                                                                     <>
                                                                                           <PungliCardPost
                                                                                                 id={item._id}
+                                                                                                idForEdit={item._id}
                                                                                                 judul_pelaporan={item.judul_pelaporan}
                                                                                                 deskripsi_pelaporan={item.deskripsi_pelaporan}
                                                                                                 tanggal_pelaporan={item.tanggal_pelaporan}
@@ -95,6 +96,7 @@ export default function HomeViews ({ _id, username, nama_lengkap, email, no_telp
                                                                                                 updated_at={item.updated_at}
                                                                                                 kategoriPungliId={item.kategoriPungliId}
                                                                                                 userId={item.userId}
+                                                                                                idPungliUser={item.userId._id}
                                                                                                 dataKomentarLaporanPungli={komentarLaporanPungli}
                                                                                                 imageSizeWidth="w-[470px]" 
                                                                                                 imageSizeHeight="h-[320px]" 

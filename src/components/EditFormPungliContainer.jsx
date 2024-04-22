@@ -1,9 +1,10 @@
 import workSans from '@/libs/FontWorkSans'
-import React from 'react'
+import React, { useState } from 'react'
 import Creatable from 'react-select/creatable';
 import dataSelectOptionsKotaDanProvinsi from '@/libs/DataOptionKotaDanProvinsi';
-import FotoLaporanSementara from "../assets/foto-laporan-sementara.png";
 import Image from "next/image";
+import { formatISO } from 'date-fns';
+import { useEffect } from 'react';
 
 const customStyles = {
 	control: (styles) => ({ 
@@ -41,7 +42,48 @@ const customStyles = {
 	},
 }
 
-const EditFormPungliContainer = () => {
+const EditFormPungliContainer = ({laporanPungliById, dataKategoriList}) => {
+
+      const [selectedImage, setSelectedImage] = useState(laporanPungliById.bukti_pendukung);
+      const [selectedKategoriPungli, setSelectedKategoriPungli] = useState(laporanPungliById.kategoriPungliId._id);
+      const [listArray, setListArray] = useState([]);
+      const [filteredKategori, setFilteredKategori] = useState();
+
+      const originalDate = laporanPungliById.tanggal_pelaporan;
+      const formattedDate = formatISO(new Date(originalDate), { representation: 'date' });
+
+      dataKategoriList.map((data) => {
+            const value = data._id;
+            const label = data.nama_kategori_pungli;
+
+            const dataObject = {
+                  value: value,
+                  label: label
+            };
+
+            return listArray.push(dataObject);
+      });
+
+      const [input, setInput] = useState({
+            judul_pelaporan: laporanPungliById.judul_pelaporan,
+            deskripsi_pelaporan: laporanPungliById.deskripsi_pelaporan,
+            tanggal_pelaporan: formattedDate,
+            kategoriPungliId: laporanPungliById.kategoriPungliId._id
+      });
+
+      const handleChangeKategoriPungli = (value) => {
+            setSelectedKategoriPungli(value);
+            setInput({ ...input, kategoriPungliId: value.value });
+      };
+
+      const filteredData = listArray.filter(data => {
+            return data.value === selectedKategoriPungli;
+      });
+
+      useEffect(() => {
+            setFilteredKategori(filteredData[0]);
+      },[filteredData]);
+
       return (
             <div className='bg-white rounded-lg py-16 px-20' style={workSans.style}>
                   <div className='flex flex-col gap-4'>
@@ -58,12 +100,14 @@ const EditFormPungliContainer = () => {
                                           className="w-full h-12 rounded-md bg-[#F8FAFB] border border-none pl-4 pt-3 pb-4 placeholder:text-[#B1BBC6] placeholder:font-normal placeholder:text-sm placeholder:tracking-wide focus:outline-primary"
                                           placeholder="Masukan Judul Laporan Pungli"
                                           style={workSans.style}
+                                          value={input.judul_pelaporan}
                                     />
                                     <input
                                           type="date"
                                           className="w-full h-12 rounded-md bg-[#F8FAFB] border border-none pl-4 pr-4 pt-3 pb-4 placeholder:text-[#B1BBC6] placeholder:font-normal placeholder:text-sm placeholder:tracking-wide focus:outline-primary"
                                           placeholder="Masukan Tanggal Laporan Pungli"
                                           style={workSans.style}
+                                          value={input.tanggal_pelaporan}
                                     />
                                     <textarea 
                                           className='w-full rounded-md bg-[#F8FAFB] border border-none pl-4 pt-4 pb-4 placeholder:text-[#B1BBC6] placeholder:font-normal placeholder:text-sm placeholder:tracking-wide focus:outline-primary' 
@@ -72,6 +116,7 @@ const EditFormPungliContainer = () => {
                                           cols="30" 
                                           rows="7" 
                                           placeholder='Masukan Deskripsi Pelaporan'
+                                          value={input.deskripsi_pelaporan}
                                     >
                                     </textarea>
                               </div>
@@ -80,12 +125,17 @@ const EditFormPungliContainer = () => {
                               <div className='flex flex-col gap-6'>
                                     <Creatable
                                           isClearable
-                                          options={dataSelectOptionsKotaDanProvinsi} 
+                                          options={listArray}
                                           styles={customStyles}
                                           placeholder="Masukan Kategori Laporan Pungli"
+                                          defaultValue={filteredKategori}
                                     />
                                     <div className='h-48 w-full overflow-hidden relative rounded-md'>
-                                          <Image className='w-full h-full object-cover object-center' layout='fill' src={FotoLaporanSementara} />
+                                          <Image 
+                                                className='w-full h-full object-cover object-center'
+                                                src={selectedImage}
+                                                fill={true}
+                                          />
                                     </div>
                                     <div class="flex items-center justify-center w-full">
                                           <label for="dropzone-file" class="flex flex-col items-center justify-center w-full py-4 rounded-lg cursor-pointer bg-none border-[1px] border-primary">
