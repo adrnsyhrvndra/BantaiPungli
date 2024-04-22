@@ -64,13 +64,6 @@ const EditFormPungliContainer = ({laporanPungliById, dataKategoriList}) => {
             return listArray.push(dataObject);
       });
 
-      const [input, setInput] = useState({
-            judul_pelaporan: laporanPungliById.judul_pelaporan,
-            deskripsi_pelaporan: laporanPungliById.deskripsi_pelaporan,
-            tanggal_pelaporan: formattedDate,
-            kategoriPungliId: laporanPungliById.kategoriPungliId._id
-      });
-
       const handleChangeKategoriPungli = (value) => {
             setSelectedKategoriPungli(value);
             setInput({ ...input, kategoriPungliId: value.value });
@@ -80,9 +73,17 @@ const EditFormPungliContainer = ({laporanPungliById, dataKategoriList}) => {
             return data.value === selectedKategoriPungli;
       });
 
-      useEffect(() => {
-            setFilteredKategori(filteredData[0]);
-      },[filteredData]);
+      const handleFile = (e) => {
+            const file = e.target.files[0];
+            setSelectedImage(URL.createObjectURL(file));
+      };
+
+      const [input, setInput] = useState({
+            judul_pelaporan: laporanPungliById.judul_pelaporan,
+            deskripsi_pelaporan: laporanPungliById.deskripsi_pelaporan,
+            tanggal_pelaporan: formattedDate,
+            kategoriPungliId: filteredData[0]
+      });
 
       return (
             <div className='bg-white rounded-lg py-16 px-20' style={workSans.style}>
@@ -125,10 +126,10 @@ const EditFormPungliContainer = ({laporanPungliById, dataKategoriList}) => {
                               <div className='flex flex-col gap-6'>
                                     <Creatable
                                           isClearable
+                                          defaultValue={input.kategoriPungliId}
                                           options={listArray}
                                           styles={customStyles}
                                           placeholder="Masukan Kategori Laporan Pungli"
-                                          defaultValue={filteredKategori}
                                     />
                                     <div className='h-48 w-full overflow-hidden relative rounded-md'>
                                           <Image 
@@ -142,7 +143,7 @@ const EditFormPungliContainer = ({laporanPungliById, dataKategoriList}) => {
                                                 <p class="text-xs text-primary font-semibold" style={workSans.style}>
                                                       Ubah Foto Laporan
                                                 </p>
-                                                <input id="dropzone-file" type="file" class="hidden" />
+                                                <input id="dropzone-file" type="file" class="hidden" onChange={handleFile}/>
                                           </label>
                                     </div> 
                               </div>
