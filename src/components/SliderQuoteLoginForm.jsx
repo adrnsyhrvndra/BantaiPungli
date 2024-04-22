@@ -5,7 +5,7 @@ import { Autoplay, Pagination } from "swiper/modules";
 
 const SliderQuoteLoginForm = () => {
       return (
-            <div className="w-full py-[78px] pl-32 pr-48 bg-secondary absolute bottom-0">
+            <div className="w-full pt-[96px] pb-36 pl-32 pr-48 bg-secondary h-screen">
                   <Swiper
                         autoplay={{
                               delay: 2500,

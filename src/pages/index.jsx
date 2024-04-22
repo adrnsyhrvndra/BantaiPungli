@@ -22,7 +22,14 @@ const Login = () => {
 				<div className="col-span-6 bg-primary bg-pattern-money-pungli bg-blend-multiply bg-contain relative overflow-hidden">
 					<div className="grid grid-cols-12">
 						<div className="col-span-12">
-							<Image className="ml-auto mt-10" src={gambarTukangPungli}/>
+							<Image 
+								className="mx-auto w-[580px] h-[580px] mt-10" 
+								src={gambarTukangPungli}
+								alt="gambar-pungli"
+								style={{
+									filter: 'drop-shadow(25px 5px 10px rgba(36, 34, 34, 0.3))'
+								}}
+							/>
 						</div>
 						<div className="col-span-12">
 							<SliderQuoteLoginForm/>
