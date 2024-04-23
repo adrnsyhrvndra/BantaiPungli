@@ -30,7 +30,7 @@ const CardHomeProfile = () => {
                               <h4 className='w-[45%] text-2xl font-semibold leading-tight text-[#17181C]' style={workSans.style}>
                                     {namaLengkap}
                               </h4>
-                              <Link href={`/user/${userId}`}>
+                              <Link href={`/user-detail-self/${userId}`}>
                                     <button className='bg-secondary px-7 py-3 text-xs text-white rounded-lg' style={workSans.style}>
                                           Detail Profil
                                     </button>

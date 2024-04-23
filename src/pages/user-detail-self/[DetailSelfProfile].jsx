@@ -6,11 +6,23 @@ import PungliCardPost from '@/components/PungliCardPost';
 import Pagination from '@/components/Paginations';
 import React, { useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
+import * as cookie from 'cookie'
+import axios from 'axios';
 
-const DetailSelfProfile = ({idUser,dataUser,dataLaporanPungli,dataKomentarLaporanPungli,dataKategoriPungli}) => {
+const DetailSelfProfile = ({userById,laporanPungli,komentarLaporanPungli,kategoriPungli}) => {
 
       const nama_lengkap = Cookies.get('nama_lengkap');
       const [namaLengkap,setNamaLengkap] = useState('');
+      const [currentPage, setCurrentPage] = useState(1);
+
+      const dataPerPage = 3;
+
+      const handlePageChange = (event, value) => {
+            setCurrentPage(value);
+      };
+
+      const startIndex = (currentPage - 1) * dataPerPage;
+      const endIndex = startIndex + dataPerPage;
 
       useEffect(() => {
             setNamaLengkap(nama_lengkap);
@@ -23,16 +35,20 @@ const DetailSelfProfile = ({idUser,dataUser,dataLaporanPungli,dataKomentarLapora
                   </Head>
                   <div className='grid grid-cols-12 gap-6'>
                         <div className='col-span-3'>
-                              <CardProfileSelf/>
+                              <CardProfileSelf
+                                    userById={userById}
+                              />
                         </div>
                         <div className='col-span-9'>
-                              <CardInformasiLengkapProfil/>
+                              <CardInformasiLengkapProfil
+                                    userById={userById}
+                              />
                         </div>
                         <div className='col-span-12 mt-16'>
                               <SearchLaporanDetailProfil textUserHeading={namaLengkap} />
                               <div className='mt-8 flex flex-col gap-8'>
                                     {
-                                          dataLaporanPungli.map((data,index) => {
+                                          laporanPungli.slice(startIndex, endIndex).map((data,index) => {
 
                                                 return (
                                                       <>
@@ -47,7 +63,7 @@ const DetailSelfProfile = ({idUser,dataUser,dataLaporanPungli,dataKomentarLapora
                                                                   updated_at={data.updated_at}
                                                                   kategoriPungliId={data.kategoriPungliId}
                                                                   userId={data.userId}
-                                                                  dataKomentarLaporanPungli={dataKomentarLaporanPungli}
+                                                                  dataKomentarLaporanPungli={komentarLaporanPungli}
                                                                   imageSizeWidth="w-[512px]" 
                                                                   imageSizeHeight="h-[320px]" 
                                                                   judulTextSize="text-3xl" 
@@ -59,7 +75,12 @@ const DetailSelfProfile = ({idUser,dataUser,dataLaporanPungli,dataKomentarLapora
                                     }
                               </div>
                               <div className='mt-14 mx-auto w-fit'>
-                                    <Pagination/>
+                                    <Pagination
+                                          totalItems={laporanPungli.length}
+                                          itemsPerPage={dataPerPage}
+                                          currentPage={currentPage}
+                                          onPageChange={handlePageChange}
+                                    />
                               </div>
                         </div>
                   </div>
@@ -67,4 +88,39 @@ const DetailSelfProfile = ({idUser,dataUser,dataLaporanPungli,dataKomentarLapora
       )
 }
 
-export default DetailSelfProfile
+export default DetailSelfProfile;
+
+export async function getServerSideProps(context) {
+
+      const parsedCookies = cookie.parse(context.req.headers.cookie);
+
+      const params = context.params.DetailSelfProfile;
+
+      const userByIdRes = await axios.get(`https://rest-api-bantai-pungli-ysnn.vercel.app/users/${params}`, {
+            headers: { 'Authorization': `Bearer ${parsedCookies.token}` }
+      });
+
+      const laporanPungliRes = await axios.get(`https://rest-api-bantai-pungli-ysnn.vercel.app/pelaporanPungli`, {
+            headers: { 'Authorization': `Bearer ${parsedCookies.token}` }
+      });
+      const filterLaporanPungli = laporanPungliRes.data.filter((item) => {
+            return item.userId._id === parsedCookies.userId;
+      });
+
+      const komentarLaporanPungliRes = await axios.get(`https://rest-api-bantai-pungli-ysnn.vercel.app/komentarPungli`, {
+            headers: { 'Authorization': `Bearer ${parsedCookies.token}` }
+      });
+
+      const kategoriAllRes = await axios.get(`https://rest-api-bantai-pungli-ysnn.vercel.app/kategoriPungli`, {
+            headers: { 'Authorization': `Bearer ${parsedCookies.token}` }
+      });
+
+      return {
+            props: {
+                  userById: userByIdRes.data,
+                  laporanPungli: filterLaporanPungli,
+                  komentarLaporanPungli: komentarLaporanPungliRes.data,
+                  kategoriPungli: kategoriAllRes.data
+            }
+      }
+}
