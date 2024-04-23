@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import NavbarUser from '../NavbarUser';
 import workSans from '@/libs/FontWorkSans';
 
-export default function (props) {
+export default function AppShell (props) {
       const router = useRouter();
       const { children } = props;
 
@@ -17,7 +17,6 @@ export default function (props) {
                         :
       
                         <>
-                              <NavbarUser/>
                               {children}
                         </>
                   }

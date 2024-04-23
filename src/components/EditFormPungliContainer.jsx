@@ -94,11 +94,17 @@ const EditFormPungliContainer = ({laporanPungliById, dataKategoriList}) => {
 
       const handleChangeKategoriPungli = (value) => {
             setSelectedKategoriPungli(value);
-            setInput({ ...input, kategoriPungliId: value.value });
+            setInput({ ...input, kategoriPungliId: {
+                  value: value.value,
+                  label: value.label
+            }});
       };
 
       const handleChangeStatusPelaporan = (value) => {
-            setInput({ ...input, status_pelaporan: value });
+            setInput({ ...input, status_pelaporan: {
+                  value: value.value,
+                  label: value.label
+            }});
       };
 
       const handleInput = (e) => {
@@ -140,7 +146,7 @@ const EditFormPungliContainer = ({laporanPungliById, dataKategoriList}) => {
 
             const data = {
                   userId: id_user,
-                  kategoriPungliId: input.kategoriPungliId,
+                  kategoriPungliId: input.kategoriPungliId.value,
                   judul_pelaporan: input.judul_pelaporan,
                   deskripsi_pelaporan: input.deskripsi_pelaporan,
                   tanggal_pelaporan: input.tanggal_pelaporan,
@@ -148,6 +154,8 @@ const EditFormPungliContainer = ({laporanPungliById, dataKategoriList}) => {
                   bukti_pendukung: result.secure_url,
                   updated_at: new Date()
             };
+
+            console.log(data);
 
             if (input.judul_pelaporan && input.tanggal_pelaporan && input.deskripsi_pelaporan && input.kategoriPungliId && id_user && input.status_pelaporan.value) {
                   
@@ -160,8 +168,6 @@ const EditFormPungliContainer = ({laporanPungliById, dataKategoriList}) => {
                                   'Authorization': `Bearer ${Cookies.get('token')}`
                               },
                         });
-
-                        console.log(res);
       
                         toast.success('Ubah Laporan Berhasil! 🤙', {
                               position: "top-right",
@@ -256,7 +262,7 @@ const EditFormPungliContainer = ({laporanPungliById, dataKategoriList}) => {
                                                 onChange={handleChangeKategoriPungli}
                                           />
                                           <Select
-                                                name="color"
+                                                name="status_pelaporan"
                                                 defaultValue={input.status_pelaporan}
                                                 styles={customStyles}
                                                 options={dataSelectOptionStatusPelaporan}

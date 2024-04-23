@@ -10,6 +10,8 @@ const MenuListSidebar = () => {
 
       const isEditLaporanPage = router.pathname.startsWith('/laporan-edit/[EditLaporan]');
 
+      const isEditProfilePage = router.pathname.startsWith('/user-edit-profile/[EditProfile]');
+
       return (
       
             <>
@@ -282,7 +284,7 @@ const MenuListSidebar = () => {
                   }
 
                   {
-                        (isDetailLaporanPage || isEditLaporanPage) &&
+                        (isDetailLaporanPage || isEditLaporanPage || isEditProfilePage) &&
                         <>
                               <Link href={"/user/Home"}>
                                     <div className='flex flex-row justify-start items-center gap-4'>

@@ -11,8 +11,9 @@ import PungliCardPost from '@/components/PungliCardPost'
 import { useSelector } from 'react-redux'
 import { useRouter } from 'next/router'
 import Paginations from '@/components/Paginations'
+import NavbarUser from '@/components/NavbarUser'
 
-const CariLaporanView = ({dataKategoriPungli,dataLaporanPungli,komentarLaporanPungli,dataUserAll}) => {
+const CariLaporanView = ({dataKategoriPungli,dataLaporanPungli,komentarLaporanPungli,dataUserAll,dataUserById}) => {
 
       const [arrayLaporanPungli, setArrayLaporanPungli] = useState(null);
       const [currentPage, setCurrentPage] = useState(1);
@@ -62,6 +63,14 @@ const CariLaporanView = ({dataKategoriPungli,dataLaporanPungli,komentarLaporanPu
                   <Head>
                         <title>Halaman Cari Laporan | Bantai Pungli</title>
                   </Head>
+                  <div className='grid grid-cols-12'>
+                        <div className='col-span-12'>
+                              <NavbarUser
+                                    nama_lengkap={dataUserById.nama_lengkap}
+                                    foto_profile={dataUserById.foto_profile}
+                              />
+                        </div>
+                  </div>
                   <div className='grid grid-cols-12'>
                         <div className='col-span-2 px-8 overflow-y-scroll h-screen pb-40'>
                               <SidebarUserMenu/>

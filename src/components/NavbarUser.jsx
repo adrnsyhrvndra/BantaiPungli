@@ -9,17 +9,7 @@ import IconNavbarHome from '@/libs/svg/IconNavbarHome';
 import IconNavbarNotif from '@/libs/svg/IconNavbarNotif';
 import IconNavbarLaporanPungli from '@/libs/svg/IconNavbarLaporanPungli';
 
-const NavbarUser = () => {
-      const [namaLengkap, setNamaLengkap] = useState('');
-      const [fotoProfile, setFotoProfile] = useState('');
-
-      const nama_lengkap = Cookies.get('nama_lengkap');
-      const foto_profile = Cookies.get('foto_profile');
-
-      useEffect(() => {
-            setNamaLengkap(nama_lengkap);
-            setFotoProfile(foto_profile);
-      }, []);
+const NavbarUser = ({nama_lengkap, foto_profile}) => {
       
       return (
 
@@ -65,14 +55,14 @@ const NavbarUser = () => {
                                     <div className='flex flex-row items-center justify-start gap-4'>
                                           <div className='w-10 h-10 rounded-full bg-[#F2F2F2] relative'>
                                                 <Image 
-                                                      src={fotoProfile} 
+                                                      src={foto_profile} 
                                                       className='object-cover object-center rounded-full' 
                                                       fill={true}
                                                       alt='user-profile'
                                                 />
                                           </div>
                                           <h4 className='text-lg font-medium text-[#364045]' style={workSans.style}>
-                                                {namaLengkap}
+                                                {nama_lengkap}
                                           </h4>
                                     </div>
                                     <Image src={ArrowIconNav} />

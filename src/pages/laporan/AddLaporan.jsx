@@ -7,6 +7,7 @@ import Head from 'next/head';
 import { useEffect } from 'react';
 import * as cookie from 'cookie';
 import axios from 'axios';
+import NavbarUser from '@/components/NavbarUser';
 
 export default function AddLaporan (props) {
       
@@ -22,6 +23,14 @@ export default function AddLaporan (props) {
                   <Head>
 				<title>Halaman Tambah Laporan | Bantai Pungli</title>
 			</Head>
+                  <div className='grid grid-cols-12'>
+                        <div className='col-span-12'>
+                              <NavbarUser
+                                    nama_lengkap={props.userById.nama_lengkap}
+                                    foto_profile={props.userById.foto_profile}
+                              />
+                        </div>
+                  </div>
                   <div className='grid grid-cols-12'>
                         <div className='col-span-2 px-8 overflow-y-scroll h-screen pb-40'>
                               <SidebarUserMenu/>
@@ -68,9 +77,17 @@ export async function getServerSideProps(context) {
             headers: { 'Authorization': `Bearer ${parsedCookies.token}` }
       });
 
-      return { props: { 
-            kategoriAll: kategoriAllRes.data,
-            userAll: userAllRes.data,
-            laporanPungli: laporanPungliRes.data,
-      }}
+      const userByIdRes = await axios.get(`https://rest-api-bantai-pungli-ysnn.vercel.app/users/${parsedCookies.userId}`, {
+            headers: { 'Authorization': `Bearer ${parsedCookies.token}` }
+      });
+
+      return { 
+            
+            props: { 
+                  kategoriAll: kategoriAllRes.data,
+                  userAll: userAllRes.data,
+                  laporanPungli: laporanPungliRes.data,
+                  userById: userByIdRes.data
+            }
+      }
 }

@@ -9,6 +9,7 @@ import { useEffect, useState } from 'react';
 import Pagination from '@/components/Paginations';
 import Cookies from 'js-cookie';
 import StatistikPungliCard from '@/components/StatistikPungliCard';
+import NavbarUser from '@/components/NavbarUser';
 
 export default function HomeViews ({ _id, username, nama_lengkap, email, no_telp, alamat, status_online,tanggal_lahir,jenis_kelamin, foto_profile, created_at, updated_at, laporanPungli, komentarLaporanPungli,dataLaporanPungli,dataUserAll}) {
 
@@ -62,6 +63,14 @@ export default function HomeViews ({ _id, username, nama_lengkap, email, no_telp
 				<title>Halaman Beranda | Bantai Pungli</title>
 			</Head>
                   <div className='grid grid-cols-12'>
+                        <div className='col-span-12'>
+                              <NavbarUser
+                                    nama_lengkap={nama_lengkap}
+                                    foto_profile={foto_profile}
+                              />
+                        </div>
+                  </div>
+                  <div className='grid grid-cols-12'>
                         <div className='col-span-2 px-8 overflow-y-scroll h-screen pb-40'>
                               <SidebarUserMenu/>
                         </div>
@@ -71,7 +80,9 @@ export default function HomeViews ({ _id, username, nama_lengkap, email, no_telp
                                     <div className='col-span-8'>
                                           <div className='grid grid-cols-12 gap-6'>
                                                 <div className='col-span-6'>
-                                                      <CardHomeProfile/>
+                                                      <CardHomeProfile
+                                                            nama_lengkap={nama_lengkap}
+                                                      />
                                                 </div>
                                                 <div className='col-span-6'>
                                                       <WeatherCard/>

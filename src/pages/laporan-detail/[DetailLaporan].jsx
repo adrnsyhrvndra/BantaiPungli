@@ -10,8 +10,9 @@ import CommentPungli from '@/components/CommentPungli';
 import { useRouter } from 'next/router';
 import * as cookie from 'cookie'
 import axios from 'axios';
+import NavbarUser from '@/components/NavbarUser';
 
-export default function DetailLaporan ({ laporanPungliById, komentarLaporanPungli,userAll, laporanPungli }) {
+export default function DetailLaporan ({ laporanPungliById, komentarLaporanPungli,userAll, laporanPungli, userById }) {
 
       const router = useRouter();
       const { id } = router.query;
@@ -31,6 +32,14 @@ export default function DetailLaporan ({ laporanPungliById, komentarLaporanPungl
                   <Head>
 				<title>Halaman Detail Laporan | Bantai Pungli</title>
 			</Head>
+                  <div className='grid grid-cols-12'>
+                        <div className='col-span-12'>
+                              <NavbarUser
+                                    nama_lengkap={userById.nama_lengkap}
+                                    foto_profile={userById.foto_profile}
+                              />
+                        </div>
+                  </div>
                   <div className='grid grid-cols-12'>
                         <div className='col-span-2 px-8 overflow-y-scroll h-screen pb-40'>
                               <SidebarUserMenu/>
@@ -101,12 +110,17 @@ export async function getServerSideProps(context) {
             headers: { 'Authorization': `Bearer ${parsedCookies.token}` }
       });
 
+      const userByIdRes = await axios.get(`https://rest-api-bantai-pungli-ysnn.vercel.app/users/${parsedCookies.userId}`, {
+            headers: { 'Authorization': `Bearer ${parsedCookies.token}` }
+      });
+
       return {
             props: {
                   laporanPungliById: laporanPungliByIdRes.data,
                   komentarLaporanPungli: filterKomentarSesuaiIdLaporanPungli,
                   userAll: userAllRes.data,
-                  laporanPungli: laporanPungliRes.data
+                  laporanPungli: laporanPungliRes.data,
+                  userById: userByIdRes.data
             }
       }
 }
