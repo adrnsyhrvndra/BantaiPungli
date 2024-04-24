@@ -4,12 +4,10 @@ import React from 'react'
 import Link from 'next/link';
 
 const MenuListSidebar = () => {
+
       const router = useRouter();
-
       const isDetailLaporanPage = router.pathname.startsWith('/laporan-detail/[DetailLaporan]');
-
       const isEditLaporanPage = router.pathname.startsWith('/laporan-edit/[EditLaporan]');
-
       const isEditProfilePage = router.pathname.startsWith('/user-edit-profile/[EditProfile]');
 
       return (
