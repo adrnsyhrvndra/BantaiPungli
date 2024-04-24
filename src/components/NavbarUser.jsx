@@ -1,16 +1,46 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import SearchIcon from "../assets/search-icon.png";
 import ArrowIconNav from "../assets/arrow-icon-bottom.png";
 import Image from 'next/image';
 import Link from 'next/link';
 import workSans from '@/libs/FontWorkSans';
-import Cookies from 'js-cookie';
 import IconNavbarHome from '@/libs/svg/IconNavbarHome';
 import IconNavbarNotif from '@/libs/svg/IconNavbarNotif';
 import IconNavbarLaporanPungli from '@/libs/svg/IconNavbarLaporanPungli';
+import { useRouter } from 'next/router';
 
 const NavbarUser = ({nama_lengkap, foto_profile}) => {
-      
+
+      const router = useRouter();
+
+      const handleBackgroundBerandaCircle = () => {
+
+            if (router.pathname === "/user/Home") {
+                  
+                  return 'bg-primary';
+
+            } else {
+                  
+                  return 'bg-[#E3E4E4] opacity-70';
+
+            }
+
+      };
+
+      const handleBackgroundLaporanCircle = () => {
+
+            if (router.pathname === "/laporan/AddLaporan") {
+                  
+                  return 'bg-primary';
+
+            } else {
+                  
+                  return 'bg-[#E3E4E4] opacity-70';
+
+            }
+
+      };
+
       return (
 
             <div className='py-6 px-8 bg-whitew-full flex'>
@@ -27,7 +57,7 @@ const NavbarUser = ({nama_lengkap, foto_profile}) => {
                         <div className='flex flex-row gap-14 justify-start items-center w-full'>
                               <Link href={'/user/Home'}>
                                     <div className='flex flex-row justify-start items-center gap-4'>
-                                          <div className='p-3 rounded-full bg-primary'>
+                                          <div className={`p-3 rounded-full ${handleBackgroundBerandaCircle(router.pathname)}`}>
                                                 <IconNavbarHome />
                                           </div>
                                           <h4 className='text-base text-[#364045] font-medium' style={workSans.style}>
@@ -35,14 +65,16 @@ const NavbarUser = ({nama_lengkap, foto_profile}) => {
                                           </h4>
                                     </div>
                               </Link>
-                              <div className='flex flex-row justify-start items-center gap-4'>
-                                    <div className='p-3 rounded-full bg-[#E3E4E4]'>
-                                          <IconNavbarLaporanPungli/>
+                              <Link href={'/laporan/AddLaporan'}>
+                                    <div className='flex flex-row justify-start items-center gap-4'>
+                                          <div className={`p-3 rounded-full ${handleBackgroundLaporanCircle(router.pathname)}`}>
+                                                <IconNavbarLaporanPungli/>
+                                          </div>
+                                          <h4 className='text-base text-[#364045] font-medium' style={workSans.style}>
+                                                Laporan Laporan Pungli
+                                          </h4>
                                     </div>
-                                    <h4 className='text-base text-[#364045] font-medium' style={workSans.style}>
-                                          Laporan Laporan Pungli
-                                    </h4>
-                              </div>
+                              </Link>
                         </div>
                   </div>
                   <div className='flex flex-row justify-end w-[40%] items-center'>

@@ -254,7 +254,7 @@ const EditFormPungliContainer = ({laporanPungliById, dataKategoriList}) => {
                               <div className='col-span-6'>
                                     <div className='flex flex-col gap-6'>
                                           <Creatable
-                                                isClearable
+                                                isClearable={false}
                                                 defaultValue={input.kategoriPungliId}
                                                 options={listArray}
                                                 styles={customStyles}
