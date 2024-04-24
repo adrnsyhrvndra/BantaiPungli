@@ -91,7 +91,7 @@ const PungliCardPost = ({imageSizeWidth,imageSizeHeight,judulTextSize,deskripsiT
       }, [bukti_pendukung, userId.foto_profile, id, userIdFromCookies]);
 
       return (
-            <div className='bg-white px-12 py-10 rounded-lg h-fit'>
+            <div className='bg-white px-12 py-10 rounded-lg h-fit mb-3'>
                   <div className='flex flex-row gap-8 items-center'>
                         <div className={`${imageSizeWidth} ${imageSizeHeight} overflow-hidden relative rounded-lg`}>
                               <Image className='object-cover object-center rounded-lg' src={gambarBuktiPendukung} fill={true} alt='laporan-pungli' />
