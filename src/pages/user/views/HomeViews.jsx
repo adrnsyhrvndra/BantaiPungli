@@ -93,8 +93,6 @@ export default function HomeViews ({ _id, username, nama_lengkap, email, no_telp
                                                                   {
                                                                         laporanPungli.slice(startIndex, endIndex).map((item, index) => {
 
-                                                                              console.log(item);
-
                                                                               return (
                                                                                     <>
                                                                                           <PungliCardPost

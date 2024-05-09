@@ -94,17 +94,21 @@ const PungliCardPost = ({imageSizeWidth,imageSizeHeight,judulTextSize,deskripsiT
             <div className='bg-white px-12 py-10 rounded-lg h-fit mb-3'>
                   <div className='flex flex-row gap-8 items-center'>
                         <div className={`${imageSizeWidth} ${imageSizeHeight} overflow-hidden relative rounded-lg`}>
-                              <Image className='object-cover object-center rounded-lg' src={gambarBuktiPendukung} fill={true} alt='laporan-pungli'/>
+                              <Link href={`/laporan-detail/${DetailLaporan}`}>
+                                    <Image className='object-cover object-center rounded-lg' src={gambarBuktiPendukung} fill={true} alt='laporan-pungli'/>
+                              </Link>
                         </div>
                         <div className='w-full'>
                               <div className='flex flex-col gap-2'>
                                     <h2 className={`text-left font-semibold ${judulTextSize} leading-normal text-[#364045]`} style={workSans.style} >
                                           {judul_pelaporan}
                                     </h2>
-                                    <Link href={`/laporan/${id}`}>
+                                    <Link href={`/laporan-detail/${DetailLaporan}`}>
                                           <p className={`${deskripsiTextSize} font-normal text-[#48555C]`} style={workSans.style}>
                                                 {handleDeskripsiLaporanLimitString(deskripsi_pelaporan)}...
-                                                <span className='text-primary font-extrabold leading-loose underline cursor-pointer' style={workSans.style}>LIHAT LEBIH DETAIL</span>
+                                                <span className='text-primary font-extrabold leading-loose underline cursor-pointer' style={workSans.style}>
+                                                      LIHAT LEBIH DETAIL
+                                                </span>
                                           </p>
                                     </Link>
                               </div>
@@ -121,7 +125,7 @@ const PungliCardPost = ({imageSizeWidth,imageSizeHeight,judulTextSize,deskripsiT
                                                       <div className='h-3 w-3 bg-green-600 rounded-full absolute top-0.5 -right-0.5'></div>
                                                 </div>
                                           </Link>
-                                          <Link href={''}>
+                                          <Link href={`/user-detail-other/${userId._id}`}>
                                                 <div className='flex flex-col gap-1'>
                                                       <h6 className='font-semibold text-base text-[#48555B]' style={workSans.style}>
                                                             {userId.nama_lengkap}
