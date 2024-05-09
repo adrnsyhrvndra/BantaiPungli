@@ -21,7 +21,7 @@ const CardHomeProfile = ({nama_lengkap}) => {
                   <div className='bg-pattern-money-pungli-card-home cover h-20 bg-no-repeat bg-primary bg-blend-multiply rounded-lg'></div>
                   <div className='mt-8 flex flex-row justify-start gap-6 px-6 pb-6'>
                         <div className='w-36 h-36 rounded-full bg-slate-500 -mt-20 border-2 border-white relative'>
-                              <Image className='rounded-full object-cover object-center' src={fotoProfile} fill={true} />
+                              <Image className='rounded-full object-cover object-center' src={fotoProfile} fill={true} alt='profile-user-bantai-pungli' />
                         </div>
                         <div className='flex flex-row justify-start items-start gap-6'>
                               <h4 className='w-[45%] text-2xl font-semibold leading-tight text-[#17181C]' style={workSans.style}>

@@ -45,7 +45,7 @@ const Paginations = ({totalItems,itemsPerPage,currentPage,onPageChange}) => {
 
       return (
 
-            <>
+            <div style={workSans.style}>
 
                   <Stack spacing={3}>
                         <Pagination
@@ -75,7 +75,7 @@ const Paginations = ({totalItems,itemsPerPage,currentPage,onPageChange}) => {
                         />
                   </Stack>
 
-            </>
+            </div>
 
       )
 }

@@ -94,7 +94,7 @@ const PungliCardPost = ({imageSizeWidth,imageSizeHeight,judulTextSize,deskripsiT
             <div className='bg-white px-12 py-10 rounded-lg h-fit mb-3'>
                   <div className='flex flex-row gap-8 items-center'>
                         <div className={`${imageSizeWidth} ${imageSizeHeight} overflow-hidden relative rounded-lg`}>
-                              <Image className='object-cover object-center rounded-lg' src={gambarBuktiPendukung} fill={true} alt='laporan-pungli' />
+                              <Image className='object-cover object-center rounded-lg' src={gambarBuktiPendukung} fill={true} alt='laporan-pungli'/>
                         </div>
                         <div className='w-full'>
                               <div className='flex flex-col gap-2'>
@@ -110,23 +110,27 @@ const PungliCardPost = ({imageSizeWidth,imageSizeHeight,judulTextSize,deskripsiT
                               </div>
                               <div className='flex flex-row items-center gap-8 mt-8'>
                                     <div className='flex flex-row gap-5 items-center'>
-                                          <div className='relative w-12 h-12 rounded-full'>
-                                                <Image 
-                                                      className='rounded-full object-cover object-center w-12 h-12' 
-                                                      src={fotoProfile} 
-                                                      fill={true}
-                                                      alt='user-profile'
-                                                />
-                                                <div className='h-3 w-3 bg-green-600 rounded-full absolute top-0.5 -right-0.5'></div>
-                                          </div>
-                                          <div className='flex flex-col gap-1'>
-                                                <h6 className='font-semibold text-base text-[#48555B]' style={workSans.style}>
-                                                      {userId.nama_lengkap}
-                                                </h6>
-                                                <p className='text-xs font-normal text-[#5E6F78]' style={workSans.style}>
-                                                      {handleDateTimeFormat(created_at)}
-                                                </p>
-                                          </div>
+                                          <Link href={`/user-detail-other/${userId._id}`}>
+                                                <div className='relative w-12 h-12 rounded-full'>
+                                                      <Image 
+                                                            className='rounded-full object-cover object-center w-12 h-12' 
+                                                            src={fotoProfile} 
+                                                            fill={true}
+                                                            alt='user-profile'
+                                                      />
+                                                      <div className='h-3 w-3 bg-green-600 rounded-full absolute top-0.5 -right-0.5'></div>
+                                                </div>
+                                          </Link>
+                                          <Link href={''}>
+                                                <div className='flex flex-col gap-1'>
+                                                      <h6 className='font-semibold text-base text-[#48555B]' style={workSans.style}>
+                                                            {userId.nama_lengkap}
+                                                      </h6>
+                                                      <p className='text-xs font-normal text-[#5E6F78]' style={workSans.style}>
+                                                            {handleDateTimeFormat(created_at)}
+                                                      </p>
+                                                </div>
+                                          </Link>
                                     </div>
                                     <div className='flex flex-col gap-4'>
                                           <div className='flex flex-row gap-2 items-center'>
