@@ -126,6 +126,7 @@ const RegisterForm = () => {
 					<div aria-label="input-group" className="relative">
 						{eyePassword === false && (
 							<Image
+								alt='eye-close'
 								onClick={handleEyePassword}
 								className="absolute top-2/3 right-6 -translate-y-1/2 opacity-60 cursor-pointer"
 								src={eyeClose}
@@ -133,6 +134,7 @@ const RegisterForm = () => {
 						)}
 						{eyePassword === true && (
 							<Image
+								alt='eye-open'
 								onClick={handleEyePassword}
 								className="absolute top-2/3 right-6 -translate-y-1/2 opacity-30 cursor-pointer"
 								src={eyeOpen}
@@ -240,7 +242,7 @@ const RegisterForm = () => {
 					<div class="flex items-center justify-center w-full">
 						<label for="dropzone-file" class="flex flex-col items-center justify-center w-full h-40 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-[#F8F8F7]">
 							<div class="flex flex-col items-center justify-center pt-5 pb-6">
-								<Image className='w-8 h-8 mb-4' src={arrowUploadFilesIcon}/>
+								<Image alt='arrow-upload-files-icon' className='w-8 h-8 mb-4' src={arrowUploadFilesIcon}/>
 								<p class="mb-2 text-sm text-[#252C32] font-bold" style={workSans.style}>
 									Upload Foto Profilmu (Optional)*
 								</p>

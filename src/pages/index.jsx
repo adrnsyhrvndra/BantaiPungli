@@ -37,7 +37,7 @@ const Login = () => {
 					</div>
 				</div>
 				<div className="col-span-6 bg-background relative z-0 overflow-y-auto">
-					<Image className="absolute top-0 right-0 -z-10" src={elemenLoginForm}/>
+					<Image alt="element-login-form" className="absolute top-0 right-0 -z-10" src={elemenLoginForm}/>
 					<LogoForm paddingTop="pt-28"/>
 					<LoginFormContainer/>
 					<AlreadyAndForgotPassword 

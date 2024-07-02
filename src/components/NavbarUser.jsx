@@ -97,7 +97,7 @@ const NavbarUser = ({nama_lengkap, foto_profile}) => {
                                                 {nama_lengkap}
                                           </h4>
                                     </div>
-                                    <Image src={ArrowIconNav} />
+                                    <Image alt='arrow-icon-nav' src={ArrowIconNav} />
                               </div>
                         </div>
                   </div>

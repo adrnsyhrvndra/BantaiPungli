@@ -236,7 +236,7 @@ const EditProfileFormContainer = ({userById}) => {
                                           </h5>
                                           <div className='flex flex-row gap-8 items-center justify-start'>
                                                 <div className='rounded-full w-24 h-20 relative overflow-hidden'>
-                                                      <Image className='w-full h-full object-center object-cover' src={selectedImage} fill={true} />
+                                                      <Image alt='selected-image' className='w-full h-full object-center object-cover' src={selectedImage} fill={true} />
                                                 </div>
                                                 <div className='flex flex-row gap-4 items-center w-full'>
                                                       <div className='w-[60%] flex items-center justify-center rounded-md cursor-pointer'>

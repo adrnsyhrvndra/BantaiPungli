@@ -31,14 +31,15 @@ const CommentPungli = ({dataKomentar}) => {
                         {dataKomentar.length} Komentar
                   </h3>
                   <div className='flex flex-col gap-10'>
-                        {dataKomentar.map((komentar) => {
+                        {dataKomentar.map((komentar, index) => {
 
                               return (
-                                    <div className='flex flex-col gap-10'>
+                                    <div key={index} className='flex flex-col gap-10'>
                                           <div className='flex flex-col gap-4'>
                                                 <div className='flex flex-row gap-4 items-center justify-start'>
                                                       <div className='relative w-14 h-14 rounded-full'>
                                                             <Image 
+                                                                  alt='foto-profile'
                                                                   src={komentar.userId.foto_profile} 
                                                                   className='rounded-full object-center object-cover'
                                                                   layout='fill'

@@ -39,12 +39,12 @@ const ListCheckBoxFilterLaporan = ({dataKategoriPungli}) => {
       return (
             <div className='flex flex-row items-center justify-start gap-10 bg-white rounded-lg py-10 px-8 mt-6 flex-wrap' style={workSans.style}>
                   {
-                        dataKategoriPungli.map((data) => {
+                        dataKategoriPungli.map((data, index) => {
 
                               const dataListNamaToLowerCase = data.nama_kategori_pungli.toLowerCase();
 
                               return (
-                                    <div className='flex flex-row items-center gap-4 justify-start opacity-100'>
+                                    <div key={index} className='flex flex-row items-center gap-4 justify-start opacity-100'>
                                           <input 
                                                 type="checkbox" 
                                                 value={data._id}

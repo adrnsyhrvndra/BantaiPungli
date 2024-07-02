@@ -50,7 +50,7 @@ const SliderQuoteLoginForm = () => {
                                           mikir.
                                     </h2>
                                     <p className="text-white text-sm font-light" style={workSans.style}>
-                                          Kalau pungli-pungli in ditoleransi dengan embel "sedekah".
+                                          Kalau pungli-pungli in ditoleransi dengan embel “sedekah”.
                                           yaudah mending markir aja daripada mikir.
                                     </p>
                               </div>

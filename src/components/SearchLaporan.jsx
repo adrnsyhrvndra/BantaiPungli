@@ -33,7 +33,7 @@ const SearchLaporan = ({totalItems}) => {
                                     placeholder='Cari Laporan...'
                                     style={workSans.style}
                               />
-                              <Image src={SearchIcon} className='absolute top-1/2 left-6 -translate-y-1/2'/>
+                              <Image alt='search-icon' src={SearchIcon} className='absolute top-1/2 left-6 -translate-y-1/2'/>
                         </div>
                   </div>
                   <div className='col-start-10 col-end-13 place-self-end'>

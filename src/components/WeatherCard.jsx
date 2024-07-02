@@ -13,10 +13,10 @@ const WeatherCard = () => {
                               <h4 className='text-6xl font-semibold' style={workSans.style}>8:44</h4>
                               <h4 className='text-5xl font-medium' style={workSans.style}>WIB</h4>
                         </div>
-                        <Image src={SunnyIcon} className='w-28'/>
+                        <Image alt='sunny-icon' src={SunnyIcon} className='w-28'/>
                   </div>
                   <div className='flex flex-row justify-start gap-4 items-center mt-8'>
-                        <Image src={MapIcon} />
+                        <Image alt='map-icon' src={MapIcon} />
                         <h6 className='text-[#8A94A6] text-sm' style={workSans.style}>Bandung, West Java</h6>
                   </div>
             </div>

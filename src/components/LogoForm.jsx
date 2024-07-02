@@ -7,7 +7,7 @@ const LogoForm = ({paddingTop}) => {
       return (
             <>
                   <div className={`mx-auto flex flex-row justify-center items-center ${paddingTop}`}>
-                        <Image src={logoBantaiPungli} />
+                        <Image alt='logo-bantai-pungli' src={logoBantaiPungli} />
                         <div className="flex flex-col ml-6">
                               <h3 className="text-6xl text-font-dark-01" style={suicoBams.style}>
                                     Bantai

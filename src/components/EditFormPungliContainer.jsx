@@ -271,6 +271,7 @@ const EditFormPungliContainer = ({laporanPungliById, dataKategoriList}) => {
                                           />
                                           <div className='h-48 w-full overflow-hidden relative rounded-md'>
                                                 <Image 
+                                                      alt='selected-image'
                                                       className='w-full h-full object-cover object-center'
                                                       src={selectedImage}
                                                       fill={true}

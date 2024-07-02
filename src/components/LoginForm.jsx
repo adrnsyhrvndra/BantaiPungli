@@ -39,6 +39,7 @@ const LoginForm = () => {
 			<div aria-label="input-group" className="relative">
 				{eyePassword === false && (
 					<Image
+						alt='eye-close'
 						onClick={handleEyePassword}
 						className="absolute top-1/2 right-6 -translate-y-1/2 opacity-60 cursor-pointer"
 						src={eyeClose}
@@ -46,6 +47,7 @@ const LoginForm = () => {
 				)}
 				{eyePassword === true && (
 					<Image
+						alt='eye-open'
 						onClick={handleEyePassword}
 						className="absolute top-1/2 right-6 -translate-y-1/2 opacity-30 cursor-pointer"
 						src={eyeOpen}

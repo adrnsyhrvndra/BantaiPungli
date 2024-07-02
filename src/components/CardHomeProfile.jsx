@@ -14,7 +14,7 @@ const CardHomeProfile = ({nama_lengkap}) => {
       useEffect(() => {
             setFotoProfile(foto_profile);
             setUserId(user_id);
-      }, []);
+      }, [foto_profile, user_id]);
 
       return (
             <div className='bg-white rounded-lg h-fit'>

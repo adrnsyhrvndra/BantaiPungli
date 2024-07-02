@@ -31,7 +31,7 @@ const CardInformasiLengkapProfil = ({userById}) => {
                   <ul className='mt-10 flex flex-col gap-6 list-none'>
                         <li>
                               <div className='flex flex-row items-center justify-start gap-8'>
-                                    <Image src={IconUserName} className='w-4 h-4' />
+                                    <Image alt='icon-user-name' src={IconUserName} className='w-4 h-4' />
                                     <h6 className='font-normal text-base text-[#676970]' style={workSans.style}>
                                           Username : {userById.username}
                                     </h6>
@@ -39,7 +39,7 @@ const CardInformasiLengkapProfil = ({userById}) => {
                         </li>
                         <li>
                               <div className='flex flex-row items-center justify-start gap-8'>
-                                    <Image src={IconUserEmail} className='w-4 h-4' />
+                                    <Image alt='icon-user-email' src={IconUserEmail} className='w-4 h-4' />
                                     <h6 className='font-normal text-base text-[#676970]' style={workSans.style}>
                                           Email : {userById.email}
                                     </h6>
@@ -47,7 +47,7 @@ const CardInformasiLengkapProfil = ({userById}) => {
                         </li>
                         <li>
                               <div className='flex flex-row items-center justify-start gap-8'>
-                                    <Image src={IconUserTanggalLahir} className='w-4 h-4' />
+                                    <Image alt='icon-user-tanggal-lahir' src={IconUserTanggalLahir} className='w-4 h-4' />
                                     <h6 className='font-normal text-base text-[#676970]' style={workSans.style}>
                                           Tanggal Lahir : {handleDate(userById.tanggal_lahir)}
                                     </h6>
@@ -55,7 +55,7 @@ const CardInformasiLengkapProfil = ({userById}) => {
                         </li>
                         <li>
                               <div className='flex flex-row items-center justify-start gap-8'>
-                                    <Image src={IconUserMale} className='w-4 h-4' />
+                                    <Image alt='icon-user-male' src={IconUserMale} className='w-4 h-4' />
                                     <h6 className='font-normal text-base text-[#676970]' style={workSans.style}>
                                           Jenis Kelamin : {handleJenisKelamin(userById.jenis_kelamin)}
                                     </h6>
@@ -63,7 +63,7 @@ const CardInformasiLengkapProfil = ({userById}) => {
                         </li>
                         <li>
                               <div className='flex flex-row items-center justify-start gap-8'>
-                                    <Image src={IconUserCity} className='w-4 h-4' />
+                                    <Image alt='icon-user-city' src={IconUserCity} className='w-4 h-4' />
                                     <h6 className='font-normal text-base text-[#676970]' style={workSans.style}>
                                           Alamat : {userById.alamat}
                                     </h6>
@@ -71,14 +71,14 @@ const CardInformasiLengkapProfil = ({userById}) => {
                         </li>
                         <li>
                               <div className='flex flex-row items-center justify-start gap-8'>
-                                    <Image src={IconUserPhone} className='w-4 h-4' />
+                                    <Image alt='icon-user-phone' src={IconUserPhone} className='w-4 h-4' />
                                     <h6 className='font-normal text-base text-[#676970]' style={workSans.style}>
                                           No Telepon : {userById.no_telp}
                                     </h6>
                               </div>
                         </li>
                   </ul>
-                  <Image className='absolute right-24 top-8' src={HandOpacity} />
+                  <Image alt='hand-opacity' className='absolute right-24 top-8' src={HandOpacity} />
             </div>
       )
 }

@@ -23,7 +23,7 @@ const DetailPostPungli = ({id,dataUser,dataKategoriPungli,judul_pelaporan,deskri
                   <div className='bg-white mt-6 rounded-lg px-10 py-11'>
                         <div className='flex flex-row gap-5 items-center'>
                               <div className='relative w-12 h-12'>
-                                    <Image className='w-12 h-12 rounded-full object-cover object-center' src={dataUser.foto_profile} layout='fill' />
+                                    <Image alt='foto-profile' className='w-12 h-12 rounded-full object-cover object-center' src={dataUser.foto_profile} layout='fill' />
                                     <div className='h-3.5 w-3.5 bg-green-600 rounded-full absolute top-0 -right-0.5'></div>
                               </div>
                               <div className='flex flex-col gap-1'>
@@ -39,7 +39,7 @@ const DetailPostPungli = ({id,dataUser,dataKategoriPungli,judul_pelaporan,deskri
                               {deskripsi_pelaporan}
                         </p>
                         <div className='relative w-full h-96 mt-8 rounded-sm overflow-hidden'>
-                              <Image className='object-cover object-center h-96 w-full' src={bukti_pendukung} layout='fill' />
+                              <Image alt='bukti-pendukung' className='object-cover object-center h-96 w-full' src={bukti_pendukung} layout='fill' />
                         </div>
                         <div className='mt-8 flex flex-row gap-8 items-center justify-start'>
                               <div className='flex flex-row items-center justify-start gap-3'>

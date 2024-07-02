@@ -19,12 +19,12 @@ const Paginations = ({totalItems,itemsPerPage,currentPage,onPageChange}) => {
       };
         
       const ArrowBackIcon = () => (
-            <Image width={16} height={16} src={ArrowLeftPagination} />
+            <Image alt='arrow-left-pagination' width={16} height={16} src={ArrowLeftPagination} />
       );
 
         
       const ArrowForwardIcon = () => (
-            <Image width={16} height={16} src={ArrowRightPagination} />
+            <Image alt='arrow-right-pagination' width={16} height={16} src={ArrowRightPagination} />
       );
 
       const backgroundColor = (item) => {
