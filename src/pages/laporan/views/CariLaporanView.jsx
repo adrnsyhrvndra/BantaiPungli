@@ -67,7 +67,7 @@ const CariLaporanView = ({ dataKategoriPungli, dataLaporanPungli, komentarLapora
                   />
               </div>
           </div>
-          <div className='grid grid-cols-12'>
+          {/* <div className='grid grid-cols-12'>
               <div className='col-span-2 px-8 overflow-y-scroll h-screen pb-40'>
                   <SidebarUserMenu />
               </div>
@@ -155,7 +155,7 @@ const CariLaporanView = ({ dataKategoriPungli, dataLaporanPungli, komentarLapora
                       </div>
                   </div>
               </div>
-          </div>
+          </div> */}
       </div>
   )
   
