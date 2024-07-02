@@ -7,11 +7,11 @@ export default function CariLaporan (props) {
 
       return (
             <CariLaporanView
-                  dataKategoriPungli={props.kategoriPungli}
-                  dataLaporanPungli={props.laporanPungli}
-                  komentarLaporanPungli={props.komentarLaporanPungli}
-                  dataUserAll={props.userAll}
-                  dataUserById={props.userById}
+                  dataKategoriPungli={props.kategoriPungli || []}
+                  dataLaporanPungli={props.laporanPungli || []}
+                  komentarLaporanPungli={props.komentarLaporanPungli || []}
+                  dataUserAll={props.userAll || []}
+                  dataUserById={props.userById || {}}
             />
       )
 }
