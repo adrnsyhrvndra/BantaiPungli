@@ -13,170 +13,152 @@ import { useRouter } from 'next/router'
 import Paginations from '@/components/Paginations'
 import NavbarUser from '@/components/NavbarUser'
 
-const CariLaporanView = ({dataKategoriPungli,dataLaporanPungli,komentarLaporanPungli,dataUserAll,dataUserById}) => {
+const CariLaporanView = ({ dataKategoriPungli, dataLaporanPungli, komentarLaporanPungli, dataUserAll, dataUserById }) => {
 
-      const [arrayLaporanPungli, setArrayLaporanPungli] = useState(null);
-      const [currentPage, setCurrentPage] = useState(1);
-      const dataPerPage = 2;
+    const [arrayLaporanPungli, setArrayLaporanPungli] = useState(null);
+    const [currentPage, setCurrentPage] = useState(1);
+    const dataPerPage = 2;
 
-      const router = useRouter();
-      const laporanSearch = useSelector(state => state.laporanReducerRedux.laporanSearch);
-      const laporanFilter = useSelector(state => state.laporanReducerRedux.laporanFilter);
+    const router = useRouter();
+    const laporanSearch = useSelector(state => state.laporanReducerRedux.laporanSearch);
+    const laporanFilter = useSelector(state => state.laporanReducerRedux.laporanFilter);
 
-      const handlePageChange = (event, value) => {
-            setCurrentPage(value);
-      };
+    const handlePageChange = (event, value) => {
+        setCurrentPage(value);
+    };
 
-      const startIndex = (currentPage - 1) * dataPerPage;
-      const endIndex = startIndex + dataPerPage;
+    const startIndex = (currentPage - 1) * dataPerPage;
+    const endIndex = startIndex + dataPerPage;
 
-      useEffect(() => {
+    useEffect(() => {
+        if (laporanSearch?.length >= 1 || laporanFilter?.length >= 1) {
+            const filterSearch = dataLaporanPungli
+                ?.filter((data) => {
+                    const matchedSearch = data.judul_pelaporan.toLowerCase().includes(laporanSearch.toLowerCase());
+                    const matchedFilter = data.kategoriPungliId._id.includes(laporanFilter);
+                    return matchedSearch && matchedFilter;
+                });
 
-            if (laporanSearch?.length >= 1 || laporanFilter?.length >= 1) {
+            router.replace(router.asPath);
+            setArrayLaporanPungli(filterSearch);
+        } else if (laporanSearch === '' && laporanFilter?.length === 0) {
+            setArrayLaporanPungli(dataLaporanPungli);
+        }
+    }, [laporanSearch, laporanFilter, dataLaporanPungli, router]);
 
-                  const filterSearch = dataLaporanPungli
-                  .filter((data) => {
-                        const matchedSearch = data.judul_pelaporan.toLowerCase().includes(laporanSearch.toLowerCase());
-                        const matchedFilter = data.kategoriPungliId._id.includes(laporanFilter);
-                        return matchedSearch && matchedFilter;
-                  });
+    useEffect(() => {
+        document.body.style.overflow = 'hidden';
+        return () => {
+            document.body.style.overflow = '';
+        };
+    }, []);
 
-                  router.replace(router.asPath);
-                  setArrayLaporanPungli(filterSearch);
-            }
-
-            if (laporanSearch === '' && laporanFilter.length === 0) {
-                  setArrayLaporanPungli(dataLaporanPungli);
-            }
-
-      }, [laporanSearch, laporanFilter, dataLaporanPungli, router]);
-
-      useEffect(() => {
-            document.body.style.overflow = 'hidden';
-            return () => {
-                  document.body.style.overflow = ''; 
-            };
-      }, []);
-
-      return (
-            <div className='overflow-hidden'>
-                  <Head>
-                        <title>Halaman Cari Laporan | Bantai Pungli</title>
-                  </Head>
-                  <div className='grid grid-cols-12'>
-                        <div className='col-span-12'>
-                              <NavbarUser
-                                    nama_lengkap={dataUserById?.nama_lengkap || 'Nama tidak tersedia' }
-                                    foto_profile={dataUserById?.foto_profile}
-                              />
-                        </div>
-                  </div>
-                  <div className='grid grid-cols-12'>
-                        <div className='col-span-2 px-8 overflow-y-scroll h-screen pb-40'>
-                              <SidebarUserMenu/>
-                        </div>
-                        <div className='col-span-10 bg-[#F1F3F4] overflow-y-auto h-screen pb-48'>
-                              <Breadcumb/>
-                              <div className='grid grid-cols-12 px-6 gap-6 mt-10'>
-                                    <div className='col-span-8'>
-                                          <div className='grid grid-cols-12 gap-12'>
-                                                <div className='col-span-12'>
-                                                      <h4 className='text-xl text-[#17181C] font-medium' style={workSans.style}>
-                                                            Filter Berdasarkan Kategori Pungli
-                                                      </h4>
-                                                      <ListCheckBoxFilterLaporan dataKategoriPungli={dataKategoriPungli}/>
-                                                      <SearchLaporan totalItems={dataLaporanPungli?.length || 0}/>
-                                                      <div className='flex flex-col gap-6 mt-6'>
-                                                            {
-                                                                  arrayLaporanPungli && (
-                                                                        
-                                                                        arrayLaporanPungli?.slice(startIndex, endIndex)?.map((item, index) => {
-
-                                                                        return (
-                                                                              <>
-                                                                                    <PungliCardPost
-                                                                                          id={item._id}
-                                                                                          judul_pelaporan={item.judul_pelaporan}
-                                                                                          deskripsi_pelaporan={item.deskripsi_pelaporan}
-                                                                                          tanggal_pelaporan={item.tanggal_pelaporan}
-                                                                                          status_pelaporan={item.status_pelaporan}
-                                                                                          bukti_pendukung={item.bukti_pendukung}
-                                                                                          created_at={item.created_at}
-                                                                                          updated_at={item.updated_at}
-                                                                                          kategoriPungliId={item.kategoriPungliId}
-                                                                                          userId={item.userId}
-                                                                                          dataKomentarLaporanPungli={komentarLaporanPungli}
-                                                                                          imageSizeWidth="w-[470px]" 
-                                                                                          imageSizeHeight="h-[320px]" 
-                                                                                          judulTextSize="text-2xl" 
-                                                                                          deskripsiTextSize="text-xs"
-                                                                                    />
-                                                                              </>
-                                                                        )})
-                                                                  )
-                                                            }
-
-                                                            {
-                                                                  arrayLaporanPungli === null && (
-                                                                        
-                                                                        dataLaporanPungli?.slice(startIndex, endIndex)?.map((item,index) => {
-
-                                                                              return (
-                                                                                    <>
-                                                                                          <PungliCardPost
-                                                                                                id={item._id}
-                                                                                                judul_pelaporan={item.judul_pelaporan}
-                                                                                                deskripsi_pelaporan={item.deskripsi_pelaporan}
-                                                                                                tanggal_pelaporan={item.tanggal_pelaporan}
-                                                                                                status_pelaporan={item.status_pelaporan}
-                                                                                                bukti_pendukung={item.bukti_pendukung}
-                                                                                                created_at={item.created_at}
-                                                                                                updated_at={item.updated_at}
-                                                                                                kategoriPungliId={item.kategoriPungliId}
-                                                                                                userId={item.userId}
-                                                                                                dataKomentarLaporanPungli={komentarLaporanPungli}
-                                                                                                imageSizeWidth="w-[470px]" 
-                                                                                                imageSizeHeight="h-[320px]" 
-                                                                                                judulTextSize="text-2xl" 
-                                                                                                deskripsiTextSize="text-xs"
-                                                                                          />
-                                                                                    </>
-                                                                              )
-
-                                                                        })
-                                                                  )
-                                                            }
-
-                                                      </div>
-                                                </div>
-                                                <div className='col-span-12'>
-                                                      <Paginations
-                                                            totalItems={dataLaporanPungli?.length || 0}
-                                                            itemsPerPage={dataPerPage}
-                                                            currentPage={currentPage}
-                                                            onPageChange={handlePageChange}
-                                                      />
-                                                </div>
-                                          </div>
-                                    </div>
-                                    <div className='col-span-4'>
-                                          <div className='grid grid-cols-12 gap-6'>
-                                                <div className='col-span-12'>
-                                                      <UserActiveListCard/>
-                                                </div>
-                                                <div className='col-span-12'>
-                                                      <StatistikPungliCard
-                                                            dataUserAll={dataUserAll}
-                                                            dataLaporanPungli={dataLaporanPungli}
-                                                      />
-                                                </div>
-                                          </div>
-                                    </div>
-                              </div>
-                        </div>
-                  </div>
+    return (
+        <div className='overflow-hidden'>
+            <Head>
+                <title>Halaman Cari Laporan | Bantai Pungli</title>
+            </Head>
+            <div className='grid grid-cols-12'>
+                <div className='col-span-12'>
+                    <NavbarUser
+                        nama_lengkap={dataUserById?.nama_lengkap || 'Nama tidak tersedia'}
+                        foto_profile={dataUserById?.foto_profile}
+                    />
+                </div>
             </div>
-      )
+            <div className='grid grid-cols-12'>
+                <div className='col-span-2 px-8 overflow-y-scroll h-screen pb-40'>
+                    <SidebarUserMenu />
+                </div>
+                <div className='col-span-10 bg-[#F1F3F4] overflow-y-auto h-screen pb-48'>
+                    <Breadcumb />
+                    <div className='grid grid-cols-12 px-6 gap-6 mt-10'>
+                        <div className='col-span-8'>
+                            <div className='grid grid-cols-12 gap-12'>
+                                <div className='col-span-12'>
+                                    <h4 className='text-xl text-[#17181C] font-medium' style={workSans.style}>
+                                        Filter Berdasarkan Kategori Pungli
+                                    </h4>
+                                    <ListCheckBoxFilterLaporan dataKategoriPungli={dataKategoriPungli} />
+                                    <SearchLaporan totalItems={dataLaporanPungli?.length || 0} />
+                                    <div className='flex flex-col gap-6 mt-6'>
+                                        {
+                                            arrayLaporanPungli && (
+                                                arrayLaporanPungli.slice(startIndex, endIndex).map((item, index) => (
+                                                    <PungliCardPost
+                                                        key={item._id}
+                                                        id={item._id}
+                                                        judul_pelaporan={item.judul_pelaporan}
+                                                        deskripsi_pelaporan={item.deskripsi_pelaporan}
+                                                        tanggal_pelaporan={item.tanggal_pelaporan}
+                                                        status_pelaporan={item.status_pelaporan}
+                                                        bukti_pendukung={item.bukti_pendukung}
+                                                        created_at={item.created_at}
+                                                        updated_at={item.updated_at}
+                                                        kategoriPungliId={item.kategoriPungliId}
+                                                        userId={item.userId}
+                                                        dataKomentarLaporanPungli={komentarLaporanPungli}
+                                                        imageSizeWidth="w-[470px]"
+                                                        imageSizeHeight="h-[320px]"
+                                                        judulTextSize="text-2xl"
+                                                        deskripsiTextSize="text-xs"
+                                                    />
+                                                ))
+                                            )
+                                        }
+
+                                        {
+                                            !arrayLaporanPungli && dataLaporanPungli?.slice(startIndex, endIndex)?.map((item, index) => (
+                                                <PungliCardPost
+                                                    key={item._id}
+                                                    id={item._id}
+                                                    judul_pelaporan={item.judul_pelaporan}
+                                                    deskripsi_pelaporan={item.deskripsi_pelaporan}
+                                                    tanggal_pelaporan={item.tanggal_pelaporan}
+                                                    status_pelaporan={item.status_pelaporan}
+                                                    bukti_pendukung={item.bukti_pendukung}
+                                                    created_at={item.created_at}
+                                                    updated_at={item.updated_at}
+                                                    kategoriPungliId={item.kategoriPungliId}
+                                                    userId={item.userId}
+                                                    dataKomentarLaporanPungli={komentarLaporanPungli}
+                                                    imageSizeWidth="w-[470px]"
+                                                    imageSizeHeight="h-[320px]"
+                                                    judulTextSize="text-2xl"
+                                                    deskripsiTextSize="text-xs"
+                                                />
+                                            ))
+                                        }
+                                    </div>
+                                </div>
+                                <div className='col-span-12'>
+                                    <Paginations
+                                        totalItems={dataLaporanPungli?.length || 0}
+                                        itemsPerPage={dataPerPage}
+                                        currentPage={currentPage}
+                                        onPageChange={handlePageChange}
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                        <div className='col-span-4'>
+                            <div className='grid grid-cols-12 gap-6'>
+                                <div className='col-span-12'>
+                                    <UserActiveListCard />
+                                </div>
+                                <div className='col-span-12'>
+                                    <StatistikPungliCard
+                                        dataUserAll={dataUserAll}
+                                        dataLaporanPungli={dataLaporanPungli}
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    )
 }
 
 export default CariLaporanView
