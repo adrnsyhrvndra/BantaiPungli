@@ -55,7 +55,7 @@ export default function HomeViews ({ _id, username, nama_lengkap, email, no_telp
             return () => {
                   document.body.style.overflow = ''; 
             };
-      }, []);
+      }, [nama_lengkap, foto_profile, email, no_telp, alamat, status_online, tanggal_lahir, jenis_kelamin]);
 
       return (
             <div className='overflow-hidden'>

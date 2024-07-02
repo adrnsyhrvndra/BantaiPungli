@@ -66,8 +66,8 @@ const CariLaporanView = ({dataKategoriPungli,dataLaporanPungli,komentarLaporanPu
                   <div className='grid grid-cols-12'>
                         <div className='col-span-12'>
                               <NavbarUser
-                                    nama_lengkap={dataUserById.nama_lengkap || 'Nama tidak tersedia' }
-                                    foto_profile={dataUserById.foto_profile}
+                                    nama_lengkap={dataUserById?.nama_lengkap || 'Nama tidak tersedia' }
+                                    foto_profile={dataUserById?.foto_profile}
                               />
                         </div>
                   </div>
