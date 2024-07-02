@@ -67,7 +67,7 @@ const CariLaporanView = ({ dataKategoriPungli, dataLaporanPungli, komentarLapora
                   />
               </div>
           </div>
-          {/* <div className='grid grid-cols-12'>
+          <div className='grid grid-cols-12'>
               <div className='col-span-2 px-8 overflow-y-scroll h-screen pb-40'>
                   <SidebarUserMenu />
               </div>
@@ -80,7 +80,7 @@ const CariLaporanView = ({ dataKategoriPungli, dataLaporanPungli, komentarLapora
                                   <h4 className='text-xl text-[#17181C] font-medium' style={workSans.style}>
                                       Filter Berdasarkan Kategori Pungli
                                   </h4>
-                                  <ListCheckBoxFilterLaporan dataKategoriPungli={dataKategoriPungli} />
+                                  {/* <ListCheckBoxFilterLaporan dataKategoriPungli={dataKategoriPungli} />
                                   <SearchLaporan totalItems={dataLaporanPungli?.length || 0} />
                                   <div className='flex flex-col gap-6 mt-6'>
                                       {
@@ -128,7 +128,7 @@ const CariLaporanView = ({ dataKategoriPungli, dataLaporanPungli, komentarLapora
                                               ))
                                           )
                                       }
-                                  </div>
+                                  </div> */}
                               </div>
                               <div className='col-span-12'>
                                   <Paginations
@@ -155,7 +155,7 @@ const CariLaporanView = ({ dataKategoriPungli, dataLaporanPungli, komentarLapora
                       </div>
                   </div>
               </div>
-          </div> */}
+          </div>
       </div>
   )
   
