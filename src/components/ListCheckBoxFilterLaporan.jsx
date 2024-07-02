@@ -34,7 +34,7 @@ const ListCheckBoxFilterLaporan = ({dataKategoriPungli}) => {
 
       useEffect(() => {
             dispatch(setLaporanFilter(listArray));
-      }, [listArray]);
+      }, [listArray, dispatch]);
 
       return (
             <div className='flex flex-row items-center justify-start gap-10 bg-white rounded-lg py-10 px-8 mt-6 flex-wrap' style={workSans.style}>

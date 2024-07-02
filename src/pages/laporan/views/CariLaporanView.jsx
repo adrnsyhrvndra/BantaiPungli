@@ -49,7 +49,7 @@ const CariLaporanView = ({dataKategoriPungli,dataLaporanPungli,komentarLaporanPu
                   setArrayLaporanPungli(dataLaporanPungli);
             }
 
-      }, [laporanSearch, laporanFilter]);
+      }, [laporanSearch, laporanFilter, dataLaporanPungli, router]);
 
       useEffect(() => {
             document.body.style.overflow = 'hidden';
