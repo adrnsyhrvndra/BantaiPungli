@@ -90,7 +90,7 @@ const CariLaporanView = ({dataKategoriPungli,dataLaporanPungli,komentarLaporanPu
                                                             {
                                                                   arrayLaporanPungli && (
                                                                         
-                                                                        arrayLaporanPungli.slice(startIndex, endIndex).map((item, index) => {
+                                                                        arrayLaporanPungli?.slice(startIndex, endIndex).map((item, index) => {
 
                                                                         return (
                                                                               <>
@@ -119,7 +119,7 @@ const CariLaporanView = ({dataKategoriPungli,dataLaporanPungli,komentarLaporanPu
                                                             {
                                                                   arrayLaporanPungli === null && (
                                                                         
-                                                                        dataLaporanPungli.slice(startIndex, endIndex).map((item,index) => {
+                                                                        dataLaporanPungli?.slice(startIndex, endIndex).map((item,index) => {
 
                                                                               return (
                                                                                     <>
