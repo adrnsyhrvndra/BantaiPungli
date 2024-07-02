@@ -91,7 +91,7 @@ export default function HomeViews ({ _id, username, nama_lengkap, email, no_telp
                                                       <div className='grid grid-cols-12 gap-7'>
                                                             <div className='col-span-12'>
                                                                   {
-                                                                        laporanPungli.slice(startIndex, endIndex).map((item, index) => {
+                                                                        laporanPungli?.slice(startIndex, endIndex).map((item, index) => {
 
                                                                               return (
                                                                                     <>
@@ -121,7 +121,7 @@ export default function HomeViews ({ _id, username, nama_lengkap, email, no_telp
                                                             </div>
                                                             <div className='col-span-12'>
                                                                   <Pagination
-                                                                        totalItems={laporanPungli.length}
+                                                                        totalItems={laporanPungli?.length || 0}
                                                                         itemsPerPage={dataPerPage}
                                                                         currentPage={currentPage}
                                                                         onPageChange={handlePageChange}

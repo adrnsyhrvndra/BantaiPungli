@@ -32,7 +32,7 @@ const CariLaporanView = ({dataKategoriPungli,dataLaporanPungli,komentarLaporanPu
 
       useEffect(() => {
 
-            if (laporanSearch.length >= 1 || laporanFilter.length >= 1) {
+            if (laporanSearch?.length >= 1 || laporanFilter?.length >= 1) {
 
                   const filterSearch = dataLaporanPungli
                   .filter((data) => {
@@ -85,7 +85,7 @@ const CariLaporanView = ({dataKategoriPungli,dataLaporanPungli,komentarLaporanPu
                                                             Filter Berdasarkan Kategori Pungli
                                                       </h4>
                                                       <ListCheckBoxFilterLaporan dataKategoriPungli={dataKategoriPungli}/>
-                                                      <SearchLaporan totalItems={dataLaporanPungli.length}/>
+                                                      <SearchLaporan totalItems={dataLaporanPungli?.length || 0}/>
                                                       <div className='flex flex-col gap-6 mt-6'>
                                                             {
                                                                   arrayLaporanPungli && (
@@ -151,7 +151,7 @@ const CariLaporanView = ({dataKategoriPungli,dataLaporanPungli,komentarLaporanPu
                                                 </div>
                                                 <div className='col-span-12'>
                                                       <Paginations
-                                                            totalItems={dataLaporanPungli.length}
+                                                            totalItems={dataLaporanPungli?.length || 0}
                                                             itemsPerPage={dataPerPage}
                                                             currentPage={currentPage}
                                                             onPageChange={handlePageChange}
