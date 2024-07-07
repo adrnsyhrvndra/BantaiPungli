@@ -22,14 +22,14 @@ const EditProfile = () => {
                         <div className='col-span-2 px-8 overflow-y-scroll h-screen pb-40'>
                               <SidebarUserMenu/>
                         </div>
-                        {/* <div className='col-span-10 bg-[#F1F3F4] overflow-y-auto h-screen pb-48'>
+                        <div className='col-span-10 bg-[#F1F3F4] overflow-y-auto h-screen pb-48'>
                               <Breadcumb/>
                               <div className='grid grid-cols-12 px-6 gap-6 mt-10'>
                                     <div className='col-span-12'>
                                           <EditProfileFormContainer/>
                                     </div>
                               </div>
-                        </div> */}
+                        </div>
                   </div>
             </div>
       )

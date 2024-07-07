@@ -21,7 +21,6 @@ const EditLaporan = (props) => {
             };
       }, []);
 
-
       return (
             <div className='overflow-hidden'>
                   <Head>

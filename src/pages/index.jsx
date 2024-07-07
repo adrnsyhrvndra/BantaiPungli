@@ -1,12 +1,11 @@
 import Head from "next/head";
-import Image from "next/image";
 import SidebarUserMenu from "@/components/SidebarUserMenu";
 import NavbarUser from "@/components/NavbarUser";
 import Breadcumb from "@/components/Breadcumb";
 import CardHomeProfile from "@/components/CardHomeProfile";
 import WeatherCard from "@/components/WeatherCard";
 import PungliCardPost from "@/components/PungliCardPost";
-import { Pagination } from "@mui/material";
+import Pagination from '@/components/Paginations';
 import axios from "axios";
 import { useState } from "react";
 import UserActiveListCard from "@/components/UserActiveListCard";

@@ -1,6 +1,6 @@
 import React from 'react'
 
-const IconPungliCardStatus = () => {
+const IconPungliCardStatusSuccess = () => {
       return (
             <svg className='w-6 h-6' viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <circle cx="10.7134" cy="10.78" r="10" fill="#4AB75B"/>
@@ -9,4 +9,4 @@ const IconPungliCardStatus = () => {
       )
 }
 
-export default IconPungliCardStatus
+export default IconPungliCardStatusSuccess

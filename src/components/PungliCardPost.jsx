@@ -4,9 +4,12 @@ import workSans from '@/libs/FontWorkSans'
 import Link from 'next/link';
 import IconPungliCardUpvote from '@/libs/svg/IconPungliCardUpvote';
 import IconPungliCardKomentar from '@/libs/svg/IconPungliCardKomentar';
-import IconPungliCardStatus from '@/libs/svg/IconPungliCardStatus';
+import IconPungliCardStatus from '@/libs/svg/IconPungliCardStatusSuccess';
 import IconPungliCardKategori from '@/libs/svg/IconPungliCardKategori';
 import Cookies from 'js-cookie';
+import IconPungliCardStatusSuccess from '@/libs/svg/IconPungliCardStatusSuccess';
+import IconPungliCardStatusFailed from '@/libs/svg/IconPungliCardStatusFailed';
+import IconPungliCardStatusOnProgress from '@/libs/svg/IconPungliCardStatusOnProgress';
 
 const PungliCardPost = ({imageSizeWidth,imageSizeHeight,judulTextSize,deskripsiTextSize, judul_pelaporan,deskripsi_pelaporan,tanggal_pelaporan,status_pelaporan,bukti_pendukung,created_at,updated_at,kategoriPungliId,userId,id,dataKomentarLaporanPungli,idPungliUser,idForEdit}) => {
 
@@ -148,7 +151,18 @@ const PungliCardPost = ({imageSizeWidth,imageSizeHeight,judulTextSize,deskripsiT
                                     </div>
                                     <div className='flex flex-col gap-4'>
                                           <div className='flex flex-row gap-2 items-center'>
-                                                <IconPungliCardStatus/>
+                                                {
+                                                      (status_pelaporan === 'Selesai') &&
+                                                      <IconPungliCardStatusSuccess/>
+                                                }
+                                                {
+                                                      (status_pelaporan === 'Belum Selesai') &&
+                                                      <IconPungliCardStatusFailed/>
+                                                }
+                                                {
+                                                      (status_pelaporan === 'Dalam Proses') &&
+                                                      <IconPungliCardStatusOnProgress/>
+                                                }
                                                 <h6 className='font-normal text-xs text-[#48555C] opacity-90' style={workSans.style}>
                                                       {status_pelaporan} Ditanggapi
                                                 </h6>

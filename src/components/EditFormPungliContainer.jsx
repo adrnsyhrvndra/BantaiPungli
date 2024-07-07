@@ -50,6 +50,7 @@ const customStyles = {
 const EditFormPungliContainer = ({laporanPungliById, dataKategoriList}) => {
 
       const id_user = Cookies.get('userId');
+
       const [selectedImage, setSelectedImage] = useState(laporanPungliById.bukti_pendukung);
       const [imageData, setImageData] = useState(laporanPungliById.bukti_pendukung);
       const [selectedKategoriPungli, setSelectedKategoriPungli] = useState(laporanPungliById.kategoriPungliId._id);
@@ -145,7 +146,7 @@ const EditFormPungliContainer = ({laporanPungliById, dataKategoriList}) => {
             const result = await response.json();
 
             const data = {
-                  userId: id_user,
+                  userId:  laporanPungliById.userId._id,
                   kategoriPungliId: input.kategoriPungliId.value,
                   judul_pelaporan: input.judul_pelaporan,
                   deskripsi_pelaporan: input.deskripsi_pelaporan,
@@ -154,8 +155,6 @@ const EditFormPungliContainer = ({laporanPungliById, dataKategoriList}) => {
                   bukti_pendukung: result.secure_url,
                   updated_at: new Date()
             };
-
-            console.log(data);
 
             if (input.judul_pelaporan && input.tanggal_pelaporan && input.deskripsi_pelaporan && input.kategoriPungliId && id_user && input.status_pelaporan.value) {
                   

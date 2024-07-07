@@ -15,15 +15,7 @@ const SidebarUserMenu = () => {
       const handleLogout = () => {
             Cookies.remove('token');
             Cookies.remove('userId');
-            Cookies.remove('username');
             Cookies.remove('nama_lengkap');
-            Cookies.remove('email');
-            Cookies.remove('no_telp');
-            Cookies.remove('alamat');
-            Cookies.remove('status_online');
-            Cookies.remove('tanggal_lahir');
-            Cookies.remove('jenis_kelamin');
-            Cookies.remove('foto_profile');
 
             router.push('/');
       }
