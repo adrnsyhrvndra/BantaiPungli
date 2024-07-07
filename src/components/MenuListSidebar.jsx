@@ -14,7 +14,7 @@ const MenuListSidebar = () => {
       
             <>
                   {
-                        (router.pathname === "/user/Home") &&
+                        (router.pathname === "/user/Home" || router.pathname === "/") &&
                         <>
                               <Link href={"/user/Home"}>
                                     <div className='py-4 px-7 bg-primary text-white rounded-lg flex flex-row justify-start items-center gap-4'>

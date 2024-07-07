@@ -40,12 +40,25 @@ const SidebarUserMenu = () => {
                               <IconSidebarHelp/>
                               <h6 className='text-black text-[15px] font-normal opacity-30' style={workSans.style}>Bantuan</h6>
                         </div>
-                        <Link href={"/"} onClick={handleLogout}>
-                              <div className='flex flex-row justify-start items-center gap-4'>
-                                    <IconSidebarLogout/>
-                                    <h6 className='text-black text-[15px] font-normal opacity-30' style={workSans.style}>Logout</h6>
-                              </div>
-                        </Link>
+                        {
+                              (router.pathname === "/") &&
+
+                              <Link href={"/auth/login"}>
+                                    <div className='flex flex-row justify-start items-center gap-4'>
+                                          <IconSidebarLogout/>
+                                          <h6 className='text-black text-[15px] font-normal opacity-30' style={workSans.style}>Login</h6>
+                                    </div>
+                              </Link>
+                        }
+                        {
+                              (router.pathname !== "/") &&
+                              <Link href={"/"} onClick={handleLogout}>
+                                    <div className='flex flex-row justify-start items-center gap-4'>
+                                          <IconSidebarLogout/>
+                                          <h6 className='text-black text-[15px] font-normal opacity-30' style={workSans.style}>Logout</h6>
+                                    </div>
+                              </Link>
+                        }
                   </div>
             </>
 
