@@ -18,7 +18,7 @@ const Login = () => {
 				<title>Halaman Login | Bantai Pungli</title>
 			</Head>
 			<div className="grid grid-cols-12 h-screen">
-				<AudioGakSudiBayarPungli/>
+				{/* <AudioGakSudiBayarPungli/> */}
 				<div className="col-span-6 bg-primary bg-pattern-money-pungli bg-blend-multiply bg-contain relative overflow-hidden">
 					<div className="grid grid-cols-12">
 						<div className="col-span-12">

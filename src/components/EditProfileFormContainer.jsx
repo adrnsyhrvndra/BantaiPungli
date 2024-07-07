@@ -5,7 +5,7 @@ import dataSelectOptionsKotaDanProvinsi from '@/libs/DataOptionKotaDanProvinsi';
 import Image from "next/image";
 import 'react-phone-number-input/style.css';
 import PhoneInput from 'react-phone-number-input';
-// import { formatISO, set } from 'date-fns';
+import { formatISO } from "date-fns";
 import { Bounce, ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useRouter } from 'next/router';
@@ -51,7 +51,7 @@ const customStyles = {
 const EditProfileFormContainer = ({userById}) => {
 
       const originalDate = userById.tanggal_lahir;
-      // const formattedDate = formatISO(new Date(originalDate), { representation: 'date' });
+      const formattedDate = formatISO(new Date(originalDate), { representation: 'date' });
 
       const [selectedImage, setSelectedImage] = useState(userById.foto_profile);
       const [imageData, setImageData] = useState(userById.foto_profile);
@@ -66,7 +66,7 @@ const EditProfileFormContainer = ({userById}) => {
       const [inpUsername,setInpUsername] = useState(userById.username);
       const [inpPassword,setInpPassword] = useState('');
       const [inpEmail, setInpEmail] = useState(userById.email);
-      // const [inpTglLahir, setInpTglLahir] = useState(formattedDate);
+      const [inpTglLahir, setInpTglLahir] = useState(formattedDate);
       const [inpJenisKelamin, setInpJenisKelamin] = useState({
             value: userById.jenis_kelamin,
             label: userById.jenis_kelamin === 'L' ? 'Laki-laki' : 'Perempuan'
@@ -217,7 +217,7 @@ const EditProfileFormContainer = ({userById}) => {
                                                 placeholder="Edit Email"
                                                 style={workSans.style}
                                           />
-                                          {/* <input
+                                          <input
                                                 type="date"
                                                 name='tanggal_lahir'
                                                 value={inpTglLahir}
@@ -225,7 +225,7 @@ const EditProfileFormContainer = ({userById}) => {
                                                 className="w-full h-12 rounded-md bg-[#F8FAFB] border border-none pl-4 pr-4 pt-3 pb-4 placeholder:text-[#B1BBC6] placeholder:font-normal placeholder:text-sm placeholder:tracking-wide focus:outline-primary"
                                                 placeholder="Edit Tangga Lahir"
                                                 style={workSans.style}
-                                          /> */}
+                                          />
                                     </div>
                               </div>
                               <div className='col-span-6'>

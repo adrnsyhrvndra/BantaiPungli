@@ -57,10 +57,7 @@ const LoginFormContainer = () => {
                         dispatch(setUsernameOrEmail(''));
                         dispatch(setPasswordLogin(''));
 
-                        setTimeout(() => {
-                              router.push('/user/Home');
-                        }, 5000);
-
+                        router.push('/user/Home');
                         
                   } catch (error) {
                         
