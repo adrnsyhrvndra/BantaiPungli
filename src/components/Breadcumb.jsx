@@ -70,6 +70,20 @@ const Breadcumb = ({namaWelcome}) => {
                         }
 
                         {
+                              router.pathname === '/laporan/BelumSelesaiLaporan' &&
+                              <>
+                                    <h5 className='font-semibold text-xl text-[#B31E28]' style={workSans.style}>Laporan yang belum selesai</h5>
+                                    <div className='flex flex-row gap-2 font-medium' style={workSans.style}>
+                                          <Link href={'/user/Home'}>
+                                                <h6 className='text-[#B31E28]'>Home</h6>
+                                          </Link>
+                                          <h6 className='text-[#B31E28]'>-</h6>
+                                          <h6 className='text-[#F59198]'>Belum Selesai Laporan</h6>
+                                    </div>
+                              </>
+                        }
+
+                        {
                               isEditProfilePage &&
                               <>
                                     <h5 className='font-semibold text-xl text-[#B31E28]' style={workSans.style}>Edit Profil</h5>

@@ -11,7 +11,7 @@ import PungliCardPost from '@/components/PungliCardPost';
 import Pagination from '@/components/Paginations';
 import workSans from '@/libs/FontWorkSans';
 
-export default function BelumSelesaiLaporan({ GetDataUser, GetDataUserById, GetDataLaporanPungli, GetDataKomentar }) {
+export default function SelesaiLaporan({ GetDataUser, GetDataUserById, GetDataLaporanPungli, GetDataKomentar }) {
 
       const [currentPage, setCurrentPage] = useState(1);
       const dataPerPage = 2;
@@ -23,15 +23,15 @@ export default function BelumSelesaiLaporan({ GetDataUser, GetDataUserById, GetD
       const startIndex = (currentPage - 1) * dataPerPage;
       const endIndex = startIndex + dataPerPage;
 
-      const FilteredLaporanPungliYangBelumSelesaiOnly = GetDataLaporanPungli.filter((data) => {
-            return data.status_pelaporan === 'Belum Selesai';
+      const FilteredLaporanPungliYangSelesaiOnly = GetDataLaporanPungli.filter((data) => {
+            return data.status_pelaporan === 'Selesai';
       });
 
       return (
 
             <div className='overflow-hidden'>
                   <Head>
-				<title>Halaman Laporan Pungli Yang Belum Selesai | Bantai Pungli</title>
+				<title>Halaman Laporan Pungli Selesai | Bantai Pungli</title>
 			</Head>
                   <div className='grid grid-cols-12'>
                         <div className='col-span-12'>
@@ -50,7 +50,7 @@ export default function BelumSelesaiLaporan({ GetDataUser, GetDataUserById, GetD
                               <div className="grid grid-cols-12 px-6 mt-12">
                                     <div className="col-span-12">
                                           <h2 className={`text-left font-semibold text-3xl leading-normal text-[#364045]`} style={workSans.style} >
-                                                Laporan Pungli Yang Belum Selesai ada : <span className='font-bold text-primary'> {FilteredLaporanPungliYangBelumSelesaiOnly.length} laporan </span>
+                                                Laporan Pungli Yang Sudah Selesai ada : <span className='font-bold text-primary'> {FilteredLaporanPungliYangSelesaiOnly.length} laporan </span>
                                           </h2>
                                     </div>
                               </div>
@@ -61,7 +61,7 @@ export default function BelumSelesaiLaporan({ GetDataUser, GetDataUserById, GetD
                                                       <div className='grid grid-cols-12 gap-7'>
                                                             <div className='col-span-12'>
                                                                   {
-                                                                        FilteredLaporanPungliYangBelumSelesaiOnly?.slice(startIndex, endIndex).map((item, index) => {
+                                                                        FilteredLaporanPungliYangSelesaiOnly?.slice(startIndex, endIndex).map((item, index) => {
 
                                                                               return (
                                                                                     <>
@@ -91,7 +91,7 @@ export default function BelumSelesaiLaporan({ GetDataUser, GetDataUserById, GetD
                                                             </div>
                                                             <div className='col-span-12'>
                                                                   <Pagination
-                                                                        totalItems={FilteredLaporanPungliYangBelumSelesaiOnly?.length || 0}
+                                                                        totalItems={FilteredLaporanPungliYangSelesaiOnly?.length || 0}
                                                                         itemsPerPage={dataPerPage}
                                                                         currentPage={currentPage}
                                                                         onPageChange={handlePageChange}

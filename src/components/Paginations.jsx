@@ -59,6 +59,7 @@ const Paginations = ({totalItems,itemsPerPage,currentPage,onPageChange}) => {
 
                                     return (
                                           <PaginationItem
+                                                style={workSans.style}
                                                 sx={{ 
                                                       color: handleColor(item),
                                                       borderRadius: "4px",

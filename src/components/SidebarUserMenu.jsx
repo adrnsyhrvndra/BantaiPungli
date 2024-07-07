@@ -16,6 +16,7 @@ const SidebarUserMenu = () => {
             Cookies.remove('token');
             Cookies.remove('userId');
             Cookies.remove('nama_lengkap');
+            Cookies.remove('foto_profile');
 
             router.push('/');
       }

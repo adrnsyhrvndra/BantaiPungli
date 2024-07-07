@@ -14,7 +14,6 @@ const LoginFormContainer = () => {
 
       const dispatch = useDispatch();
       const router = useRouter();
-      console.log(router.pathname);
 
 	const usernameOrEmail = useSelector(state => state.authReducerRedux.usernameOrEmail);
 	const passwordLogin = useSelector(state => state.authReducerRedux.passwordLogin);
