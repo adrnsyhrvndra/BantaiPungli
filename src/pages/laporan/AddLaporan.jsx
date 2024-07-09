@@ -31,10 +31,26 @@ export default function AddLaporan (props) {
 
                   <div className='grid grid-cols-12'>
                         <div className='col-span-12'>
-                              <NavbarUser
-                                    nama_lengkap={'Login dan Laporkan'}
-                                    foto_profile={'https://res.cloudinary.com/adriansyah-course-laravel7/image/upload/v1720332399/bantai-pungli/Ellipse_2_jpmd5y.png'}
-                              />
+
+                              {
+                                    (GetCookiesToken) &&
+
+                                    <NavbarUser
+                                          nama_lengkap={props.userById.nama_lengkap}
+                                          foto_profile={props.userById.foto_profile}
+                                    />
+
+                              }
+
+                              {
+                                    (!GetCookiesToken) &&
+
+                                    <NavbarUser
+                                          nama_lengkap={'Login dan Laporkan'}
+                                          foto_profile={'https://res.cloudinary.com/adriansyah-course-laravel7/image/upload/v1720332399/bantai-pungli/Ellipse_2_jpmd5y.png'}
+                                    />
+
+                              }
                         </div>
                   </div>
                   <div className='grid grid-cols-12'>
@@ -90,26 +106,30 @@ export async function getServerSideProps(context) {
       let laporanPungliRes = [];
       let userByIdRes = [];
 
+      console.log(parsedCookies);
+
       // Kalau user login dan ada token.
       if (parsedCookies.token) {
 
-            const kategoriAllRes = await axios.get(`https://rest-api-bantai-pungli-ysnn.vercel.app/kategoriPungli`, {
-                  headers: { 'Authorization': `Bearer ${parsedCookies.token}` }
-            });
-      
-            const userAllRes = await axios.get(`https://rest-api-bantai-pungli-ysnn.vercel.app/users`, {
-                  headers: { 'Authorization': `Bearer ${parsedCookies.token}` }
-            });
-      
-            const laporanPungliRes = await axios.get(`https://rest-api-bantai-pungli-ysnn.vercel.app/pelaporanPungli`, {
-                  headers: { 'Authorization': `Bearer ${parsedCookies.token}` }
-            });
-      
-            const userByIdRes = await axios.get(`https://rest-api-bantai-pungli-ysnn.vercel.app/users/${parsedCookies.userId}`, {
-                  headers: { 'Authorization': `Bearer ${parsedCookies.token}` }
-            });
-      
+            try {
+                  kategoriAllRes = await axios.get(`https://rest-api-bantai-pungli-ysnn.vercel.app/kategoriPungli`, {
+                        headers: { 'Authorization': `Bearer ${parsedCookies.token}` }
+                  });
             
+                  userAllRes = await axios.get(`https://rest-api-bantai-pungli-ysnn.vercel.app/users`, {
+                        headers: { 'Authorization': `Bearer ${parsedCookies.token}` }
+                  });
+            
+                  laporanPungliRes = await axios.get(`https://rest-api-bantai-pungli-ysnn.vercel.app/pelaporanPungli`, {
+                        headers: { 'Authorization': `Bearer ${parsedCookies.token}` }
+                  });
+            
+                  userByIdRes = await axios.get(`https://rest-api-bantai-pungli-ysnn.vercel.app/users/${parsedCookies.userId}`, {
+                        headers: { 'Authorization': `Bearer ${parsedCookies.token}` }
+                  });
+            } catch (error) {
+                  console.error('Error fetching data:', error);
+            }
       }
 
       return { 
