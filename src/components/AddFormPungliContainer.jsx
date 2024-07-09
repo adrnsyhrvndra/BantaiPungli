@@ -154,8 +154,6 @@ const AddFormPungliContainer = ({dataKategoriList}) => {
                                   'Authorization': `Bearer ${Cookies.get('token')}`
                               },
                         });
-
-                        console.log(res);
       
                         toast.success('Tambah Laporan Berhasil! 🤙', {
                               position: "top-right",
